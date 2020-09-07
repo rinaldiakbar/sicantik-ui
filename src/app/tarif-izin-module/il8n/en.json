@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "JENIS-IZIN": {
+            "JENIS-IZIN-MODULE": "Menu",
+            "JENIS-IZIN-LIST": "Daftar Jenis Izin"
+        }
+    },
+    "JENIS-IZIN": {
+        "TITLE": "Jenis Izin",
+        "LIST": "Daftar",
+        "ADD": "Tambah Jenis Izin",
+        "EDIT": "Ubah Jenis Izin",
+        "VIEW": "Lihat Jenis Izin",
+        "SEARCH": "Cari"
+    }
+}

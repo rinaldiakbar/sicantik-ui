@@ -1,0 +1,332 @@
+<div layout="row" flex layout-padding layout-fill layout-align="center center">
+    <div flex="80" flex-lg="70" flex-md="80" flex-xs="100">
+
+        <div flex layout="row" layout-align="center" layout-fill>
+            <div flex="100" class="md-whiteframe-z1 margin-bottom-100" tri-wizard>
+                <md-toolbar class="md-primary">
+                    <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                        <h2>Registrasi</h2>
+                        <h2> {{triWizard.progress}}% <span> Proses Registrasi</span></h2>
+                    </div>
+                    <md-progress-linear class="md-accent padding-bottom-10" md-mode="determinate"
+                                        ng-value="triWizard.progress"></md-progress-linear>
+                </md-toolbar>
+
+                <md-tabs class="md-primary" md-selected="triWizard.currentStep" md-dynamic-height>
+                    <md-tab id="account">
+                        <md-tab-label>
+                            <span class="oxy-step-label">1</span>
+                            <span>Data User</span>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-content class="md-padding">
+                                <form name="accountForm" tri-wizard-form novalidate>
+                                    <div>
+                                        <md-input-container class="md-block">
+                                            <label>Username</label>
+                                            <input type="text" name="pemohon_username" placeholder="username" ng-required="true"
+                                                   ng-model="vm.pemohon.username" md-maxlength="25" ng-change="vm.usernameChange()">
+                                            <div ng-messages="accountForm.pemohon_username.$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block">
+                                            <label>Nama</label>
+                                            <input type="text" name="pemohon_nama" placeholder="Nama" ng-required="true"
+                                                   ng-model="vm.pemohon.nama" md-maxlength="100">
+                                            <div ng-messages="accountForm.pemohon_nama.$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block">
+                                            <label>Email</label>
+                                            <input type="email" placeholder="Email" ng-required="true"
+                                                   name="pemohon_email"
+                                                   ng-model="vm.pemohon.email" md-maxlength="50">
+                                            <div ng-messages="accountForm.pemohon_email.$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+
+                                        <md-input-container md-no-float class="md-block">
+                                            <label>Instansi yang dituju</label>
+                                            <md-autocomplete
+                                                    ng-required="true"
+                                                    class="margin-bottom-20" ng-disabled="vm.isDisabledInstansi"
+                                                    md-no-cache="vm.noCacheInstansi"
+                                                    md-selected-item="selectedItemInstansi"
+                                                    md-search-text="vm.searchTextInstansi"
+                                                    md-selected-item-change="vm.selectedItemChangeInstansi(item)"
+                                                    md-items="item in vm.querySearchInstansi(vm.searchTextInstansi)"
+                                                    md-item-text="item.nama" md-item-value="item.id" md-min-length="0"
+                                                    placeholder="Cari Instansi">
+                                                <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.nama}}</span>
+                                            </md-autocomplete>
+                                        </md-input-container>
+                                    </div>
+                                </form>
+                            </md-content>
+                        </md-tab-body>
+                    </md-tab>
+
+                    <md-tab id="identitas" ng-disabled="accountForm.$invalid">
+                        <md-tab-label>
+                            <span class="oxy-step-label">2</span>
+                            <span>Identitas User</span>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-content class="md-padding">
+                                <form name="identitasForm" tri-wizard-form>
+                                    <div>
+                                        <div layout layout-xs="column" flex>
+                                            <md-input-container flex>
+                                                <label>Tipe Identitas</label>
+                                                <md-select placeholder="Tipe Identitas"
+                                                           ng-model="vm.pemohon.tipe_identitas">
+                                                    <md-option ng-value="opt.kode"
+                                                               ng-repeat="opt in vm.jenisIdentitasList">{{opt.label}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                            <md-input-container flex>
+                                                <label>No. Identitas</label>
+                                                <input type="text" name="pemohon_no_identitas"
+                                                       placeholder="No. Identitas" ng-required="true"
+                                                       ng-model="vm.pemohon.no_identitas" md-maxlength="100">
+                                                <div ng-messages="identitasForm.pemohon_no_identitas.$error">
+                                                    <div ng-messages-include="app/include/validation-messages.html"></div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout layout-xs="column" flex>
+                                            <md-input-container flex>
+                                                <label>Jenis Kelamin</label>
+                                                <md-select placeholder="Jenis Kelamin"
+                                                           ng-model="vm.pemohon.jenis_kelamin">
+                                                    <md-option ng-value="opt.kode" ng-repeat="opt in vm.genderList">
+                                                        {{opt.label}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+
+                                            <md-input-container flex>
+                                                <label>Pekerjaan</label>
+                                                <input type="text" placeholder="Pekerjaan" ng-required="true"
+                                                       name="pemohon_pekerjaan"
+                                                       ng-model="vm.pemohon.pekerjaan" md-maxlength="25">
+                                                <div ng-messages="identitasForm.pemohon_pekerjaan.$error">
+                                                    <div ng-messages-include="app/include/validation-messages.html"></div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+
+                                        <div layout layout-xs="column" flex>
+                                            <md-input-container flex>
+                                                <label>Tempat Lahir</label>
+                                                <input type="text" placeholder="Tempat Lahir" name="pemohon_tempat_lahir"
+                                                       ng-required="true"
+                                                       ng-model="vm.pemohon.tempat_lahir" md-maxlength="100">
+                                                <div ng-messages="identitasForm.pemohon_tempat_lahir.$error">
+                                                    <div ng-messages-include="app/include/validation-messages.html"></div>
+                                                </div>
+                                            </md-input-container>
+
+                                            <md-input-container flex>
+                                                <label>NPWP</label>
+                                                <input type="text" placeholder="NPWP" ng-required="false"
+                                                       name="npwp"
+                                                       ng-model="vm.pemohon.npwp" md-maxlength="25">
+                                                <div ng-messages="identitasForm.pemohon_npwp.$error">
+                                                    <div ng-messages-include="app/include/validation-messages.html"></div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+
+                                        <md-input-container md-no-float class="md-block">
+                                            <label>Lampiran Identitas</label>
+                                            <div layout="row" layout-align="space-around center">
+                                                <div layout="column" flex="80">
+                                                    <input type="text" placeholder="" ng-required="true" ng-model="vm.pemohon.file_dokumen" ng-disabled="true">
+                                                </div>
+                                                <div layout="column" flex="20">
+                                                    <md-button class="md-primary md-raised md-fab" ngf-select="vm.upload($files)"
+                                                               ng-disabled="vm.upload_status != 'idle'" ngf-multiple="true" aria-label="upload">
+                                                        <md-icon md-font-icon
+                                                                 ng-class="{ 'zmdi zmdi-cloud-upload': vm.upload_status == 'idle', 'fa fa-spinner fa-pulse': vm.upload_status == 'uploading', 'zmdi zmdi-check': vm.upload_status == 'complete'}"></md-icon>
+                                                    </md-button>
+                                                </div>
+                                            </div>
+                                        </md-input-container>
+
+                                        <label>Tanggal Lahir</label>
+                                        <md-datepicker name="pemohon_tgl_lahir" data-ng-model="vm.pemohon.tgl_lahir" md-max-date="vm.maxBirthDate"
+                                                       md-current-view="year" md-placeholder="Tanggal Lahir" ng-required="true">
+                                        </md-datepicker>
+                                        <div ng-messages="identitasForm.pemohon_tgl_lahir.$error">
+                                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </md-content>
+                        </md-tab-body>
+                    </md-tab>
+
+                    <md-tab id="Kontak User" ng-disabled="identitasForm.$invalid">
+                        <md-tab-label>
+                            <span class="oxy-step-label">3</span>
+                            <span>Kontak & Alamat</span>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-content class="md-padding">
+                                <form name="addressForm" tri-wizard-form>
+                                    <div layout layout-xs="column" flex>
+                                        <md-input-container flex>
+                                            <label>No. Telepon</label>
+                                            <input type="text" placeholder="No. Telepon" ng-required="true"
+                                                   name="pemohon_no_tlp"
+                                                   ng-model="vm.pemohon.no_tlp" md-maxlength="15">
+                                            <div ng-messages="addressForm.pemohon_no_tlp.$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+
+                                        <md-input-container flex>
+                                            <label>No. HP</label>
+                                            <input type="text" placeholder="No. HP" ng-required="true"
+                                                   name="pemohon_no_hp"
+                                                   ng-model="vm.pemohon.no_hp" md-maxlength="15">
+                                            <div ng-messages="addressForm.pemohon_no_hp.$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+                                    </div>
+                                    <md-input-container class="md-block">
+                                        <label>Alamat</label>
+                                        <input type="text" placeholder="Alamat" ng-required="true" name="pemohon_alamat"
+                                               ng-model="vm.pemohon.alamat" md-maxlength="100">
+                                        <div ng-messages="addressForm.pemohon_alamat.$error">
+                                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                                        </div>
+                                    </md-input-container>
+                                    <div layout layout-xs="column" flex>
+                                        <md-input-container flex>
+                                            <label>Provinsi</label>
+                                            <md-autocomplete
+                                                    class="margin-bottom-20"
+                                                    ng-disabled="vm.isDisabled"
+                                                    ng-required="true"
+                                                    md-no-cache="vm.noCache"
+                                                    md-search-text="vm.searchTextProvinsi"
+                                                    md-selected-item-change="vm.selectedItemChangeProvinsi(item)"
+                                                    md-items="item in vm.querySearchProvinsi(vm.searchTextProvinsi)"
+                                                    md-item-text="item.nama_daerah"
+                                                    md-min-length="0"
+                                                    placeholder="Cari Provinsi">
+                            <span md-highlight-text="vm.searchTextProvinsi"
+                                  md-highlight-flags="^i">{{item.nama_daerah}}</span>
+                                            </md-autocomplete>
+                                        </md-input-container>
+
+                                        <md-input-container flex>
+                                            <label>Kabupaten</label>
+                                            <md-autocomplete
+                                                    class="margin-bottom-20"
+                                                    ng-disabled="vm.isDisabled"
+                                                    ng-required="true"
+                                                    md-no-cache="vm.noCache"
+                                                    md-search-text="vm.searchTextKabupaten"
+                                                    md-selected-item-change="vm.selectedItemChangeKabupaten(item)"
+                                                    md-items="item in vm.querySearchKabupaten(vm.searchTextKabupaten, vm.pemohon.provinsi_id)"
+                                                    md-item-text="item.nama_daerah"
+                                                    md-min-length="0"
+                                                    placeholder="Cari Kabupaten">
+                                                <span md-highlight-text="vm.searchTextKecamatan"
+                                                      md-highlight-flags="^i">{{item.nama_daerah}}</span>
+                                            </md-autocomplete>
+                                        </md-input-container>
+
+                                        <md-input-container flex>
+                                            <label>Kecamatan</label>
+                                            <md-autocomplete
+                                                    class="margin-bottom-20"
+                                                    ng-disabled="vm.isDisabled"
+                                                    ng-required="true"
+                                                    md-no-cache="vm.noCache"
+                                                    md-search-text="vm.searchTextKecamatan"
+                                                    md-selected-item-change="vm.selectedItemChangeKecamatan(item)"
+                                                    md-items="item in vm.querySearchKecamatan(vm.searchTextKecamatan, vm.pemohon.kabupaten_id)"
+                                                    md-item-text="item.nama_daerah"
+                                                    md-min-length="0"
+                                                    placeholder="Cari Kecamatan">
+                                                <span md-highlight-text="vm.searchTextKecamatan"
+                                                      md-highlight-flags="^i">{{item.nama_daerah}}</span>
+                                            </md-autocomplete>
+                                        </md-input-container>
+
+                                        <md-input-container flex>
+                                            <label>Desa</label>
+                                            <md-autocomplete
+                                                    class="margin-bottom-20"
+                                                    ng-disabled="vm.isDisabled"
+                                                    ng-required="true"
+                                                    md-no-cache="vm.noCache"
+                                                    md-search-text="vm.searchTextDesa"
+                                                    md-selected-item-change="vm.selectedItemChangeDesa(item)"
+                                                    md-items="item in vm.querySearchDesa(vm.searchTextDesa, vm.pemohon.kecamatan_id)"
+                                                    md-item-text="item.nama_daerah"
+                                                    md-min-length="0"
+                                                    placeholder="Cari Desa">
+                                                <span md-highlight-text="vm.searchTextDesa" md-highlight-flags="^i">{{item.nama_daerah}}</span>
+                                            </md-autocomplete>
+                                        </md-input-container>
+                                    </div>
+                                    <md-input-container class="md-block">
+                                        <label>Kode Pos</label>
+                                        <input type="text" placeholder="Kode Pos" ng-required="true" name="pemohon_kode_pos"
+                                               ng-model="vm.pemohon.kode_pos" md-maxlength="10">
+                                        <div ng-messages="addressForm.pemohon_kode_pos.$error">
+                                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                                        </div>
+                                    </md-input-container>
+                                </form>
+                            </md-content>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab id="confirm" ng-disabled="billingForm.$invalid">
+                        <md-tab-label>
+                            <span class="oxy-step-label">4</span>
+                            <span translate>Registrasi Selesai</span>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-content class="md-padding">
+                                <div class="padding-40" flex layout="column" layout-align="center center">
+                                    <h2 class="md-display-2">Registrasi Berhasil</h2>
+                                </div>
+                            </md-content>
+                        </md-tab-body>
+                    </md-tab>
+                </md-tabs>
+
+                <div class="wizard-navbar" layout-padding layout="row" layout-align="end center">
+                    <md-button class="md-primary md-raised" ng-click="triWizard.prevStep()"
+                               ng-hide="triWizard.currentStep > 2" ng-disabled="triWizard.prevStepDisabled()">PREV
+                    </md-button>
+                    <md-button class="md-primary md-raised" ng-click="triWizard.nextStep()"
+                               ng-hide="triWizard.progress == 100 && triWizard.currentStep > 1"
+                               ng-disabled="triWizard.nextStepDisabled()">Next
+                    </md-button>
+                    <md-button
+                            ng-show="triWizard.progress == 100 && triWizard.currentStep < 3"
+                            class="md-raised md-primary"
+                            ng-click="vm.registerClick()" ng-disabled="register.$invalid" translate="REGISTER.BUTTON"
+                            aria-label="{{'REGISTER.BUTTON' | translate}}"></md-button>
+                    <md-button class="md-primary"
+                               href="#/login" translate="REGISTER.HAVE_LOGIN"
+                               aria-label="{{'REGISTER.HAVE_LOGIN' | translate}}"></md-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

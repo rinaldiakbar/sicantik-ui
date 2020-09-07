@@ -1,0 +1,17 @@
+<md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+    <md-tab ng-repeat="tab in vm.tabs | orderObjectBy:'tab_idx'" label="{{tab.label}}">
+        <md-content class="md-padding">
+                <div class="dashboard-container overlay-10 padded-content-page" 
+                    layout="row" layout-wrap>
+                    <div class="drag-container" layout="row" layout-xs="column" 
+                        layout-margin dragula='"drag-analytics-container"' 
+                        ng-repeat="objchart in vm.charts | orderObjectBy:'posisi'" layout-wrap>
+                        <tri-widget google-geochart-widget content-padding 
+                            ng-if="objchart.tab_idx == tab.tab_idx">
+                            <div google-chart chart="objchart" ></div>
+                        </tri-widget>
+                    </div>
+                </div>
+            </md-content>
+    </md-tab>
+</md-tabs>

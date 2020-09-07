@@ -1,0 +1,21 @@
+<md-content class="padded-content-page">
+    <h2 translate>DASHBOARD-SETTING.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Title</label>
+        <input type="text" placeholder="Kode Desa" ng-required="true" ng-model="vm.page.title" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Instansi</label>
+        <input type="text" placeholder="Nama Desa" ng-required="true" ng-model="vm.page.instansi.nama" ng-disabled="true">
+    </md-input-container>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

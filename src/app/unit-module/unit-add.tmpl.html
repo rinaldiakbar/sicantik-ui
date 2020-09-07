@@ -1,0 +1,87 @@
+<md-content class="padded-content-page">
+    <h2>Tambah Unit</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nama</label>
+            <input type="text" name="nama" placeholder="Nama" ng-required="true" ng-model="vm.unit.nama" md-maxlength="100">
+            <div ng-messages="mainForm.nama.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Tipe</label>
+            <md-select name="tipe" ng-model="vm.unit.tipe" ng-change="vm.tipeChanged()">
+                <md-option ng-value="kodeTipe" ng-repeat="(kodeTipe, tipe) in vm.optionTipe">{{ tipe }}</md-option>
+            </md-select>
+            <div ng-messages="mainForm.tipe.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Kode Daerah</label>
+            <md-autocomplete
+                    class="margin-bottom-20"
+                    ng-disabled="false"
+                    md-no-cache="false"
+                    md-selected-item="selectedItemKodeDaerah"
+                    md-search-text="vm.searchTextKodeDaerah"
+                    md-selected-item-change="vm.selectedItemChangeKodeDaerah(item)"
+                    md-items="item in vm.querySearchKodeDaerah(vm.searchTextKodeDaerah)"
+                    md-item-text="item.kode_daerah"
+                    md-item-value="item.kode_daerah"
+                    md-min-length="0"
+                    placeholder="Kode Daerah">
+                <span md-highlight-text="vm.searchTextKodeDaerah" md-highlight-flags="^i">{{item.nama_daerah}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block" ng-if="vm.unit.parent_id_enabled">
+            <label>Parent Unit</label>
+            <md-autocomplete
+                class="margin-bottom-20"
+                ng-disabled="false"
+                md-no-cache="false"
+                md-selected-item="selectedItemUnit"
+                md-search-text="vm.searchTextUnit"
+                md-selected-item-change="vm.selectedItemChangeUnit(item)"
+                md-items="item in vm.querySearchStruktur(vm.searchTextUnit, vm.unit.tipe)"
+                md-item-text="item.nama"
+                md-item-value="item.id"
+                md-min-length="0"
+                placeholder="Parent Unit">
+                <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.nama}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Kode Instansi</label>
+            <input type="text" name="instansi_code" placeholder="Kode Instansi" ng-required="false"
+                ng-model="vm.unit.instansi_code" md-maxlength="100">
+            <div ng-messages="mainForm.instansi_code.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>WS URL</label>
+            <input type="url" name="ws_url" placeholder="WS URL" ng-required="false"
+                ng-model="vm.unit.ws_url" md-maxlength="100">
+            <div ng-messages="mainForm.ws_url.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

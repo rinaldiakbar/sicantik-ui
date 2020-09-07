@@ -1,0 +1,36 @@
+<md-content class="padded-content-page">
+    <h2 class="md-display-1">{{nama_form}}</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button ng-if="forms != null" ng-disabled="mainForm.$invalid" class="md-primary md-raised" ng-click="vm.save()">
+                Simpan
+            </md-button>
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.saveAndNext()">Proses Berikutnya</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <div ng-repeat="(formIndex, form) in forms | filter : {tabIdx:'0', ftype:'!tabel-grid', del: false} | orderBy:'no_urut':false">
+            <div ng-include="'app/form-module/canvas.html'" onload="onLoadFunc(form)"></div>
+        </div>
+
+        <md-card flex="100" class="card-element" ng-repeat="tabDisplay in forms | filter:{ftype:'tab'} | orderBy:'tabIdx':false | orderBy:'no_urut':false">
+            <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always" ng-if="tabDisplay.ftype === 'tab'">
+                <md-tab ng-repeat="tab in tabDisplay.ftab" label="{{tab.label}}">
+                    <md-content class="md-padding" ng-if="form.ftype !== 'tab' && form.tabIdx === tab.idx"
+                        ng-repeat="form in forms | filter: {del: false} | orderBy:'no_urut':false">
+                        <div ng-include="'app/form-module/canvas.html'"></div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-card>
+
+        <div layout="row" layout-align="end center">
+            <md-button ng-if="forms != null" ng-disabled="mainForm.$invalid" class="md-primary md-raised" ng-click="vm.save()">
+                Simpan
+            </md-button>
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.saveAndNext()">Proses Berikutnya</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

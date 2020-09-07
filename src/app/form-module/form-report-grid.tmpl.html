@@ -1,0 +1,46 @@
+<md-content class="padded-content-page no-scroll">
+
+    <div layout="row" flex layout-align="center center" class="form-title">
+        <h2 class="md-display-1">{{nama_form}}</h2>
+    </div>
+
+    <!-- Action Button Area -->
+    <div layout="row" flex layout-align="end center" 
+        ng-repeat="(formIndex, form) in forms | filter:{ftype:'action', tabIdx: -1, del: false}">
+        <div ng-include="'app/form-module/canvas_report.html'"></div>
+    </div>
+
+    <div>&nbsp;</div>
+
+    <!-- Filters -->
+    <div class="border-box report-filter">
+        <h3 ng-if="has_filter">Filter</h3>
+        <form flex="" name="vm.filter.form">
+            <md-data-table-toolbar class="md-data-table-toolbar" ng-if="has_tabel_grid">
+                <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                <input id="filter-text" type="text" ng-model="vm.query.filter" ng-model-options="vm.filter.options" placeholder="Cari">
+            </md-data-table-toolbar>
+
+            <md-data-table-toolbar class="md-data-table-toolbar" ng-if="has_filter">
+                <div ng-repeat="form in forms | filter : {ftype:'filter'}">
+                    <div ng-include="'app/form-module/canvas_report.html'"></div>
+                </div>
+            </md-data-table-toolbar>
+
+            <md-button class="md-primary md-raised" ng-click="vm.getReportData()">Tampilkan</md-button>
+            <md-button class="md-primary md-raised" ng-if="vm.hasRecord" ng-click="vm.downloadData('xls')">Download As Excel</md-button>
+        </form>
+    </div>
+    <!-- .Filters -->
+
+    <div>&nbsp;</div>
+
+    <!-- Table-grid area -->
+    <div id="report-result" class="border-box report-result" ng-if="vm.hasRecord">
+        <div ng-repeat="form in forms | filter: vm.filterCanvas">
+            <div ng-include="'app/form-module/canvas_report.html'"></div>
+        </div>
+    </div>
+    <!-- .Table-grid area -->
+
+</md-content>

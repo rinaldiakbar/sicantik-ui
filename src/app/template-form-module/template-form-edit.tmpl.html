@@ -1,0 +1,74 @@
+<md-content class="padded-content-page">
+    <h2 translate>TEMPLATE-FORM.EDIT</h2>
+
+    <form name="mainForm">
+        <div layout="row" layout-align="end center">
+            <md-button ng-if="forms != null" class="md-primary md-raised" ng-click="saveForm()">
+                Simpan Form
+            </md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Form</label>
+            <input type="text" placeholder="Nama Form" ng-required="true" ng-model="vm.template_form.nama_form" md-maxlength="100">
+            <div ng-messages="mainForm.otomatis_update.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Field Kunci</label>
+            <input type="text" placeholder="Field Kunci" ng-required="true" ng-model="vm.template_form.key_field" md-maxlength="25">
+            <div ng-messages="mainForm.otomatis_update.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Otomatis Update </label>
+            <md-select ng-required="true" name="otomatis_update" placeholder="otomatis update ketika form dibuka" ng-model="vm.template_form.otomatis_update">
+                <md-option ng-value="opt.kode" ng-repeat="opt in otomatisUpdateList">{{opt.label}}</md-option>
+            </md-select>
+            <div ng-messages="mainForm.otomatis_update.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block" ng-if="vm.template_form.otomatis_update === 1">
+            <label>Target Update Otomatis</label>
+            <md-select ng-required="true" name="target_simpan" placeholder="Target Update Otomatis*" ng-model="vm.template_form.target_simpan">
+                <md-option ng-value="opt.kode" ng-repeat="opt in targetSimpanList">{{opt.label}}</md-option>
+            </md-select>
+            <div ng-messages="mainForm.target_simpan.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block" ng-if="vm.template_form.otomatis_update === 1 && vm.template_form.target_simpan === 'eksternal'">
+            <label>Service Eksternal</label>
+            <md-autocomplete class="margin-bottom-20" ng-disabled="isDisabledOtomatisUpdate" md-no-cache="noCacheOtomatisUpdate" md-selected-item="selectedItemOtomatisUpdate"
+                md-search-text="searchTextOtomatisUpdate" md-selected-item-change="selectedItemChangeOtomatisUpdate(item)" md-items="item in querySearchOtomatisUpdate(searchTextOtomatisUpdate)"
+                md-item-text="item.nama" md-min-length="0" placeholder="Cari Service Eksternal" ng-required="true">
+                <span md-highlight-text="searchTextOtomatisUpdate" md-highlight-flags="^i">{{item.nama}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block" ng-if="vm.template_form.otomatis_update === 1 && vm.template_form.target_simpan === 'eksternal'">
+            <label>Target Path</label>
+            <input type="text" placeholder="Target Path*" ng-required="true" ng-model="vm.template_form.target_path" md-maxlength="50">
+            <div ng-messages="mainForm.target_path.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <div ng-include="'app/template-form-module/setting_form.component.html'"></div>
+
+        <div class="button-toolbar" layout="row" layout-align="end center">
+            <md-button ng-if="forms != null" class="md-primary md-raised" ng-click="saveForm()">
+                Simpan Form
+            </md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

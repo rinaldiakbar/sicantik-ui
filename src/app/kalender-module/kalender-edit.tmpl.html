@@ -1,0 +1,110 @@
+<md-content class="padded-content-page">
+    <h2>Kalender</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.saveAction()">Simpan
+            </md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Instansi</label>
+            <input type="text" placeholder="Nama Instansi" ng-disabled="true" ng-model="vm.instansi.nama">
+        </md-input-container>
+
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+
+            <!-- BEGIN - Hari Off -->
+            <md-tab label="Hari Off">
+                <md-content class="md-padding">
+                    <table class="md-table">
+                        <thead>
+                        <th width="10%">No</th>
+                        <th width="80">Hari</th>
+                        <th width="10%">Aksi</th>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(index, kalender) in vm.kalender_hari">
+                            <td>{{index + 1}}</td>
+                            <td>
+                                <md-input-container>
+                                    <md-select name="tipe" ng-model="kalender.idx_hari" ng-disabled="kalender.id ? true : false">
+                                        <md-option ng-value="kodeHari" ng-repeat="(kodeHari, hari) in vm.optionHari">{{
+                                            hari }}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </td>
+                            <td>
+                                <button class="btn btn-success btn-circle" type="button"
+                                        ng-click="vm.removeKalenderHari(index)">
+                                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <md-list class="no-scroll">
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addKalenderHari()"
+                                       aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Hari Off -->
+
+            <!-- BEGIN - Tanggal Libur -->
+            <md-tab label="Tanggal Libur">
+                <md-content class="md-padding">
+                    <table class="md-table">
+                        <thead>
+                        <th width="10%">No</th>
+                        <th width="80">Tanggal</th>
+                        <th width="10%">Aksi</th>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(index, kalender) in vm.kalender_tanggal">
+                            <td>{{index + 1}}</td>
+                            <td>
+                                <md-datepicker name="kalender_tanggal_{{index}}"
+                                    data-ng-model="kalender.tanggal" ng-required="true"
+                                    ng-disabled="kalender.id ? true : false">
+                                </md-datepicker>
+                            </td>
+                            <td>
+                                <button class="btn btn-success btn-circle" type="button"
+                                        ng-click="vm.removeKalenderTanggal(index)">
+                                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <md-list class="no-scroll">
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button"
+                                       ng-click="vm.addKalenderTanggal()" aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Tanggal Libur -->
+
+        </md-tabs>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.saveAction()">Simpan
+            </md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

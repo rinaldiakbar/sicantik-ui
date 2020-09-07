@@ -1,0 +1,15 @@
+{
+    "MENU": {
+        "PENGGUNA": {
+            "PENGGUNA-MODULE": "Pengguna"
+        }
+    },
+    "PENGGUNA": {
+        "TITLE": "Pengguna",
+        "LIST": "Daftar",
+        "ADD": "Tambah Pengguna",
+        "EDIT": "Ubah Pengguna",
+        "VIEW": "Lihat Pengguna",
+        "SEARCH": "Cari"
+    }
+}

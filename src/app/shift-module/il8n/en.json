@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "SHIFT": {
+            "SHIFT-MODULE": "Menu",
+            "SHIFT-LIST": "Daftar Shift"
+        }
+    },
+    "SHIFT": {
+        "TITLE": "Shift",
+        "LIST": "Daftar",
+        "ADD": "Calculate",
+        "EDIT": "Ubah Shift",
+        "VIEW": "Lihat Shift",
+        "SEARCH": "Cari"
+    }
+}

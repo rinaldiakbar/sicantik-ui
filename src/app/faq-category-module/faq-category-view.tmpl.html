@@ -1,0 +1,33 @@
+<md-content class="padded-content-page">
+    <h2 translate>FAQ-CATEGORY.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Nama</label>
+        <input type="text" placeholder="Nama" ng-required="true" ng-model="vm.faq_category.nama" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Deskripsi</label>
+        <input type="text" placeholder="Deskripsi" ng-required="true" ng-model="vm.faq_category.deskripsi" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>No Urut</label>
+        <input type="number" name="no_urut" placeholder="No Urut" ng-disabled="true" ng-model="vm.faq_category.no_urut">
+        <div ng-messages="mainForm.no_urut.$error">
+            <div ng-messages-include="app/include/validation-messages.html"></div>
+        </div>
+    </md-input-container>
+
+    <md-switch ng-model="vm.faq_category.is_active" aria-label="Aktif" ng-disabled="true">
+        Aktif
+    </md-switch>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

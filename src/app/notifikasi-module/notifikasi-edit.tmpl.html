@@ -1,0 +1,110 @@
+<md-content class="padded-content-page">
+    <h2>Ubah Jenis Izin</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Jenis Izin</label>
+            <input type="text" name="jenis_izin" placeholder="Nama Jenis Izin" ng-required="true" ng-model="vm.jenis_izin.jenis_izin" md-maxlength="100">
+            <div ng-messages="mainForm.jenis_izin.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+
+            <!-- BEGIN - Loop Jenis Pengajuan -->
+            <md-tab label="{{pengajuan.jenis_pengajuan}}" ng-repeat="(tabIdx, pengajuan) in vm.jenis_izin.jenis_pengajuan">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <md-tabs class="md-primary" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+                            <md-tab label="{{daftarProses.no}}" ng-repeat="(subTabIdx, daftarProses) in pengajuan.alur_prose.daftar_proses">
+                                <md-content class="md-padding">
+                                    <md-list class="no-scroll">
+                                        <h3>Proses-{{daftarProses.no}} : {{daftarProses.nama_proses}}</h3>
+
+                                        <table class="md-table static-table">
+                                            <thead>
+                                                <th style="width:5%" class="number-col">#</th>
+                                                <th style="width:30%">Tipe</th>
+                                                <th style="width:30%">Penerima</th>
+                                                <th style="width:20%" class="action-col">Format Pesan</th>
+                                                <th style="width:15%" class="action-col">Aksi</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="(index, detail) in daftarProses.details">
+                                                    <td class="number-col">{{index+1}}</td>
+                                                    <td>
+                                                        <md-input-container md-no-float class="md-block">
+                                                            <md-select name="proses_tipe_{{index}}" placeholder="Tipe" ng-model="detail.tipe" ng-required="true">
+                                                                <md-option ng-value="opt.kode" ng-repeat="opt in vm.tipeList">{{opt.label}}</md-option>
+                                                            </md-select>
+                                                            <div ng-messages="mainForm['proses_tipe_'+index].$error">
+                                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                                            </div>
+                                                        </md-input-container>
+                                                    </td>
+                                                    <td>
+                                                        <md-input-container md-no-float class="md-block">
+                                                            <md-select name="proses_tipe_penerima_{{index}}" placeholder="Tipe Penerima" ng-model="detail.tipe_penerima" ng-required="true">
+                                                                <md-option ng-value="opt.kode" ng-repeat="opt in vm.tipePenerimaList">{{opt.label}}</md-option>
+                                                            </md-select>
+                                                            <div ng-messages="mainForm['proses_tipe_penerima_'+index].$error">
+                                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                                            </div>
+                                                        </md-input-container>
+
+                                                        <md-input-container md-no-float class="md-block" ng-if="detail.tipe_penerima === 'jabatan'">
+                                                            <md-select name="proses_jabatan_{{index}}" placeholder="Pilih Jabatan" ng-model="detail.jabatan_id" ng-required="true">
+                                                                <md-option ng-value="opt.id" ng-repeat="opt in vm.jabatanList">{{opt.jabatan}}</md-option>
+                                                            </md-select>
+                                                            <div ng-messages="mainForm['proses_jabatan_'+index].$error">
+                                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                                            </div>
+                                                        </md-input-container>
+                                                    </td>
+                                                    <td class="action-col">
+                                                        <button class="btn btn-success btn-circle" type="button" ng-click="vm.editMessage(tabIdx, subTabIdx, daftarProses.id, index)">
+                                                            <md-icon md-font-icon="fa fa-pencil"></md-icon>
+                                                        </button>
+                                                    </td>
+                                                    <td class="action-col">
+                                                        <button class="btn btn-success btn-circle" type="button" ng-click="vm.removeDetail(tabIdx, subTabIdx, daftarProses.id, index)">
+                                                            <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <md-list class="no-scroll">
+                                            <md-list-item layout="row" layout-align="space-around center">
+                                                <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addDetail(tabIdx, subTabIdx, daftarProses.id)" aria-label="raised button">
+                                                    <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                                                </md-button>
+                                            </md-list-item>
+                                        </md-list>
+
+                                    </md-list>
+                                </md-content>
+                            </md-tab>
+                        </md-tabs>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Loop Jenis Pengajuan -->
+
+        </md-tabs>
+        <!-- END - Tabs -->
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

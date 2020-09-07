@@ -1,0 +1,12 @@
+{
+    "MENU": {
+        "NAVIGATION": {
+            "NAVIGATION-MODULE": "Graines De Module",
+            "NAVIGATION-PAGE": "Page De Démarrage"
+        }
+    },
+    "NAVIGATION": {
+        "TITLE": "Bienvenue à la forme triangulaire de la page de test",
+        "DATA_TABLE": "Data Table"
+    }
+}

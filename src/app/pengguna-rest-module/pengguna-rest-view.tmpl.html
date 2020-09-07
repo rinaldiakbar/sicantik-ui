@@ -1,0 +1,48 @@
+<md-content class="padded-content-page">
+    <h2 translate>PENGGUNA-GATEWAY.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.pengguna.id">
+
+    <md-input-container md-no-float class="md-block">
+        <label>Nama User</label>
+        <input type="text" placeholder="Nama User" ng-required="true" ng-model="vm.pengguna.username" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Instansi</label>
+        <input type="text" placeholder="Instansi" ng-required="true" ng-model="vm.pengguna.instansi.nama" ng-disabled="true">
+    </md-input-container>
+
+    <md-switch ng-model="vm.pengguna.is_active" aria-label="Aktif" ng-disabled="true">
+        Aktif
+    </md-switch>
+
+    <!-- BEGIN - Tabs -->
+    <!--<md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">-->
+        <!--<md-tab label="Unit Kerja">-->
+            <!--<md-content class="md-padding">-->
+                <!--<table class="md-table">-->
+                    <!--<thead>-->
+                        <!--<th class="number-col" style="width:15%">#</th>-->
+                        <!--<th style="width:85%">Unit Kerja</th>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                        <!--<tr ng-repeat="(index, unit) in vm.unit">-->
+                            <!--<td class="number-col">{{index+1}}</td>-->
+                            <!--<td>{{unit.nama}}</td>-->
+                        <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</md-content>-->
+        <!--</md-tab>-->
+    <!--</md-tabs>-->
+    <!-- END - Tabs -->
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

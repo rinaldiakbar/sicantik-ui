@@ -1,0 +1,80 @@
+<!-- Action Canvas -->
+<div ng-if="form.ftype == 'action'" layout="row" layout-align="end center" class="action-canvas">
+    <div ng-repeat="(fieldIndex, field) in form.fields" layout="column" layout-align="middle end" flex>
+        <div ng-repeat="(dataIndex, data) in field.field | filter:{type:'button-action'}">
+            <div ng-include="'app/form-module/element.html'"></div>
+        </div>
+    </div>
+</div>
+<!-- .Action Canvas -->
+
+
+<!-- Form -->
+<div ng-if="form.ftype === 'form'">
+    </br>
+    <div ng-repeat="(fieldIndex, field) in form.fields">
+        <div ng-repeat="(dataIndex, data) in field.field | filter:{type:'!button-action'} | orderBy:'no_urut':false">
+            <span ng-include="'app/form-module/element.html'"></span>
+        </div>
+    </div>
+</div>
+
+<div ng-if="form.ftype === 'tabel' || form.ftype === 'tabel-statik'">{{form.type}}</br>
+    <table class="dynamic-form-table">
+        <thead ng-if="index==0" ng-repeat="(index, field) in form.fields | orderBy:'no_urut':false">
+            <th ng-repeat="header in field.field">{{header.label}}</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="record in form.fields | filter:{del:false} | orderBy:'no_urut':false">
+                <td ng-repeat="data in record.field">
+                    <div ng-include="'app/form-module/element_table.html'"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- .Form -->
+
+
+<!-- Table-Grid -->
+<div ng-if="form.ftype === 'tabel-grid'">
+    <!--<md-data-table-toolbar class="md-data-table-toolbar">
+        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+        <form flex="" name="vm.filter.form">
+            <input id="filter-text" type="text" ng-model="vm.query.filter" ng-model-options="vm.filter.options" placeholder="Cari">
+        </form>
+    </md-data-table-toolbar>-->
+
+    <md-data-table-container>
+        <table md-data-table class="md-primary md-data-table dynamic-form-table" md-progress="vm.deferred">
+            <thead md-order="vm.query.order" md-trigger="vm.getData">
+                <tr ng-if="index==0" ng-repeat="(index, field) in form.fields">
+                    <th name="No" ng-hide="!showGridNo"></th>
+                    <th name="{{header.label}}" ng-repeat="header in field.field | filter:{type:'!button-set'}"></th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="(recordIndex, record) in vm.gridData.items">
+                <tr ng-repeat="(fieldIndex, field) in form.fields">
+                    <td ng-hide="!showGridNo">{{record.no}}</td>
+                    <td ng-repeat="field in field.field | filter:{type:'!button-set'}">
+                        {{record[field.data_kolom]}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </md-data-table-container>
+
+    <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.gridData.total_items}}" md-trigger="vm.getData"></md-data-table-pagination>
+</div>
+<!-- .Table-Grid -->
+
+
+<!-- Filter -->
+<div ng-if="form.ftype === 'filter'">
+    <div ng-repeat="(fieldIndex, field) in form.fields | filter:{del:false}" class="layout-margin layout-xs-column layout-row" layout-margin="" layout-xs="column" layout="row">
+        <div layout="column" flex ng-repeat="(dataIndex, data) in field.field | filter:{del:false}">
+            <div ng-include="'app/form-module/element.html'"></div>
+        </div>
+    </div>
+</div>
+<!-- .Filter -->

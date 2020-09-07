@@ -1,0 +1,584 @@
+<md-content class="padded-content-page">
+    <h2>Ubah Permohonan Izin</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAndNextAction()">Proses Berikutnya</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <input type="hidden" ng-model="vm.permohonan_izin.id">
+
+        <md-input-container md-no-float class="md-block">
+            <label>Jenis Permohonan</label>
+            <md-select ng-required="true" name="jenis_permohonan" placeholder="Jenis Permohonan" ng-model="vm.permohonan_izin.jenis_permohonan" ng-disabled="true">
+                <md-option ng-value="opt.kode" ng-repeat="opt in vm.jenisPermohonanList">{{opt.label}}</md-option>
+            </md-select>
+            <div ng-messages="mainForm.jenis_permohonan.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Instansi</label>
+            <md-autocomplete
+                    ng-required="true"
+                    class="margin-bottom-20" ng-disabled="vm.isDisabledInstansi"
+                    md-no-cache="vm.noCacheInstansi"
+                    md-selected-item="selectedItemInstansi"
+                    md-search-text="vm.searchTextInstansi"
+                    md-selected-item-change="vm.selectedItemChangeInstansi(item)"
+                    md-items="item in vm.querySearchInstansi(vm.searchTextInstansi)"
+                    md-item-text="item.nama" md-item-value="item.id" md-min-length="0"
+                    placeholder="Cari Instansi">
+                <span md-highlight-text="vm.searchTextInstansi" md-highlight-flags="^i">{{item.nama}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Unit</label>
+            <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabledUnit" md-no-cache="vm.noCacheUnit" md-selected-item="selectedItemUnit" md-search-text="vm.searchTextUnit" md-selected-item-change="vm.selectedItemChangeUnit(item)" md-items="item in vm.querySearchUnit(vm.searchTextUnit, vm.permohonan_izin.instansi_id)"
+                md-item-text="item.nama" md-item-value="item.id" md-min-length="0" placeholder="Cari Unit">
+                <span md-highlight-text="vm.searchTextUnit" md-highlight-flags="^i">{{item.nama}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Jenis Izin</label>
+            <md-autocomplete ng-disabled="false" ng-required="true" md-no-cache="true" md-search-text="vm.searchTextJenisIzin" md-selected-item-change="vm.selectedItemChangeJenisIzin(item)" md-items="item in vm.querySearchJenisIzin(vm.searchTextJenisIzin, vm.permohonan_izin.instansi_id)" md-item-text="item.jenis_izin"
+                md-item-value="item.id" md-min-length="0" placeholder="Cari Jenis Izin">
+                <span md-highlight-text="vm.permohonan_izin.jenis_izin_id_display" md-highlight-flags="^i">{{item.jenis_izin}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>No Permohonan</label>
+            <input type="text" name="no_permohonan" placeholder="No Permohonan" ng-required="true" ng-readonly="true" ng-model="vm.permohonan_izin.no_permohonan" md-maxlength="50">
+            <div ng-messages="mainForm.no_permohonan.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Tipe Pemohon</label>
+            <md-select ng-required="true" name="tipe_pemohon" placeholder="Tipe Pemohon" ng-model="vm.permohonan_izin.tipe_pemohon" ng-change="vm.checkTipePemohon()">
+                <md-option ng-value="opt.kode" ng-repeat="opt in vm.tipePemohonList">{{opt.label}}</md-option>
+            </md-select>
+            <div ng-messages="mainForm.tipe_pemohon.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Lokasi Izin</label>
+            <text-angular name="lokasi_izin" data-ng-model="vm.permohonan_izin.lokasi_izin" ng-required="false" md-maxlength="500" ta-target-toolbars="editor-toolbar">
+            </text-angular>
+            <div ng-messages="mainForm.lokasi_izin.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+            <md-tab label="Pemohon">
+                <md-content class="md-padding">
+
+                    <div layout="row" flex>
+                        <div layout="column" flex="70"></div>
+                        <div layout="column" flex="30">
+                            <md-button class="md-accent md-raised md-hue-1" ng-click="vm.openPemohonDialog()">
+                                Ambil Data Pemohon
+                            </md-button>
+                        </div>
+                    </div>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Nama</label>
+                        <input type="text" name="pemohon_nama" placeholder="Nama" ng-required="true" ng-model="vm.permohonan_izin.pemohon.nama" md-maxlength="100">
+                        <div ng-messages="mainForm.pemohon_nama.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Tipe Identitas</label>
+                        <md-select placeholder="Tipe Identitas" ng-model="vm.permohonan_izin.pemohon.tipe_identitas">
+                            <md-option ng-value="opt.kode" ng-repeat="opt in vm.jenisIdentitasList">{{opt.label}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>No. Identitas</label>
+                        <input type="text" name="pemohon_no_identitas" placeholder="No. Identitas" ng-required="true" ng-model="vm.permohonan_izin.pemohon.no_identitas" md-maxlength="100">
+                        <div ng-messages="mainForm.pemohon_no_identitas.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Tempat Lahir</label>
+                        <input type="text" placeholder="Tempat Lahir" name="pemohon_tempat_lahir" ng-required="true" ng-model="vm.permohonan_izin.pemohon.tempat_lahir" md-maxlength="100">
+                        <div ng-messages="mainForm.pemohon_tempat_lahir.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Tanggal Lahir</label>
+                        <md-datepicker name="pemohon_tgl_lahir" data-ng-model="vm.permohonan_izin.pemohon.tgl_lahir" md-max-date="vm.maxBirthDate" md-current-view="year" md-placeholder="Tanggal Lahir" ng-required="true"></md-datepicker>
+                        <div ng-messages="mainForm.pemohon_tgl_lahir.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Jenis Kelamin</label>
+                        <md-select placeholder="Jenis Kelamin" ng-model="vm.permohonan_izin.pemohon.jenis_kelamin">
+                            <md-option ng-value="opt.kode" ng-repeat="opt in vm.genderList">{{opt.label}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Pekerjaan</label>
+                        <input type="text" placeholder="Pekerjaan" ng-required="true" name="pemohon_pekerjaan" ng-model="vm.permohonan_izin.pemohon.pekerjaan" md-maxlength="25">
+                        <div ng-messages="mainForm.pemohon_pekerjaan.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>No. Telepon</label>
+                        <input type="text" placeholder="No. Telepon" ng-required="true" name="pemohon_no_tlp" ng-model="vm.permohonan_izin.pemohon.no_tlp" md-maxlength="15">
+                        <div ng-messages="mainForm.pemohon_no_tlp.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>No. HP</label>
+                        <input type="text" placeholder="No. HP" ng-required="true" name="pemohon_no_hp" ng-model="vm.permohonan_izin.pemohon.no_hp" md-maxlength="15">
+                        <div ng-messages="mainForm.pemohon_no_hp.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Email</label>
+                        <input type="email" placeholder="Email" ng-required="true" name="pemohon_email" ng-model="vm.permohonan_izin.pemohon.email" md-maxlength="50">
+                        <div ng-messages="mainForm.pemohon_email.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Alamat</label>
+                        <input type="text" placeholder="Alamat" ng-required="true" name="pemohon_alamat" ng-model="vm.permohonan_izin.pemohon.alamat" md-maxlength="100">
+                        <div ng-messages="mainForm.pemohon_alamat.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Provinsi</label>
+                        <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabled" ng-required="true" md-no-cache="vm.noCache" md-search-text="vm.searchTextProvinsi" md-selected-item-change="vm.selectedItemChangeProvinsi(item)" md-items="item in vm.querySearchProvinsi(vm.searchTextProvinsi)"
+                            md-item-text="item.nama_daerah" md-min-length="0" placeholder="Cari Provinsi">
+                            <span md-highlight-text="vm.searchTextProvinsi" md-highlight-flags="^i">{{item.nama_daerah}}</span>
+                        </md-autocomplete>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Kabupaten</label>
+                        <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabled" ng-required="true" md-no-cache="vm.noCache" md-search-text="vm.searchTextKabupaten" md-selected-item-change="vm.selectedItemChangeKabupaten(item)" md-items="item in vm.querySearchKabupaten(vm.searchTextKabupaten, vm.permohonan_izin.pemohon.provinsi_id)"
+                            md-item-text="item.nama_daerah" md-min-length="0" placeholder="Cari Kabupaten">
+                            <div flex="100" layout="row">
+                                <div flex="50" layout="column">
+                                    <span md-highlight-text="vm.searchTextKecamatan" md-highlight-flags="^i">{{item.nama_daerah}}</span>
+                                </div>
+                                <div flex=50 " layout="column ">
+                                    {{item.provinsi.kode_daerah}} - {{item.provinsi.nama_daerah}}
+                                </div>
+                            </div>
+                        </md-autocomplete>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block ">
+                        <label>Kecamatan</label>
+                        <md-autocomplete
+                                class="margin-bottom-20 "
+                                ng-disabled="vm.isDisabled "
+                                ng-required="true "
+                                md-no-cache="vm.noCache "
+                                md-search-text="vm.searchTextKecamatan "
+                                md-selected-item-change="vm.selectedItemChangeKecamatan(item) "
+                                md-items="item in vm.querySearchKecamatan(vm.searchTextKecamatan, vm.permohonan_izin.pemohon.kabupaten_id) "
+                                md-item-text="item.nama_daerah "
+                                md-min-length="0 "
+                                placeholder="Cari Kecamatan ">
+                            <div flex="100 " layout="row ">
+                                <div flex="40 " layout="column ">
+                                    <span md-highlight-text="vm.searchTextKecamatan " md-highlight-flags="^i ">{{item.nama_daerah}}</span>
+                                </div>
+                                <div flex=30" layout="column">
+                                    {{item.kabupaten.kode_daerah}} - {{item.kabupaten.nama_daerah}}
+                                </div>
+                                <div flex=30 " layout="column ">
+                                    {{item.kabupaten.provinsi.kode_daerah}} - {{item.kabupaten.provinsi.nama_daerah}}
+                                </div>
+                            </div>
+                        </md-autocomplete>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block ">
+                        <label>Desa</label>
+                        <md-autocomplete
+                                class="margin-bottom-20 "
+                                ng-disabled="vm.isDisabled "
+                                ng-required="true "
+                                md-no-cache="vm.noCache "
+                                md-search-text="vm.searchTextDesa "
+                                md-selected-item-change="vm.selectedItemChangeDesa(item) "
+                                md-items="item in vm.querySearchDesa(vm.searchTextDesa, vm.permohonan_izin.pemohon.kecamatan_id) "
+                                md-item-text="item.nama_daerah "
+                                md-min-length="0 "
+                                placeholder="Cari Desa ">
+                            <div flex="100 " layout="row ">
+                                <div flex="25 " layout="column ">
+                                    <span md-highlight-text="vm.searchTextDesa " md-highlight-flags="^i ">{{item.nama_daerah}}</span>
+                                </div>
+                                <div flex=25" layout="column">
+                                    {{item.kecamatan.kode_daerah}} - {{item.kecamatan.nama_daerah}}
+                                </div>
+                                <div flex=25 " layout="column ">
+                                    {{item.kecamatan.kabupaten.kode_daerah}} - {{item.kecamatan.kabupaten.nama_daerah}}
+                                </div>
+                                <div flex=25" layout="column">
+                                    {{item.kecamatan.kabupaten.provinsi.kode_daerah}} - {{item.kecamatan.kabupaten.provinsi.nama_daerah}}
+                                </div>
+                            </div>
+                        </md-autocomplete>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Kode Pos</label>
+                        <input type="text" placeholder="Kode Pos" ng-required="true" name="pemohon_kode_pos" ng-model="vm.permohonan_izin.pemohon.kode_pos" md-maxlength="10">
+                        <div ng-messages="mainForm.pemohon_kode_pos.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                </md-content>
+            </md-tab>
+
+            <md-tab label="Badan Usaha">
+                <md-content class="md-padding">
+
+                    <div layout="row" flex>
+                        <div layout="column" flex="70"></div>
+                        <div layout="column" flex="30">
+                            <md-button class="md-accent md-raised md-hue-1" ng-click="vm.openPerusahaanDialog()" ng-disabled="!vm.enable_perusahaan">
+                                Ambil Data Perusahaan
+                            </md-button>
+                        </div>
+                    </div>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Nama Perusahaan</label>
+                        <input type="text" placeholder="Nama Perusahaan" ng-required="vm.enable_perusahaan" name="perusahaan_nama_perusahaan" ng-model="vm.permohonan_izin.perusahaan.nama_perusahaan" md-maxlength="100" ng-disabled="!vm.enable_perusahaan">
+                        <div ng-messages="mainForm.perusahaan_nama_perusahaan.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>NPWP</label>
+                        <input type="text" placeholder="NPWP" ng-required="vm.enable_perusahaan" name="perusahaan_npwp" ng-model="vm.permohonan_izin.perusahaan.npwp" md-maxlength="100" ng-disabled="!vm.enable_perusahaan">
+                        <div ng-messages="mainForm.perusahaan_npwp.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>No. Register</label>
+                        <input type="text" placeholder="No. Register" ng-required="vm.enable_perusahaan" name="perusahaan_no_register" ng-model="vm.permohonan_izin.perusahaan.no_register" md-maxlength="100" ng-disabled="!vm.enable_perusahaan">
+                        <div ng-messages="mainForm.perusahaan_no_register.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Jenis Perusahaan</label>
+                        <input type="text" placeholder="Jenis Perusahaan" ng-required="vm.enable_perusahaan" name="perusahaan_jenis_perusahaan" ng-model="vm.permohonan_izin.perusahaan.jenis_perusahaan" md-maxlength="100" ng-disabled="!vm.enable_perusahaan">
+                        <div ng-messages="mainForm.perusahaan_jenis_perusahaan.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Bidang Usaha</label>
+                        <md-contact-chips ng-if="vm.enable_perusahaan" ng-model="vm.permohonan_izin.perusahaan.bidang_usaha" md-contacts="vm.querySearchBidangUsaha($query)" md-contact-name="name" md-require-match="true" md-highlight-flags="i" filter-selected="true" placeholder="Pilih Bidang Usaha">
+                        </md-contact-chips>
+                        <input type="text" placeholder="Pilih Bidang Usaha" ng-disabled="true" ng-if="!vm.enable_perusahaan">
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Jenis Usaha</label>
+                        <md-contact-chips ng-if="vm.enable_perusahaan" ng-model="vm.permohonan_izin.perusahaan.jenis_usaha" md-contacts="vm.querySearchJenisUsaha($query)" md-contact-name="name" md-require-match="true" md-highlight-flags="i" filter-selected="true" placeholder="Pilih Jenis Usaha">
+                        </md-contact-chips>
+                        <input type="text" placeholder="Pilih Jenis Usaha" ng-disabled="true" ng-if="!vm.enable_perusahaan">
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Jumlah Pegawai</label>
+                        <input type="number" placeholder="Jumlah Pegawai" ng-required="false" name="perusahaan_jumlah_pegawai" ng-model="vm.permohonan_izin.perusahaan.jumlah_pegawai" ng-disabled="!vm.enable_perusahaan">
+                        <div ng-messages="mainForm.perusahaan_jumlah_pegawai.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Nilai Investasi</label>
+                        <input type="number" placeholder="Nilai Investasi" ng-required="false" name="perusahaan_nilai_investasi" ng-model="vm.permohonan_izin.perusahaan.nilai_investasi" ng-disabled="!vm.enable_perusahaan">
+                        <div ng-messages="mainForm.perusahaan_nilai_investasi.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Telepon</label>
+                        <input type="text" placeholder="Telepon" ng-required="false" name="perusahaan_no_tlp" ng-model="vm.permohonan_izin.perusahaan.no_tlp" md-maxlength="15" ng-disabled="!vm.enable_perusahaan">
+                        <div ng-messages="mainForm.perusahaan_no_tlp.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Fax</label>
+                        <input type="text" placeholder="Fax" ng-required="false" name="perusahaan_fax" ng-model="vm.permohonan_izin.perusahaan.fax" md-maxlength="15" ng-disabled="!vm.enable_perusahaan">
+                        <div ng-messages="mainForm.perusahaan_fax.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Email</label>
+                        <input type="email" placeholder="Email" ng-required="false" name="perusahaan_email" ng-model="vm.permohonan_izin.perusahaan.email" md-maxlength="50" ng-disabled="!vm.enable_perusahaan">
+                        <div ng-messages="mainForm.perusahaan_email.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Alamat</label>
+                        <input type="text" placeholder="Alamat" ng-required="false" name="perusahaan_alamat" ng-model="vm.permohonan_izin.perusahaan.alamat" md-maxlength="100" ng-disabled="!vm.enable_perusahaan">
+                        <div ng-messages="mainForm.perusahaan_alamat.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Provinsi</label>
+                        <md-autocomplete class="margin-bottom-20" ng-disabled="!vm.enable_perusahaan" ng-required="vm.enable_perusahaan" md-no-cache="vm.noCache" md-search-text="vm.searchTextProvinsiPerusahaan" md-selected-item-change="vm.selectedItemChangeProvinsiPerusahaan(item)"
+                            md-items="item in vm.querySearchProvinsiPerusahaan(vm.searchTextProvinsiPerusahaan)" md-item-text="item.nama_daerah" md-min-length="0" placeholder="Cari Provinsi">
+                            <span md-highlight-text="vm.searchTextProvinsiPerusahaan" md-highlight-flags="^i">{{item.nama_daerah}}</span>
+                        </md-autocomplete>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Kabupaten</label>
+                        <md-autocomplete class="margin-bottom-20" ng-disabled="!vm.enable_perusahaan" ng-required="vm.enable_perusahaan" md-no-cache="vm.noCache" md-search-text="vm.searchTextKabupatenPerusahaan" md-selected-item-change="vm.selectedItemChangeKabupatenPerusahaan(item)"
+                            md-items="item in vm.querySearchKabupatenPerusahaan(vm.searchTextKabupatenPerusahaan, vm.permohonan_izin.perusahaan.provinsi_id)" md-item-text="item.nama_daerah" md-min-length="0" placeholder="Cari Kabupaten">
+                            <div flex="100" layout="row">
+                                <div flex="50" layout="column">
+                                    <span md-highlight-text="vm.searchTextKecamatan" md-highlight-flags="^i">{{item.nama_daerah}}</span>
+                                </div>
+                                <div flex=50 " layout="column ">
+                                    {{item.provinsi.kode_daerah}} - {{item.provinsi.nama_daerah}}
+                                </div>
+                            </div>
+                        </md-autocomplete>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block ">
+                        <label>Kecamatan</label>
+                        <md-autocomplete
+                                class="margin-bottom-20 "
+                                ng-disabled="!vm.enable_perusahaan "
+                                ng-required="vm.enable_perusahaan "
+                                md-no-cache="vm.noCache "
+                                md-search-text="vm.searchTextKecamatanPerusahaan "
+                                md-selected-item-change="vm.selectedItemChangeKecamatanPerusahaan(item) "
+                                md-items="item in vm.querySearchKecamatanPerusahaan(vm.searchTextKecamatanPerusahaan, vm.permohonan_izin.perusahaan.kabupaten_id) "
+                                md-item-text="item.nama_daerah "
+                                md-min-length="0 "
+                                placeholder="Cari Kecamatan ">
+                            <div flex="100 " layout="row ">
+                                <div flex="40 " layout="column ">
+                                    <span md-highlight-text="vm.searchTextKecamatanPerusahaan " md-highlight-flags="^i ">{{item.nama_daerah}}</span>
+                                </div>
+                                <div flex=30" layout="column">
+                                    {{item.kabupaten.kode_daerah}} - {{item.kabupaten.nama_daerah}}
+                                </div>
+                                <div flex=30 " layout="column ">
+                                    {{item.kabupaten.provinsi.kode_daerah}} - {{item.kabupaten.provinsi.nama_daerah}}
+                                </div>
+                            </div>
+                        </md-autocomplete>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block ">
+                        <label>Desa</label>
+                        <md-autocomplete
+                                class="margin-bottom-20 "
+                                ng-disabled="!vm.enable_perusahaan "
+                                ng-required="vm.enable_perusahaan "
+                                md-no-cache="vm.noCache "
+                                md-search-text="vm.searchTextDesaPerusahaan "
+                                md-selected-item-change="vm.selectedItemChangeDesaPerusahaan(item) "
+                                md-items="item in vm.querySearchDesaPerusahaan(vm.searchTextDesaPerusahaan, vm.permohonan_izin.perusahaan.kecamatan_id) "
+                                md-item-text="item.nama_daerah "
+                                md-min-length="0 "
+                                placeholder="Cari Desa ">
+                            <div flex="100 " layout="row ">
+                                <div flex="25 " layout="column ">
+                                    <span md-highlight-text="vm.searchTextDesaPerusahaan " md-highlight-flags="^i ">{{item.nama_daerah}}</span>
+                                </div>
+                                <div flex=25" layout="column">
+                                    {{item.kecamatan.kode_daerah}} - {{item.kecamatan.nama_daerah}}
+                                </div>
+                                <div flex=25 " layout="column ">
+                                    {{item.kecamatan.kabupaten.kode_daerah}} - {{item.kecamatan.kabupaten.nama_daerah}}
+                                </div>
+                                <div flex=25" layout="column">
+                                    {{item.kecamatan.kabupaten.provinsi.kode_daerah}} - {{item.kecamatan.kabupaten.provinsi.nama_daerah}}
+                                </div>
+                            </div>
+                        </md-autocomplete>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+                        <label>Kode Pos</label>
+                        <input type="text" placeholder="Kode Pos" ng-required="false" name="perusahaan_kode_pos" ng-model="vm.permohonan_izin.perusahaan.kode_pos" md-maxlength="10" ng-disabled="!vm.enable_perusahaan">
+                        <div ng-messages="mainForm.perusahaan_kode_pos.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                </md-content>
+            </md-tab>
+
+            <md-tab label="Persyaratan">
+                <md-content class="md-padding">
+                    <div layout="row" flex>
+                        <div flex></div>
+                        <md-button class="md-primary md-raised" ng-click="vm.sendNotif()" flex="20">Notif</md-button>
+                    </div>
+                    <table class="md-table">
+                        <thead>
+                            <th class="number-col" style="width:3%">#</th>
+                            <th style="width:27%">Jenis Dokumen</th>
+                            <th style="width:20%">No Dokumen</th>
+                            <th style="width:40%">Masa Berlaku</th>
+                            <th class="action-col" style="width:5%">Terpenuhi</th>
+                            <th class="action-col" style="width:5%">Aksi</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(index, syarat) in vm.permohonan_izin.persyaratan">
+                                <td class="number-col">{{index+1}}</td>
+                                <td>
+                                    <md-input-container flex>
+                                        <md-autocomplete ng-disabled="true" md-no-cache="true" md-search-text="vm.searchTextJenisDokumen[index]" md-selected-item-change="vm.selectedItemChangeJenisDokumen(item, index)" md-items="item in vm.querySearchJenisDokumen(vm.searchTextJenisDokumen[index])"
+                                            md-item-text="item.deskripsi" md-item-value="item.id" md-min-length="0" placeholder="Jenis Dokumen">
+                                            <span md-highlight-text="syarat.jenis_dokumen.deskripsi" md-highlight-flags="^i">{{item.deskripsi}}</span>
+                                        </md-autocomplete>
+                                    </md-input-container>
+                                </td>
+                                <td>
+                                    <md-input-container>
+                                        <input type="text" placeholder="No Dokumen" name="syarat_no_dokumen_{{index}}" ng-model="syarat.no_dokumen" md-maxlength="25">
+                                        <div ng-messages="mainForm['syarat_no_dokumen_'+index].$error">
+                                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                                        </div>
+                                    </md-input-container>
+                                </td>
+                                <td>
+                                    <div flex="90" layout="row">
+                                        <div flex="50" layout="column">
+                                            <md-datepicker name="syarat_awal_berlaku_{{index}}" data-ng-model="syarat.awal_berlaku" md-placeholder="Awal Berlaku"></md-datepicker>
+                                            <div ng-messages="mainForm['syarat_awal_berlaku_'+index].$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </div>
+                                        <div flex="50" layout="column">
+                                            <md-datepicker name="syarat_akhir_berlaku_{{index}}" data-ng-model="syarat.akhir_berlaku" md-placeholder="Akhir Berlaku"></md-datepicker>
+                                            <div ng-messages="mainForm['syarat_akhir_berlaku_'+index].$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="action-col">
+                                    <md-checkbox class="md-primary" ng-model="syarat.terpenuhi" aria-label="Visible" ng-true-value="1" ng-false-value="0" ng-required="syarat.wajib === 1" />
+                                </td>
+                                <td class="action-col">
+                                    <button class="btn btn-success btn-circle" type="button" ng-click="vm.viewDokumen(syarat.lokasi_dokumen)">
+                                    <md-icon md-font-icon="fa fa-eye"></md-icon>
+                                </button>
+                                <button ng-if="syarat.lokasi_dokumen" class="btn btn-success btn-circle" type="button" ng-click="vm.downloadDokumen(syarat.lokasi_dokumen)">
+                                    <md-icon md-font-icon="fa fa-download"></md-icon>
+                                </button>
+                                <button class="btn btn-success btn-circle" type="button" ng-click="vm.uploadDokumen(vm.permohonan_izin.pemohon_id, syarat.jenis_dokumen_id, vm.permohonan_izin.id)">
+                                    <md-icon md-font-icon="fa fa-upload"></md-icon>
+                                </button>
+                                <!-- <button ng-if="syarat.wajib !== 1" class="btn btn-success btn-circle" type="button" ng-click="vm.removePersyaratan(index)">
+                                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                </button> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <md-list class="no-scroll">
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addNewPersyaratan()" aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                                <md-tooltip>Tambah Persyaratan</md-tooltip>
+                            </md-button>
+                        </md-list-item>
+                    </md-list> -->
+                </md-content>
+            </md-tab>
+
+            <md-tab label="Proyek">
+                <md-content class="md-padding">
+                    <md-input-container md-no-float class="md-block">
+                        <label>Jenis Proyek</label>
+                        <md-select ng-required="false" name="jenis_proyek" placeholder="Jenis Proyek" ng-model="vm.permohonan_izin.jenis_proyek_id">
+                            <md-option ng-value="opt.id" ng-repeat="opt in vm.jenisProyekList">{{opt.keterangan}}</md-option>
+                        </md-select>
+                        <div ng-messages="mainForm.jenis_permohonan.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Target PAD</label>
+                        <input type="number" placeholder="Target PAD" ng-required="false" name="target_pad" ng-model="vm.permohonan_izin.target_pad">
+                        <div ng-messages="mainForm.target_pad.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Nilai Investasi</label>
+                        <input type="number" placeholder="Nilai Investasi" ng-required="false" name="nilai_investasi" ng-model="vm.permohonan_izin.nilai_investasi">
+                        <div ng-messages="mainForm.nilai_investasi.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Jumlah Tenaga Kerja</label>
+                        <input type="number" placeholder="Jumlah Tenaga Kerja" ng-required="false" name="jumlah_tenaga_kerja" ng-model="vm.permohonan_izin.jumlah_tenaga_kerja">
+                        <div ng-messages="mainForm.jumlah_tenaga_kerja.$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                </md-content>
+            </md-tab>
+
+        </md-tabs>
+        <!-- END - Tabs -->
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAndNextAction()">Proses Berikutnya</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

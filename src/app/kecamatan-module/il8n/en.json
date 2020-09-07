@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "KECAMATAN": {
+            "KECAMATAN-MODULE": "Menu",
+            "KECAMATAN-LIST": "Daftar Kecamatan"
+        }
+    },
+    "KECAMATAN": {
+        "TITLE": "Kecamatan",
+        "LIST": "Daftar",
+        "ADD": "Tambah Kecamatan",
+        "EDIT": "Ubah Kecamatan",
+        "VIEW": "Lihat Kecamatan",
+        "SEARCH": "Cari"
+    }
+}

@@ -1,0 +1,43 @@
+<div layout="row" flex layout-padding layout-fill layout-align="center center">
+    <div flex="40" flex-lg="50" flex-md="70" flex-xs="100">
+        <md-card>
+            <md-toolbar class="padding-20">
+                <div layout="row" layout-align="center center">
+                    <img ng-src="{{::vm.triSettings.logo}}" alt="{{vm.triSettings.name}}">
+                </div>
+                <div layout="row" layout-align="center center">
+                    <h1 class="md-headline">Reset Password</h1>
+                </div>
+            </md-toolbar>
+
+            <md-content class="md-padding">
+                <form name="reset" novalidate>
+                    <md-input-container class="md-block">
+                        <label for="password">Masukkan password baru anda</label>
+                        <input id="password" label="password" name="password" type="password" ng-model="vm.pengguna.password"
+                               ng-minlength="5" required/>
+                        <div ng-messages="reset.password.$error" ng-if="reset.password.$dirty">
+                            <div ng-message when="required"><span>Masukkan password baru anda</span></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label for="confirm">Konfirmasi password</label>
+                        <input id="confirm" label="confirm" name="confirm" type="password" ng-model="vm.pengguna.confirm"
+                               tri-same-password="reset.password" ng-minlength="5" required/>
+                        <div ng-messages="reset.confirm.$error" ng-if="reset.confirm.$dirty">
+                            <div ng-message when="required"><span translate>Konfirmasi password harus sama dengan password</span></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" ng-click="vm.changePassword()" ng-disabled="reset.$invalid" translate="FORGOT.RESET" aria-label="{{'FORGOT.RESET' | translate}}"></md-button>
+
+                    <md-button class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" href="#/login">
+                        Ingat password anda? Login di sini
+                    </md-button>
+                </form>
+            </md-content>
+        </md-card>
+
+    </div>
+</div>

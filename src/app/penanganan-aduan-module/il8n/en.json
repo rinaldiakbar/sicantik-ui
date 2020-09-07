@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "PENANGANANADUAN": {
+            "PENANGANANADUAN-MODULE": "Menu",
+            "PENANGANANADUAN-LIST": "Daftar Aduan"
+        }
+    },
+    "PENANGANANADUAN": {
+        "TITLE": "Penanganan Aduan",
+        "LIST": "Daftar",
+        "ADD": "Tambah Penanganan Adunan",
+        "Edit": "Ubah Penanganan Aduan",
+        "VIEW": "Lihat Penanganan Aduan",
+        "SEARCH": "Cari"
+    }
+}

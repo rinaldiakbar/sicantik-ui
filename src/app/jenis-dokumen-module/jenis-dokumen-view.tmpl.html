@@ -1,0 +1,30 @@
+<md-content class="padded-content-page">
+    <h2 translate>JENIS-DOKUMEN.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.desa.id">
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Kode</label>
+        <input type="text" placeholder="Kode" ng-required="true" ng-model="vm.jenis_dokumen.kode"
+               ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+            <label>Deskripsi</label>
+            <text-angular name="deskripsi" ng-required="true" ng-disabled="true"
+                data-ng-model="vm.jenis_dokumen.deskripsi"
+                md-maxlength="500" ta-target-toolbars="editor-toolbar">
+            </text-angular>
+            <div ng-messages="mainForm.deskripsi.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

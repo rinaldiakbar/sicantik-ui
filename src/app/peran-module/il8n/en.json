@@ -1,0 +1,15 @@
+{
+    "MENU": {
+        "PERAN": {
+            "PERAN-MODULE": "Peran"
+        }
+    },
+    "PERAN": {
+        "TITLE": "Peran",
+        "LIST": "Daftar",
+        "ADD": "Tambah Peran",
+        "EDIT": "Ubah Peran",
+        "VIEW": "Lihat Peran",
+        "SEARCH": "Cari"
+    }
+}

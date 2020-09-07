@@ -1,0 +1,28 @@
+<md-content class="padded-content-page">
+    <h2 translate>DESA.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.desa.id">
+    <md-input-container md-no-float class="md-block">
+        <label>Kode Desa</label>
+        <input type="text" placeholder="Kode Desa" ng-required="true" ng-model="vm.desa.kode_daerah" ng-disabled="true">
+    </md-input-container>
+    <md-input-container md-no-float class="md-block">
+        <label>Nama Desa</label>
+        <input type="text" placeholder="Nama Desa" ng-required="true" ng-model="vm.desa.nama_daerah" ng-disabled="true">
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label>Kode Kecamatan</label>
+        <input type="text" placeholder="Kode Kecamatan" ng-required="true" ng-model="vm.desa.kecamatan.kode_daerah" ng-disabled="true">
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label>Nama Kecamatan</label>
+        <input type="text" placeholder="Nama Kecamatan" ng-required="true" ng-model="vm.desa.kecamatan.nama_daerah" ng-disabled="true">
+    </md-input-container>
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

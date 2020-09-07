@@ -1,0 +1,66 @@
+<md-content class="padded-content-page">
+    <div layout="row" layout-align="center center">
+        <h2 class="md-display-3" translate>PERMOHONAN-IZIN.TITLE</h2>
+        <md-button class="md-fab md-primary md-fab-top-right" ng-click="vm.showFormAdd()"
+                   aria-label="bottom right toast">
+            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+            <md-tooltip>Add</md-tooltip>
+        </md-button>
+    </div>
+
+    <div>
+        <form flex="" name="vm.filter.form">
+            <md-data-table-toolbar class="md-data-table-toolbar">
+                <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                <input type="text" ng-model="vm.query.filter" ng-model-options="vm.filter.options" placeholder="Cari Permohonan Izin" id="filter-text">
+            </md-data-table-toolbar>
+
+            <md-data-table-toolbar class="md-data-table-toolbar">
+                <md-datepicker name="filter-date-start" data-ng-model="vm.query.begin_date" md-placeholder="Begin Date"></md-datepicker>
+                <md-datepicker name="filter-date-end" data-ng-model="vm.query.end_date" md-placeholder="End Date"></md-datepicker>
+            </md-data-table-toolbar>
+        </form>
+
+        <md-data-table-container>
+            <table md-data-table class="md-primary md-data-table" md-progress="vm.deferred">
+                <thead md-order="vm.query.order" md-trigger="vm.getData">
+                    <tr>
+                        <th order-by="permohonanizin.id" name="#"></th>
+                        <th order-by="permohonanizin.no_permohonan" name="No Permohonan"></th>
+                        <th order-by="permohonanizin.nib_id" name="NIB"></th>
+                        <th order-by="permohonanizin.tgl_pengajuan" name="Tgl Permohonan"></th>
+                        <th order-by="jenisizin.jenis_izin" name="Jenis Izin"></th>
+                        <th order-by="pemohon.nama" name="Pemohon"></th>
+                        <th order-by="perusahaan.nama_perusahaan" name="Perusahaan"></th>
+                        <th name=""></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.data.items">
+                        <td>{{item.no}}</td>
+                        <td>{{item.no_permohonan}}</td>
+                        <td>{{item.nib_id}}</td>
+                        <td>{{item.tgl_pengajuan}}</td>
+                        <td>{{item.jenis_izin.jenis_izin}}</td>
+                        <td>{{item.pemohon.nama}}</td>
+                        <td>{{item.perusahaan.nama_perusahaan}}</td>
+                        <td>
+                            <button class="btn btn-success btn-circle" type="button" ng-click="vm.showFormEdit(item.id)">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                            <button class="btn btn-info btn-circle" type="button" ng-click="vm.showFormView(item.id)">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                            <button class="btn btn-danger btn-circle" type="button" ng-click="vm.confirmDelete(item.id)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+
+        <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.data.total_items}}"
+                                  md-trigger="vm.getData"></md-data-table-pagination>
+    </div>
+</md-content>

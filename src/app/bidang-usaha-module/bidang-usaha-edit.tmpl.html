@@ -1,0 +1,32 @@
+<md-content class="padded-content-page">
+    <h2>Ubah Bidang Usaha</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Kode</label>
+            <input type="text" name="kode" placeholder="Kode" ng-required="true" ng-model="vm.bidang_usaha.kode" md-maxlength="10">
+            <div ng-messages="mainForm.kode.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+        
+        <md-input-container md-no-float class="md-block">
+            <label>Keterangan</label>
+            <input type="text" name="keterangan" placeholder="Keterangan" ng-required="true" ng-model="vm.bidang_usaha.keterangan" md-maxlength="100">
+            <div ng-messages="mainForm.keterangan.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+
+</md-content>

@@ -1,0 +1,66 @@
+<md-content class="padded-content-page">
+    <h2 translate>SERVICE-EKSTERNAL.ADD</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nama </label>
+            <input name="nama" type="text" placeholder="Nama" ng-required="true" ng-model="vm.serviceEksternal.nama" md-maxlength="50">
+            <div ng-messages="mainForm.nama.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Deskripsi </label>
+            <textarea type="text" name="deskripsi" placeholder="Deskripsi" ng-required="false" ng-model="vm.serviceEksternal.deskripsi">
+            </textarea>
+            <div ng-messages="mainForm.deskripsi.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Base URL </label>
+            <input name="base_url" type="text" placeholder="contoh: http://api.codeless.com" ng-required="true" ng-model="vm.serviceEksternal.base_url" md-maxlength="50">
+            <div ng-messages="mainForm.base_url.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Tipe Otentikasi </label>
+            <md-select ng-required="true" name="tipe_otentikasi" placeholder="Tipe Otentikasi" ng-model="vm.serviceEksternal.tipe_otentikasi">
+                <md-option ng-value="opt.kode" ng-repeat="opt in vm.tipeOtentikasiList">{{opt.label}}</md-option>
+            </md-select>
+            <div ng-messages="mainForm.tipe_otentikasi.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block" ng-if="vm.serviceEksternal.tipe_otentikasi !== 'No Authentication'">
+            <label>Username </label>
+            <input type="text" name="username" placeholder="Username API" ng-required="true" ng-model="vm.serviceEksternal.username" md-maxlength="25" ng-change="vm.usernameChange()">
+            <div ng-messages="mainForm.username.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block" ng-if="vm.serviceEksternal.tipe_otentikasi !== 'No Authentication'">
+            <label>Password </label>
+            <input type="password" name="password" placeholder="Password User API" ng-required="true" ng-model="vm.serviceEksternal.password" md-minlength="6" md-maxlength="50">
+            <div ng-messages="mainForm.password.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "PROFILE-PEGAWAI": {
+            "PROFILE-PEGAWAI-MODULE": "Menu",
+            "PROFILE-PEGAWAI-LIST": "Daftar Profile Pegawai"
+        }
+    },
+    "PROFILE": {
+        "TITLE": "Profile Pegawai",
+        "LIST": "Daftar Profile Pegawai",
+        "ADD": "Tambah Profile Pegawai",
+        "EDIT": "Ubah Profile Pegawai",
+        "VIEW": "Lihat Profile Pegawai",
+        "SEARCH": "Cari"
+    }
+}

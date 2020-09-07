@@ -1,0 +1,85 @@
+<md-content class="padded-content-page">
+    <h2>Tambah Item Tarif</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Jenis Izin</label>
+            <input type="text" placeholder="Nama Jenis Izin" ng-disabled="true" ng-model="vm.jenis_izin.jenis_izin">
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Item</label>
+            <input type="text" placeholder="Nama Item" ng-required="true" ng-model="vm.tarif_item.nama_item" md-maxlength="100">
+            <div ng-messages="mainForm.tarif_item.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Satuan</label>
+            <input type="text" placeholder="Satuan" ng-required="false" ng-model="vm.tarif_item.satuan" md-maxlength="10">
+            <div ng-messages="mainForm.tarif_item.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+
+            <!-- BEGIN - Tarif Harga -->
+            <md-tab label="Kategori">
+                <md-content class="md-padding">
+                    <table class="md-table">
+                        <thead>
+                            <th width="10%">No</th>
+                            <th width="50">Kategori</th>
+                            <th width="30%">Harga</th>
+                            <th width="10%">Aksi</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(index, kategori) in vm.tarif_harga">
+                                <td>{{index + 1}}</td>
+                                <td>
+                                    <input type="hidden" value="{{kategori.id}}" ng-model="kategori.id">
+                                    <md-input-container flex>
+                                        <input type="text" placeholder="Kategori*" ng-required="true" ng-model="kategori.kategori" md-maxlength="100">
+                                    </md-input-container>
+                                </td>
+                                <td>
+                                    <md-input-container flex>
+                                        <input type="number" placeholder="Harga*" ng-required="true" ng-model="kategori.harga">
+                                    </md-input-container>
+                                </td>
+                                <td>
+                                    <md-button class="md-raised md-primary md-hue-1" ng-click="vm.removeTarifHarga(index)" aria-label="raised button">
+                                        <md-icon md-font-icon="zmdi zmdi-minus"></md-icon>
+                                    </md-button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <md-list class="no-scroll">
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addTarifHarga()" aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Tarif Harga -->
+
+        </md-tabs>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

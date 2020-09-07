@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "JENIS-PROSES": {
+            "JENIS-PROSES-MODULE": "Menu",
+            "JENIS-PROSES-LIST": "Daftar Jenis Proses"
+        }
+    },
+    "JENIS-PROSES": {
+        "TITLE": "Jenis Proses",
+        "LIST": "Daftar",
+        "ADD": "Tambah Jenis Proses",
+        "EDIT": "Ubah Jenis Proses",
+        "VIEW": "Lihat Jenis Proses",
+        "SEARCH": "Cari"
+    }
+}

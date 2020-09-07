@@ -1,0 +1,12 @@
+{
+  "MENU": {
+    "NAVIGATION": {
+      "NAVIGATION-MODULE": "Semente Do Módulo",
+      "NAVIGATION-PAGE": "Página Inicial"
+    }
+  },
+  "NAVIGATION": {
+    "TITLE": "Bem-vindo à página de teste triangular",
+    "DATA_TABLE": "Data Table"
+  }
+}

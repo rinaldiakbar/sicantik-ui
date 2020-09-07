@@ -1,0 +1,15 @@
+{
+    "MENU": {
+        "PEGAWAI": {
+            "PEGAWAI-MODULE": "Pegawai"
+        }
+    },
+    "PEGAWAI": {
+        "TITLE": "Pegawai",
+        "LIST": "Daftar",
+        "ADD": "Tambah Pegawai",
+        "EDIT": "Ubah Pegawai",
+        "VIEW": "Lihat Pegawai",
+        "SEARCH": "Cari"
+    }
+}

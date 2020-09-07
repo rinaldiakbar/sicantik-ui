@@ -1,0 +1,226 @@
+{
+    "global": {
+        "AppConfig": {
+            "version": "0.1.0"
+        }
+    },
+    "env": {
+        "development": {
+            "EnvironmentConfig": {
+                "name": "SICANTIK",
+                "title": "SICANTIK",              
+				"copyright": "sicantik-developer",				
+                "api": "http://localhost/sicantik-ws/api",
+                "logo": "assets/images/logo-sicantik.png",
+                "subLogo": "assets/images/logo-sub-codeless.png",
+                "favicon": "assets/images/favicon/favicon.ico",
+                "faviconType": "image/x-icon",
+                "loginBackground": "mb-bg-21",
+                "showDashboardImage": true,
+                "showRegisterPemohon": true,
+                "sideMenuSize": "full",
+                "ssoOssApi":"https://webform.oss.go.id/sso/engine/broker/apiSSO?command=login&sso_broker_id=SSO_SICANTIK_010&sso_broker_secret=8izwiL9trwF",
+                "rest": "http://localhost/sicantik-ws/rest/"						
+            },
+            "ElementConfig": {
+                "gridRow": "15",
+                "dialogGridRow": "10",
+                "showGridNo": true
+            }
+        },
+        "staging": {
+            "EnvironmentConfig": {
+                "name": "Codeless Staging",
+                "title": "Codeless Staging",
+                "copyright": "codeless-developer",
+                "api": "http://api-stg.codeless.id/api/",
+                "logo": "assets/images/logo-codeless.png",
+                "subLogo": "assets/images/logo-sub-codeless.png",
+                "favicon": "assets/images/favicon/favicon.ico",
+                "faviconType": "image/x-icon",
+                "loginBackground": "mb-bg-21",
+                "showDashboardImage": true,
+                "showRegisterPemohon": true,
+                "sideMenuSize": "full"
+            },
+            "ElementConfig": {
+                "gridRow": "15",
+                "dialogGridRow": "10",
+                "showGridNo": true
+            }
+        },
+        "staging-sicantik": {
+            "EnvironmentConfig": {
+                "name": "SICANTIK",
+                "title": "SICANTIK",
+                "copyright": "sicantik-developer",
+                "api": "http://157.119.220.138/stage.codeless-api/api/",
+                "logo": "assets/images/logo-kominfo.png",
+                "subLogo": "",
+                "favicon": "assets/images/favicon/favicon-kominfo.ico",
+                "faviconType": "image/x-icon",
+                "loginBackground": "mb-bg-19",
+                "showDashboardImage": true,
+                "showRegisterPemohon": true,
+                "sideMenuSize": "full",
+                "ssoOssApi":"https://webform.oss.go.id/sso/engine/broker/apiSSO?command=login&sso_broker_id=SSO_SICANTIK_010&sso_broker_secret=8izwiL9trwF"
+            },
+            "ElementConfig": {
+                "gridRow": "15",
+                "dialogGridRow": "10",
+                "showGridNo": true
+            }
+        },
+        "demo": {
+            "EnvironmentConfig": {
+                "name": "Codeless Demo",
+                "title": "Codeless Demo",
+                "copyright": "codeless-developer",
+                "api": "http://api-demo.codeless.id/api/",
+                "logo": "assets/images/logo-codeless.png",
+                "subLogo": "assets/images/logo-sub-codeless.png",
+                "favicon": "assets/images/favicon/favicon.ico",
+                "faviconType": "image/x-icon",
+                "loginBackground": "mb-bg-21",
+                "showDashboardImage": true,
+                "showRegisterPemohon": false,
+                "sideMenuSize": "full"
+            },
+            "ElementConfig": {
+                "gridRow": "15",
+                "dialogGridRow": "10",
+                "showGridNo": true
+            }
+        },
+        "production": {
+            "EnvironmentConfig": {
+                "name": "Codeless",
+                "title": "Codeless",
+                "copyright": "codeless-developer",
+                "api": "http://api.codeless.id/api/",
+                "logo": "assets/images/logo-codeless.png",
+                "subLogo": "assets/images/logo-sub-codeless.png",
+                "favicon": "assets/images/favicon/favicon.ico",
+                "faviconType": "image/x-icon",
+                "loginBackground": "mb-bg-21",
+                "showDashboardImage": true,
+                "showRegisterPemohon": false,
+                "sideMenuSize": "full"
+            },
+            "ElementConfig": {
+                "gridRow": "15",
+                "dialogGridRow": "10",
+                "showGridNo": true
+            }
+        },
+        "production-kominfo": {
+            "EnvironmentConfig": {
+                "name": "SICANTIK",
+                "title": "SICANTIK",
+                "copyright": "sicantik-developer",
+                "api": "https://sicantikws.layanan.go.id/api/",
+                "logo": "assets/images/logo-sicantik.png",
+                "subLogo": "",
+                "favicon": "assets/images/favicon/favicon.ico",
+                "faviconType": "image/x-icon",
+                "loginBackground": "mb-bg-19",
+                "showDashboardImage": true,
+                "showRegisterPemohon": true,
+                "sideMenuSize": "full",
+                "ssoOssApi":"https://webform.oss.go.id/sso/engine/broker/apiSSO?command=login&sso_broker_id=SSO_SICANTIK_010&sso_broker_secret=8izwiL9trwF",
+                "rest": "https://sicantikws.layanan.go.id/rest/"
+            },
+            "ElementConfig": {
+                "gridRow": "15",
+                "dialogGridRow": "10",
+                "showGridNo": true
+            }
+        },
+        "staging-kominfo": {
+            "EnvironmentConfig": {
+                "name": "SICANTIK",
+                "title": "SICANTIK",
+                "copyright": "sicantik-developer",
+                "api": "https://sicantikws2.layanan.go.id/api/",
+                "logo": "assets/images/logo-sicantik.png",
+                "subLogo": "",
+                "favicon": "assets/images/favicon/favicon.ico",
+                "faviconType": "image/x-icon",
+                "loginBackground": "mb-bg-19",
+                "showDashboardImage": true,
+                "showRegisterPemohon": true,
+                "sideMenuSize": "full",
+                "ssoOssApi":"https://webform.oss.go.id/sso/engine/broker/apiSSO?command=login&sso_broker_id=SSO_SICANTIK_010&sso_broker_secret=8izwiL9trwF",
+                "rest": "https://sicantikws2.layanan.go.id/rest/"
+            },
+            "ElementConfig": {
+                "gridRow": "15",
+                "dialogGridRow": "10",
+                "showGridNo": true
+            }
+        },
+        "staging-imigrasi": {
+            "EnvironmentConfig": {
+                "name": "Helpdesk",
+                "title": "Helpdesk",
+                "copyright": "imigrasi-developer",
+                "api": "http://10.1.44.47/stage.helpdesk-api/api/",
+                "logo": "assets/images/logo-imigrasi.png",
+                "subLogo": "",
+                "favicon": "assets/images/favicon/favicon-imigrasi.ico",
+                "faviconType": "image/x-icon",
+                "loginBackground": "mb-bg-22",
+                "showDashboardImage": false,
+                "showRegisterPemohon": false,
+                "sideMenuSize": "full"
+            },
+            "ElementConfig": {
+                "gridRow": "25",
+                "dialogGridRow": "15",
+                "showGridNo": false
+            }
+        },
+        "production-imigrasi": {
+            "EnvironmentConfig": {
+                "name": "Helpdesk",
+                "title": "Helpdesk",
+                "copyright": "imigrasi-developer",
+                "api": "http://10.1.44.47/helpdesk-api/api/",
+                "logo": "assets/images/logo-imigrasi.png",
+                "subLogo": "",
+                "favicon": "assets/images/favicon/favicon-imigrasi.ico",
+                "faviconType": "image/x-icon",
+                "loginBackground": "mb-bg-22",
+                "showDashboardImage": false,
+                "showRegisterPemohon": false,
+                "sideMenuSize": "full"
+            },
+            "ElementConfig": {
+                "gridRow": "25",
+                "dialogGridRow": "15",
+                "showGridNo": false
+            }
+        },
+        "production-kolaka": {
+            "EnvironmentConfig": {
+                "name": "Codeless",
+                "title": "Codeless",
+                "copyright": "codeless-developer",
+                "api": "http://118.97.34.177/kolaka-api/api/",
+                "logo": "assets/images/logo-garuda.png",
+                "subLogo": "",
+                "favicon": "assets/images/favicon/favicon-garuda.ico",
+                "faviconType": "image/x-icon",
+                "loginBackground": "mb-bg-19",
+                "showDashboardImage": true,
+                "showRegisterPemohon": true,
+                "sizeMenuSize": "full"
+            },
+            "ElementConfig": {
+                "gridRow": "15",
+                "dialogGridRow": "10",
+                "showGridNo": true
+            }
+        }
+    }
+}

@@ -1,0 +1,51 @@
+<md-content class="padded-content-page">
+    <div layout="row" layout-align="center center">
+        <h2 class="md-display-3" translate>FAQ.TITLE</h2>
+    </div>
+
+    <div>&nbsp;</div>
+
+    <div layout="row" layout-align="center right">
+        <p>
+            <a href="javascript:void(0);" name="search-all"
+                ng-click="vm.openLink('faq-search-all', null, item.id, false)">
+                Cari FAQ &#x2192;
+            </a>
+        </p>
+    </div>
+
+    <div>
+        <!-- <md-data-table-toolbar class="md-data-table-toolbar">
+            <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+            <form flex="" name="vm.filter.form">
+                <input id="filter-text" type="text" ng-model="vm.query.filter" placeholder="Cari FAQ">
+            </form>
+        </md-data-table-toolbar> -->
+
+        <div flex layout="row" ng-repeat="item in vm.data.items">
+            <md-card flex>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{item.nama}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-divider></md-divider>
+                <md-card-content>
+                    <p class="text-left">
+                        {{item.deskripsi}}
+                    </p>
+                    <p class="text-right">
+                        <a href="javascript:void(0);" name="{{item.id}}"
+                            ng-click="vm.openLink('faq-search', null, item.id, false)">
+                            Selengkapnya &#x2192;
+                        </a>
+                    </p>
+                    <!-- <md-divider></md-divider>
+                    <ul ng-if="item.top_faq.length > 0">
+                        <li ng-repeat="faq in item.top_faq">{{faq.pertanyaan}}</li>
+                    </ul> -->
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+</md-content>

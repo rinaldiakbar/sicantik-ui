@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "PERUSAHAAN": {
+            "PERUSAHAAN-MODULE": "Perusahaan",
+            "PERUSAHAAN-LIST": "Daftar Perusahaan"
+        }
+    },
+    "PERUSAHAAN": {
+        "TITLE": "Perusahaan",
+        "LIST": "Daftar",
+        "ADD": "Tambah Perusahaan",
+        "EDIT": "Ubah Perusahaan",
+        "VIEW": "Lihat Perusahaan",
+        "SEARCH": "Cari"
+    }
+}

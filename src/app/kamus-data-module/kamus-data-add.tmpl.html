@@ -1,0 +1,169 @@
+<md-content class="padded-content-page">
+    <h2>Tambah Datatabel</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Datatabel</label>
+            <input type="text" name="nama_datatabel" placeholder="Nama Datatabel" ng-required="true" ng-model="vm.datatabel.nama_datatabel" md-maxlength="23" ng-change="vm.namaDatatabelChange()">
+            <div ng-messages="mainForm.nama_datatabel.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Label</label>
+            <input type="text" name="label" placeholder="Label" ng-required="true" ng-model="vm.datatabel.label" md-maxlength="100">
+            <div ng-messages="mainForm.label.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <md-checkbox class="md-primary" ng-model="vm.datatabel.visible" aria-label="Visible" ng-true-value="1" ng-false-value="0">
+                Visible
+            </md-checkbox>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <md-checkbox class="md-primary" ng-model="vm.datatabel.is_custom" aria-label="Is Custom" ng-true-value="1" ng-false-value="0">
+                Is Custom
+            </md-checkbox>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <md-checkbox class="md-primary" ng-model="vm.datatabel.is_view" aria-label="Is View" ng-true-value="1" ng-false-value="0">
+                Is View
+            </md-checkbox>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <md-checkbox class="md-primary" ng-model="vm.datatabel.use_mapper" aria-label="Use Mapper" ng-true-value="1" ng-false-value="0">
+                Use Mapper
+            </md-checkbox>
+        </md-input-container>
+
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+            <md-tab label="Data Kolom">
+                <md-content class="md-padding">
+                    <table class="md-table">
+                        <thead>
+                            <th width="30%">Kolom</th>
+                            <th width="40%">Label</th>
+                            <th width="10%">Tipe Kolom</th>
+                            <th width="10%">Panjang</th>
+                            <th width="10%" class="action-col">Aksi</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(index, kolom) in vm.data_kolom">
+                                <td>
+                                    <input type="hidden" value="{{kolom.id}}" ng-model="kolom.id">
+                                    <md-input-container md-no-float class="md-block">
+                                        <input type="text" name="kolom_data_kolom_{{index}}" placeholder="Nama Kolom*" ng-required="true" ng-model="kolom.data_kolom" md-maxlength="25" ng-change="vm.dataKolomChange(index)" ng-disabled="kolom.id!=undefined">
+                                        <div ng-messages="mainForm['kolom_data_kolom_'+index].$error">
+                                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                                        </div>
+                                    </md-input-container>
+                                </td>
+                                <td>
+                                    <md-input-container md-no-float class="md-block">
+                                        <input type="text" name="kolom_label_{{index}}" placeholder="Label*" ng-required="true" ng-model="kolom.label" md-maxlength="100" ng-disabled="kolom.id!=undefined">
+                                        <div ng-messages="mainForm['kolom_label_'+index].$error">
+                                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                                        </div>
+                                    </md-input-container>
+                                </td>
+                                <td>
+                                    <md-input-container md-no-float class="md-block">
+                                        <md-select name="kolom_tipe_kolom_{{index}}" placeholder="Tipe Kolom" ng-model="kolom.tipe_kolom" ng-disabled="kolom.id!=undefined">
+                                            <md-option ng-value="opt.kode" ng-repeat="opt in vm.tipeKolomList">{{opt.label}}</md-option>
+                                        </md-select>
+                                        <div ng-messages="mainForm['kolom_tipe_kolom_'+index].$error">
+                                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                                        </div>
+                                    </md-input-container>
+                                </td>
+                                <td>
+                                    <md-input-container md-no-float class="md-block">
+                                        <input type="number" name="kolom_panjang_{{index}}" placeholder="Panjang*" ng-required="true" ng-model="kolom.panjang" ng-disabled="kolom.id!=undefined">
+                                        <div ng-messages="mainForm['kolom_panjang_'+index].$error">
+                                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                                        </div>
+                                    </md-input-container>
+                                </td>
+                                <td class="action-col">
+                                    <button class="btn btn-success btn-circle" type="button" ng-click="vm.removeDataKolom(index)" ng-disabled="kolom.id != undefined && vm.datatabel.is_custom === 1 && vm.datatabel.is_editable === 0">
+                                        <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <md-list-item layout="row" layout-align="space-around center">
+                        <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addNewDataKolom()" aria-label="raised button">
+                            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                        </md-button>
+                    </md-list-item>
+                </md-content>
+            </md-tab>
+
+            <!-- Tab Unit Akses -->
+            <md-tab label="Unit Akses">
+                <md-content class="md-padding">
+                    <div flex="100" layout="row">
+                        <div flex="60" layout="column">
+                            <table class="md-table">
+                                <thead>
+                                    <th width="10%">No</th>
+                                    <th width="80%">Unit Kerja</th>
+                                    <th width="10%">Aksi</th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(index, akses) in vm.unit_datatabel">
+                                        <td>{{ index+1 }}</td>
+                                        <td>
+                                            <input type="hidden" value="{{akses.id}}" ng-model="akses.id">
+                                            <md-input-container md-no-float class="md-block" ng-if="!akses.id">
+                                                <md-autocomplete ng-disabled="false" md-no-cache="true" md-search-text="vm.searchTextUnitDatatabel[index]" md-selected-item-change="vm.selectedItemChangeUnitDatatabel(item, index)" md-items="item in vm.querySearchUnitDatatabel(vm.searchTextUnitDatatabel[index])"
+                                                    md-item-text="item.nama" md-item-value="item.id" md-min-length="0" placeholder="Unit">
+                                                    <span md-highlight-text="akses.unit.nama" md-highlight-flags="^i">{{item.nama}}</span>
+                                                </md-autocomplete>
+                                            </md-input-container>
+                                            <md-input-container md-no-float class="md-block" ng-if="akses.id">
+                                                <input type="text" ng-disabled="true" value="{{akses.unit.nama}}">
+                                            </md-input-container>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success btn-circle" type="button" ng-click="vm.removeUnitDatatabel(index)" ng-disabled="akses.id">
+                                                <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <md-list-item layout="row" layout-align="space-around center">
+                                <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addNewUnitDatatabel()" aria-label="raised button">
+                                    <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                                </md-button>
+                            </md-list-item>
+                        </div>
+                    </div>
+                </md-content>
+            </md-tab>
+            <!-- .Tab Unit Akses -->
+        </md-tabs>
+        <!-- END - Tabs -->
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

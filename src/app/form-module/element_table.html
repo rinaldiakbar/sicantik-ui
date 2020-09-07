@@ -1,0 +1,186 @@
+<!-- Text Input -->
+<md-input-container ng-if="data.type=='text'" class="md-block">
+    <input type="{{ data.type }}" name="{{data.id}}" data-ng-model="data.data" ng-required="{{data.required}}" ng-disabled="(data.disabled && limitAccess) || isReadOnly"/>
+    <div ng-messages="mainForm['{{data.id}}'].$error">
+        <div ng-messages-include="app/include/validation-messages.html"></div>
+    </div>
+</md-input-container>
+
+<!-- EMAIL data -->
+<md-input-container ng-if="data.type=='email'" class="md-block">
+    <input type="{{ data.type }}" name="{{data.id}}" data-ng-model="data.data" ng-required="{{data.required}}" ng-disabled="(data.disabled && limitAccess) || isReadOnly"/>
+    <div ng-messages="mainForm['{{data.id}}'].$error">
+        <div ng-messages-include="app/include/validation-messages.html"></div>
+    </div>
+</md-input-container>
+
+<!-- Date -->
+<div ng-if="data.type === 'date'">
+    <md-datepicker ng-if="data.type=='date'" data-ng-model="data.data" name="{{data.id}}" ng-required="{{data.required}}" ng-disabled="(data.disabled && limitAccess) || isReadOnly"></md-datepicker>
+    <div ng-messages="mainForm['{{data.id}}'].$error">
+        <div ng-messages-include="app/include/validation-messages.html"></div>
+    </div>
+</div>
+
+<!-- Checkbox -->
+<md-input-container ng-if="data.type=='checkbox'" class="md-block">
+    <md-checkbox class="md-primary" ng-model="data.data" name="{{data.id}}" ng-true-value="1" ng-false-value="0" ng-disabled="(data.disabled && limitAccess) || isReadOnly" ng-required="{{data.required}}">
+    </md-checkbox>
+    <div ng-messages="mainForm['{{data.id}}'].$error">
+        <div ng-messages-include="app/include/validation-messages.html"></div>
+    </div>
+</md-input-container>
+
+<!-- PASSWORD data -->
+<md-input-container ng-if="data.type=='password'" class="md-block">
+    <input type="{{ data.type }}" name="{{data.id}}" data-ng-model="data.data" ng-minlength="6" ng-maxlength="12" ng-required="{{data.required}}" ng-disabled="(data.disabled && limitAccess) || isReadOnly" />
+    <div ng-messages="mainForm['{{data.id}}'].$error">
+        <div ng-messages-include="app/include/validation-messages.html"></div>
+    </div>
+</md-input-container>
+
+<!-- Select -->
+<md-input-container ng-if="data.type == 'select' || data.type == 'select-ws'" class="md-block">
+    <md-select name="{{data.id}}" id="repeatSelect" ng-model="data.data" ng-required="{{data.required}}" ng-disabled="(data.disabled && limitAccess) || isReadOnly">
+        <md-optgroup label="{{data.label}}">
+            <md-option ng-repeat="option in data.options" value="{{option.id}}">{{option.name}}</md-option>
+        </md-optgroup>
+    </md-select>
+    <div ng-messages="mainForm['{{data.id}}'].$error">
+        <div ng-messages-include="app/include/validation-messages.html"></div>
+    </div>
+</md-input-container>
+
+<!-- Number -->
+<md-input-container ng-if="data.type=='number'" class="md-block">
+    <input type="{{ data.type }}" name="{{data.id}}" ng-model="data.data" min="0" ng-required="{{data.required}}" ng-disabled="(data.disabled && limitAccess) || isReadOnly">
+    <div ng-messages="mainForm['{{data.id}}'].$error">
+        <div ng-messages-include="app/include/validation-messages.html"></div>
+    </div>
+</md-input-container>
+
+<md-input-container ng-if="data.type=='button'" class="md-block">
+    <div class="col-sm-6">
+        <md-button ng-click="delElm(data)" class="btn btn-danger pull-right">X</md-button>
+    </div>
+</md-input-container>
+
+<!-- Autocomplete -->
+<md-input-container ng-if="data.type=='autocomplete-datatabel'" md-no-float class="md-block">
+    <md-autocomplete class="margin-bottom-20" ng-disabled="(data.disabled && limitAccess) || isReadOnly" md-no-cache="noCache" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="selectedItemChange(item)" md-items="item in querySearch(vm.searchText)"
+        md-item-text="item.nama_datatabel" md-min-length="0">
+        <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.nama_datatabel}}</span>
+        <div ng-messages="mainForm['{{data.id}}'].$error">
+            <div ng-messages-include="app/include/validation-messages.html"></div>
+        </div>
+    </md-autocomplete>
+</md-input-container>
+
+<!-- Combogrid -->
+<div ng-if="data.type=='autocomplete'">
+    <md-input-container ng-if="data.type=='autocomplete'" md-no-float class="md-block">
+        <input type="text" ng-if="data.type=='autocomplete'" name="{{data.id}}" cg-label-model="data.data_label" cg-model="data.data" my-combogrid cg-url="{{data.cg_url}}" cg-fields="{{data.cg_fields}}" cg-value-col="{{data.cg_value_col}}" cg-label-col={{data.cg_label_col}}
+            ng-init="dataLabel=data.data_label" value="{{dataLabel}}" ng-disabled="(data.disabled && limitAccess) || isReadOnly" />
+    </md-input-container>
+    <input ng-if="data.type=='autocomplete'" type="hidden" data-ng-model="data.data" ng-required="{{data.required}}" />
+    <input ng-if="data.type=='autocomplete'" type="hidden" data-ng-model="data.data_label" ng-required="{{data.required}}" />
+</div>
+
+<!-- Tipe Label-->
+<md-input-container ng-if="data.type=='label'" class="md-block">
+    <input type="text" name="{{data.id}}" data-ng-model="data.data" ng-disabled="true" />
+</md-input-container>
+
+<!-- Formatted Number -->
+<md-input-container ng-if="data.type=='numbering'" class="md-block">
+    <label>{{data.label}}</label>
+    <input type="text" name="{{data.id}}" data-ng-model="data.data" ng-required="{{data.required}}" ng-disabled="true" />
+    <div ng-messages="mainForm['{{data.id}}'].$error">
+        <div ng-messages-include="app/include/validation-messages.html"></div>
+    </div>
+</md-input-container>
+
+<!-- Button Action -->
+<md-button ng-if="data.type=='button-action' && data.tombol_aksi=='add'" 
+    class="md-primary md-button md-cyan-theme md-ink-ripple" 
+    ng-click="clickButton(formId, form.datatabel, keyId, data.tombol_tautan, data.tombol_aksi)" 
+    aria-label="bottom right toast" 
+    ng-hide="(data.disabled && limitAccess) || isReadOnly">
+    <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+    {{data.label ? data.label : 'Tambah'}}
+</md-button>
+<md-button 
+    ng-if="data.type=='button-action' && data.tombol_aksi=='save'" 
+    class="md-primary md-raised" ng-disabled="mainForm.$invalid" 
+    ng-click="clickButton(formId, form.datatabel, keyId, data.tombol_tautan, data.tombol_aksi, data.id)"
+    ng-hide="(data.disabled && limitAccess) || isReadOnly">
+    {{data.label ? data.label : 'Simpan'}}
+</md-button>
+<md-button 
+    ng-if="data.type=='button-action' && data.tombol_aksi=='cancel'" 
+    ng-click="clickButton(formId, form.datatabel, keyId, data.tombol_tautan, data.tombol_aksi)">
+    {{data.label ? data.label : 'Batal'}}
+</md-button>
+
+<!-- Upload File -->
+<div layout="row" ng-if="data.type=='file'" layout-align="space-around center">
+    <div layout="column" flex="80">
+        <md-input-container md-no-float class="md-block">
+            <input type="text" placeholder="" name="{{data.id}}" ng-model="data.data" ng-required="{{data.required}}" ng-readonly="true">
+            <div ng-if="data.data.length > 0" ng-click="downloadFile(data.data)" class="btn-download">Download</div>
+            <div ng-if="data.data.length > 0 && isViewable(data.data)" ng-click="viewFile(data.data)" class="btn-download">View</div>
+        </md-input-container>
+    </div>
+    <div layout="column" flex="20">
+        <md-button 
+            class="md-primary md-raised md-fab" ngf-select="uploadFile($files, data)" 
+            ng-disabled="data.upload_status != 'idle'" ngf-multiple="true" ngf-max-size="20MB" aria-label="upload"
+            ng-hide="(data.disabled && limitAccess) || isReadOnly">
+            <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': data.upload_status == 'idle', 'fa fa-spinner fa-pulse': data.upload_status == 'uploading', 'zmdi zmdi-check': data.upload_status == 'complete'}"></md-icon>
+        </md-button>
+    </div>
+</div>
+
+<!-- Input Textarea -->
+<md-input-container ng-if="data.type === 'textarea'" flex class="md-block">
+    <label>{{data.label}}</label>
+    <text-angular name="{{data.id}}" data-ng-model="data.data" 
+        ng-required="data.required && validateForm" ta-target-toolbars="editor-toolbar"
+        ng-disabled="(data.disabled && limitAccess) || isReadOnly">
+    </text-angular>
+</md-input-container>
+
+<!-- QR Code -->
+<div ng-if="data.type === 'qrcode'" layout-align="space-around center">
+    <div>
+        <md-input-container md-no-float class="md-block">
+            <label>{{data.label}}</label>
+        </md-input-container>
+    </div>
+    <div ng-if="data.data === null || data.data.length === 0">
+        <img src="assets/images/no-image.120x160.png" class="thumb-photo">
+    </div>
+    <div ng-if="data.data !== null && data.data.length > 0">
+        <img ng-src="{{data.data}}" height="100">
+    </div>
+</div>
+
+<!-- Barcode -->
+<div ng-if="data.type === 'barcode'" layout-align="space-around center">
+    <div>
+        <md-input-container md-no-float class="md-block">
+            <label>{{data.label}}</label>
+        </md-input-container>
+    </div>
+    <div ng-if="data.data === null || data.data.length === 0">
+        <img src="assets/images/no-image.120x160.png" class="thumb-photo">
+    </div>
+    <div ng-if="data.data !== null && data.data.length > 0">
+        <img ng-src="data:image/png;base64,{{data.data}}">
+    </div>
+</div>
+
+<!-- Hyperlink -->
+<md-input-container ng-if="data.type === 'hyperlink'" class="md-block">
+    <a href="javascript:void(0);" name="{{data.id}}" ng-click="vm.openLink(data.tautan, null, record.id, true)">{{data_val}}</a>
+</md-input-container>

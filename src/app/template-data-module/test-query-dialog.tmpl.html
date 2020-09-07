@@ -1,0 +1,78 @@
+<md-dialog aria-label="Test Query" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Test Query SQL</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout="row" flex="100">
+                    <div layout="column" flex="50">
+                        <md-input-container class="md-block">
+                            <label>$key_id</label>
+                            <input type="number" ng-model="formData.key_id" ng-disabled="false">
+                        </md-input-container>
+                    </div>
+                    <div layout="column" flex="50">
+                        <md-input-container class="md-block">
+                            <label>$user_id</label>
+                            <input type="number" ng-model="formData.user_id" ng-disabled="!formData.user_id_enabled">
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <div layout="row" flex="100">
+                    <div layout="column" flex="50">
+                        <md-input-container class="md-block">
+                            <label>$peran_id</label>
+                            <input type="number" ng-model="formData.peran_id" ng-disabled="!formData.peran_id_enabled">
+                        </md-input-container>
+                    </div>
+                    <div layout="column" flex="50">
+                        <md-input-container class="md-block">
+                            <label>$pegawai_id</label>
+                            <input type="number" ng-model="formData.pegawai_id" ng-disabled="!formData.pegawai_id_enabled">
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <div layout="row" flex="100">
+                    <div layout="column" flex="50">
+                        <md-input-container class="md-block">
+                            <label>$unit_id</label>
+                            <input type="number" ng-model="formData.unit_id" ng-disabled="!formData.unit_id_enabled">
+                        </md-input-container>
+                    </div>
+                    <div layout="column" flex="50">
+                        <md-input-container class="md-block">
+                            <label>$instansi_id</label>
+                            <input type="number" ng-model="formData.instansi_id" ng-disabled="!formData.instansi_id_enabled">
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <md-input-container class="md-block">
+                    <label><i>Custom Variables</i></label>
+                    <textarea name="sqlQuery" ng-model="formData.custom_variables" md-maxlength="500" rows="2" cols="250"
+                              ng-disabled="false" placeholder="Contoh: $var1=100&$var2=200"></textarea>
+                </md-input-container>
+
+                <div class="json-prettify" ng-if="formData.strJson">
+                    <pre ng-bind-html="formData.strJson"></pre>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="doRequest()">
+                Run
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

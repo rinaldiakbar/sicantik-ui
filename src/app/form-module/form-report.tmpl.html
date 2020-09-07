@@ -1,0 +1,50 @@
+<md-content class="padded-content-page no-scroll">
+
+    <div layout="row" flex layout-align="center center" class="form-title">
+        <h2 class="md-display-1">{{nama_form}}</h2>
+    </div>
+
+    <!-- Action Button Area -->
+    <div layout="row" flex layout-align="end center" 
+        ng-repeat="(formIndex, form) in forms | filter:{ftype:'action', tabIdx: -1, del: false}">
+        <div ng-include="'app/form-module/canvas_report.html'"></div>
+    </div>
+
+    <div>&nbsp;</div>
+
+    <!-- Filters -->
+    <div class="border-box report-filter">
+        <h3 ng-if="has_filter">Filter</h3>
+        <form flex="" name="vm.filter.form">
+            <md-data-table-toolbar class="md-data-table-toolbar" ng-if="has_filter">
+                <div ng-repeat="form in forms | filter : {ftype:'filter'}">
+                    <div ng-include="'app/form-module/canvas_report.html'"></div>
+                </div>
+            </md-data-table-toolbar>
+
+            <md-button class="md-primary md-raised" ng-click="vm.getReportData()">Tampilkan</md-button>
+            <md-button class="md-primary md-raised" ng-if="vm.hasRecord" ng-click="vm.downloadData('xls')">Download As Excel</md-button>
+        </form>
+    </div>
+    <!-- .Filters -->
+
+    <div>&nbsp;</div>
+
+    <div id="report-result" class="border-box report-result" ng-if="recordForms.length > 0">
+        <div ng-repeat="form in recordForms | filter: vm.filterCanvas | orderBy:'no_urut':false">
+            <div ng-include="'app/form-module/canvas_report.html'"></div>
+        </div>
+
+        <div ng-repeat="tabDisplay in forms | filter:{ftype:'tab'}">
+            <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+                <md-tab ng-repeat="tab in tabDisplay.ftab" label="{{tab.label}}">
+                    <md-content class="md-padding" ng-if="form.ftype !== 'tab'" 
+                        ng-repeat="form in forms | filter : {tabIdx:tab.idx} | orderBy:'no_urut':false">
+                        <div ng-include="'app/form-module/canvas_report.html'"></div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </div>
+    </div>
+
+</md-content>

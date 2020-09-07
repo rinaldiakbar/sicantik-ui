@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "PAYROLL-GROUP": {
+            "JENIS-PROSES-MODULE": "Menu",
+            "JENIS-PROSES-LIST": "Daftar Jenis Proses"
+        }
+    },
+    "PAYROLL": {
+        "TITLE": "Payroll Group",
+        "LIST": "Daftar",
+        "ADD": "Calculate",
+        "EDIT": "Ubah Payroll Group",
+        "VIEW": "Lihat Payroll Group",
+        "SEARCH": "Cari"
+    }
+}

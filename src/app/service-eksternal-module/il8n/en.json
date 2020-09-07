@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "SERVICE-EKSTERNAL": {
+            "SERVICE-EKSTERNAL-MODULE": "Menu",
+            "SERVICE-EKSTERNAL-LIST": "Daftar Service Eksternal"
+        }
+    },
+    "SERVICE-EKSTERNAL": {
+        "TITLE": "Service Eksternal",
+        "LIST": "Daftar",
+        "ADD": "Tambah Service Eksternal",
+        "EDIT": "Ubah Service Eksternal",
+        "VIEW": "Lihat Service Eksternal",
+        "SEARCH": "Cari"
+    }
+}

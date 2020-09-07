@@ -1,0 +1,31 @@
+<md-dialog aria-label="Pilih Profile Pemohon" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Form Penilaian</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content style="max-width:1500px;">
+            <div class="md-dialog-content">
+                <h3>Berikan Penilaian Berdasarkan Bintang</h3>
+                <jk-rating-stars 
+                    max-rating="5" 
+                    rating="secondRate" 
+                    on-rating="onItemRating(rating)">
+                </jk-rating-stars>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="hide()">
+                Tutup
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

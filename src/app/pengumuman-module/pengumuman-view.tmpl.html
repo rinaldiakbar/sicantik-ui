@@ -1,0 +1,32 @@
+<md-content class="padded-content-page">
+    <h2 translate>PENGUMUMAN.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.pengumuman.id">
+    <md-input-container md-no-float class="md-block">
+        <label>Judul</label>
+        <input type="text" placeholder="Judul" ng-required="true" ng-model="vm.pesan.judul" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Pesan</label>
+        <input type="text" placeholder="Pesan" ng-required="true" ng-model="vm.pesan.pesan" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Lampiran</label>
+        <br>
+        <md-button ng-if="vm.pesan.file_lampiran" class="md-hue-1"
+            type="button" ng-click="vm.downloadAttachment(vm.pesan.url_lampiran)">
+            <md-icon md-font-icon="fa fa-download"></md-icon>
+            {{vm.pesan.file_lampiran}}
+        </md-button>
+    </md-input-container>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "JENIS-USAHA": {
+            "JENIS-USAHA-MODULE": "Menu",
+            "JENIS-USAHA-LIST": "Daftar Jenis Usaha"
+        }
+    },
+    "JENIS-USAHA": {
+        "TITLE": "Jenis Usaha",
+        "LIST": "Daftar",
+        "ADD": "Tambah Jenis Usaha",
+        "EDIT": "Ubah Jenis Usaha",
+        "VIEW": "Lihat Jenis Usaha",
+        "SEARCH": "Cari"
+    }
+}

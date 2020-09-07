@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "FAQ": {
+            "FAQ-MODULE": "Menu",
+            "FAQ-LIST": "Daftar FAQ"
+        }
+    },
+    "FAQ": {
+        "TITLE": "Frequently Asked Questions",
+        "LIST": "Daftar",
+        "ADD": "Tambah FAQ",
+        "EDIT": "Ubah FAQ",
+        "VIEW": "Lihat FAQ",
+        "SEARCH": "Cari"
+    }
+}

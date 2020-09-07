@@ -1,0 +1,58 @@
+<div layout="row" flex layout-padding layout-fill layout-align="center center">
+    <div flex="40" flex-lg="50" flex-md="70" flex-xs="100">
+        <md-card>
+            <md-toolbar class="padding-30">
+                <div flex layout="row" layout-align="center center">
+                    <div flex layout="column" flex="30"></div>
+                    <div flex layout="column" flex="40">
+                        <img ng-src="{{::vm.triSettings.logo}}" alt="{{vm.triSettings.name}}">
+                    </div>
+                    <div flex layout="column" flex="30"></div>
+                </div>
+                <br>
+                <div flex layout="row" layout-align="center center" ng-if="vm.triSettings.subLogo.length > 0">
+                    <div flex layout="column" flex="30"></div>
+                    <div flex layout="column" flex="40">
+                        <img ng-src="{{::vm.triSettings.subLogo}}" alt="{{vm.triSettings.name}}">
+                    </div>
+                    <div flex layout="column" flex="30"></div>
+                </div>
+                <div layout="row" layout-align="center center" ng-if="vm.triSettings.subLogo.length === 0">
+                    <h1 class="md-headline">{{vm.triSettings.name}}</h1>
+                </div>
+            </md-toolbar>
+
+            <md-content class="md-padding">
+                <form name="login">
+                    <md-input-container class="md-block">
+                        <label for="sic_username" translate>LOGIN.USERNAME.LABEL</label>
+                        <input id="sic_username" label="username" name="sic_username" type="text" ng-model="vm.user.username" required/>
+                        <div ng-messages="login.username.$error" ng-if="login.username.$dirty">
+                            <div ng-message when="required"><span translate>LOGIN.USERNAME.PLEASE_ENTER</span></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label for="sic_password" translate>LOGIN.PASSWORD.LABEL</label>
+                        <input id="sic_password" label="password" name="sic_password" type="password" ng-model="vm.user.password" required/>
+                        <div ng-messages for="login.password.$error" ng-if="login.password.$dirty">
+                            <div ng-message when="required"><span translate>LOGIN.PASSWORD.PLEASE_ENTER</span></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" type="submit" ng-click="vm.loginClick()" ng-disabled="login.$invalid" translate="LOGIN.BUTTON" aria-label="{{'LOGIN.BUTTON' | translate}}"></md-button>
+
+                    <md-input-container class="md-block text-center">
+                        <md-button flex class="md-primary" href="#/forgot" translate="LOGIN.FORGOT" aria-label="{{'LOGIN.FORGOT' | translate}}"></md-button>
+                    </md-input-container>
+
+                    <md-button ng-if="vm.showRegisterPemohon && vm.triSettings.name.toUpperCase()==='SICANTIK'"
+                               class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10"
+                               href="#/register" translate="LOGIN.REGISTER_LINK" aria-label="{{'LOGIN.REGISTER_LINK' | translate}}">
+                    </md-button>
+
+                </form>
+            </md-content>
+        </md-card>
+    </div>
+</div>

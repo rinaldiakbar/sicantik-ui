@@ -1,0 +1,198 @@
+<md-dialog aria-label="Dialog Query SQL" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Wizard SQL</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <!--<md-input-container class="md-block">
+                    <label>ID <i>Report Group</i></label>
+                    <input type="text">
+                </md-input-container>-->
+                <md-input-container class="md-block">
+                    <label>Label Kelompok</label>
+                    <input type="text" ng-model="formData.label_kelompok" ng-disabled="true">
+                </md-input-container>
+                <!--<md-input-container class="md-block">
+                    <label>Deskripsi Singkat</label>
+                    <input type="text">
+                </md-input-container>-->
+                <md-input-container class="md-block">
+                    <label><i>Query Group</i></label>
+                    <textarea name="sqlQuery" ng-model="formData.sql" md-maxlength="1000" rows="5" cols="500" ng-disabled="true"></textarea>
+                </md-input-container>
+
+                <md-tabs md-dynamic-height md-border-bottom>
+                    <md-tab label="Tabel">
+                        <md-content class="md-padding">
+                            <table class="md-table">
+                                <thead>
+                                <th class="number-col">No.</th>
+                                <th>Tabel Laporan</th>
+                                <th>Tipe <i>Join</i> Laporan</th>
+                                <th class="action-col">Aksi</th>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="(index, kel_tabel) in formData.kelompok_tabel" >
+                                    <td class="number-col">{{index+1}}</td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" placeholder="Nama Tabel*" ng-required="true" ng-model="kel_tabel.nama_tabel">
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-select placeholder="Tipe Join" ng-required="true" ng-model="kel_tabel.tipe_join">
+                                            <md-option ng-if="index > 0" ng-value="opt.kode" ng-repeat="opt in tipeJoinList">{{opt.label}}</md-option>
+                                            <md-option ng-if="index == 0" ng-value="MAIN" ng-selected="true">MAIN</md-option>
+                                        </md-select>
+                                    </td>
+                                    <td class="action-col">
+                                        <button class="btn btn-success btn-circle" type="button"
+                                                ng-click="removeKelompokTabel(index)">
+                                            <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <md-list class="no-scroll">
+                                <md-list-item layout="row" layout-align="space-around center">
+                                    <md-button class="md-raised md-accent md-hue-1 full-button"
+                                               ng-click="addKelompokTabel()" aria-label="raised button">
+                                        <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                                    </md-button>
+                                </md-list-item>
+                            </md-list>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Kolom">
+                        <md-content class="md-padding">
+                            <table class="md-table">
+                                <thead>
+                                <th class="number-col">No.</th>
+                                <th>Tabel Laporan</th>
+                                <th>Kolom Laporan</th>
+                                <th>Alias Kolom Laporan</th>
+                                <th class="action-col">Aksi</th>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="(index, kel_kolom) in formData.kelompok_kolom" >
+                                    <td class="number-col">{{index+1}}</td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" placeholder="Nama Tabel*" ng-required="true" ng-model="kel_kolom.nama_tabel">
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" placeholder="Kolom Laporan*" ng-required="true" ng-model="kel_kolom.nama_kolom">
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" placeholder="Alias Kolom Laporan*" ng-required="true" ng-model="kel_kolom.alias_kolom">
+                                        </md-input-container>
+                                    </td>
+                                    <td class="action-col">
+                                        <button class="btn btn-success btn-circle" type="button"
+                                                ng-click="removeKelompokKolom(index)">
+                                            <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <md-list class="no-scroll">
+                                <md-list-item layout="row" layout-align="space-around center">
+                                    <md-button class="md-raised md-accent md-hue-1 full-button"
+                                               ng-click="addKelompokKolom()" aria-label="raised button">
+                                        <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                                    </md-button>
+                                </md-list-item>
+                            </md-list>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Kondisi">
+                        <md-content class="md-padding">
+                            <table class="md-table">
+                                <thead>
+                                <th class="number-col">No.</th>
+                                <th>Tabel 1</th>
+                                <th>Kolom 1</th>
+                                <th>Tipe Kondisi</th>
+                                <th>Tabel 2</th>
+                                <th>Kolom 2</th>
+                                <th>Tipe Relasi</th>
+                                <th class="action-col">Aksi</th>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="(index, kel_kondisi) in formData.kelompok_kondisi" >
+                                    <td class="number-col">{{index+1}}</td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" placeholder="Nama Tabel 1*" ng-required="true" ng-model="kel_kondisi.nama_tabel_1">
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" placeholder="Nama Kolom 1*" ng-required="true" ng-model="kel_kondisi.nama_kolom_1">
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-select placeholder="Tipe Kondisi" ng-model="kel_kondisi.tipe_kondisi" ng-required="true">
+                                            <md-option ng-value="opt.kode" ng-repeat="opt in tipeKondisiList">{{opt.label}}</md-option>
+                                        </md-select>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" placeholder="Nama Tabel 2*" ng-model="kel_kondisi.nama_tabel_2">
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" placeholder="Nama Kolom 2*" ng-required="true" ng-model="kel_kondisi.nama_kolom_2">
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-select placeholder="Tipe Kondisi" ng-model="kel_kondisi.tipe_relasi">
+                                            <md-option ng-value="opt.kode" ng-repeat="opt in tipeRelasiList">{{opt.label}}</md-option>
+                                        </md-select>
+                                    </td>
+                                    <td class="action-col">
+                                        <button class="btn btn-success btn-circle" type="button"
+                                                ng-click="removeKelompokKondisi(index)">
+                                            <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <md-list class="no-scroll">
+                                <md-list-item layout="row" layout-align="space-around center">
+                                    <md-button class="md-raised md-accent md-hue-1 full-button"
+                                               ng-click="addKelompokKondisi()" aria-label="raised button">
+                                        <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                                    </md-button>
+                                </md-list-item>
+                            </md-list>
+                        </md-content>
+
+                    </md-tab>
+                </md-tabs>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="save()">
+                Simpan
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

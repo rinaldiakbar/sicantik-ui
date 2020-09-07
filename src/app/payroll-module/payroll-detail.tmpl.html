@@ -1,0 +1,39 @@
+<md-content class="padded-content-page">
+    <div layout="row"> 
+        <h3 class="md-display-2" translate>PAYROLL.TITLE</h3>
+        <span flex></span> 
+        <md-button class="md-icon-button" ng-click="vm.init()" style="font-size: 20px;">
+            <md-tooltip md-direction="left">Print Slip</md-tooltip>
+           <i class="fa fa-file-pdf-o"  style="color:cyan"></i>
+        </md-button>               
+        <md-button class="md-icon-button" ng-click="vm.getData(true)" style="font-size: 20px;">
+            <md-tooltip md-direction="left">Download XLS</md-tooltip>
+           <i class="fa fa-file-excel-o"  style="color:cyan"></i>
+        </md-button>  
+    </div>
+
+    <md-card>
+        <md-data-table-container>
+            <table md-data-table class="md-primary md-data-table" md-progress="vm.deferred">
+                <thead md-order="vm.query.order" md-trigger="vm.getData">
+                    <tr>                        
+                        <th ng-repeat="header in vm.data.header" name={{header}}></th>
+                        <th name="Slip"></th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.data.data">
+                        <td ng-repeat="detail in item">{{detail}}</td>                        
+                        <td>                            
+                            <button class="btn btn-danger btn-circle" type="button" ng-click="vm.confirmDelete(item.id)">
+                                <i class="fa fa-file-pdf-o"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+
+        <md-data-table-pagination md-limit="vm.data.query.limit" md-page="vm.data.query.page" md-total="{{vm.data.total}}" md-trigger="vm.getData"></md-data-table-pagination>
+    </md-card>
+</md-content>

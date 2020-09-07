@@ -1,0 +1,34 @@
+.my-custom-stars .button .icons-star {
+  font-size: 50px; 
+}
+
+.my-custom-stars .star-button.star-on .icons-star {
+  color: #003399; 
+}
+
+.my-custom-stars .star-button.star-off .icons-star {
+  color: #99ccff; 
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v50/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.icons-star {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -moz-font-feature-settings: 'liga';
+  -moz-osx-font-smoothing: grayscale;
+}

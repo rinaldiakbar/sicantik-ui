@@ -1,0 +1,56 @@
+<md-content class="padded-content-page">
+    <h2 translate>DOKUMEN.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid"
+                   ng-click="vm.createAction()">Simpan
+        </md-button>
+        <md-button class="md-raised" ng-click="vm.backToPemohonView(vm.key_id)">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.dokumenPemohon.id">
+
+    <md-input-container md-no-float class="md-block">
+        <label>No Dokumen</label>
+        <input type="text" placeholder="No Dokumen" ng-required="true" ng-model="vm.dokumenPemohon.no_dokumen" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Jenis Dokumen</label>
+        <input type="text" placeholder="Jenis Dokumen" ng-required="true" ng-model="vm.dokumenPemohon.jenis_dokuman.deskripsi" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>File Dokumen</label>
+        <div layout="row" layout-align="space-around center">
+            <div layout="column" flex="80">
+                <input type="text" placeholder="" ng-required="true" ng-model="vm.dokumenPemohon.lokasi_dokumen" ng-disabled="true">
+            </div>
+            <div layout="column" flex="20">
+                <md-button class="md-primary md-raised md-fab" ngf-select="vm.upload($files)"
+                           ng-disabled="vm.upload_status != 'idle'" ngf-multiple="true" aria-label="upload">
+                    <md-icon md-font-icon
+                             ng-class="{ 'zmdi zmdi-cloud-upload': vm.upload_status == 'idle', 'fa fa-spinner fa-pulse': vm.upload_status == 'uploading', 'zmdi zmdi-check': vm.upload_status == 'complete'}"></md-icon>
+                </md-button>
+            </div>
+        </div>
+        <div ng-click="vm.downloadFile()" class="btn-download">Download</div>
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Awal Berlaku</label>
+        <input type="text" placeholder="Mulai Berlaku" ng-required="true" ng-model="vm.dokumenPemohon.awal_berlaku" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Akhir Berlaku</label>
+        <input type="text" placeholder="Akhir Berlaku" ng-required="true" ng-model="vm.dokumenPemohon.akhir_berlaku" ng-disabled="true">
+    </md-input-container>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid"
+                   ng-click="vm.createAction()">Simpan
+        </md-button>
+        <md-button class="md-raised" ng-click="vm.backToPemohonView(vm.key_id)">Batal</md-button>
+    </div>
+</md-content>

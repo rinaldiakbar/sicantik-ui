@@ -1,0 +1,150 @@
+<md-content class="padded-content-page" layout="column">
+  <form>
+    <div layout="row">
+      <h2>Profile perusahaan</h2>
+      <span flex></span>
+      <md-button class="md-primary md-raised" ng-click="vm.createAction()">
+        Buat
+      </md-button>
+      <md-button class="md-primary md-raised" ng-click="vm.cancelAction()">
+        Batal
+      </md-button>
+    </div>
+    <div layout="column">
+      <md-card class="card-element">
+        <md-card-content layout="row" layout-xs="column" flex="100">
+          <div layout="column" flex="60" style="padding-right:5px;">
+            <div layout="row" layout-xs="column" flex="100">
+              <div layout="column" flex="20">
+                <img src="{{vm.foto}}" class="thumb-photo"
+                     ng-if="vm.foto != null">
+                <img src="assets/images/no-image.120x160.png"
+                     class="thumb-photo"
+                     ng-if="vm.foto == null">
+                <div layout="row">
+                  <flex></flex>
+                  <md-button
+                      class="md-primary md-raised md-fab"
+                      ngf-select="vm.uploadFile($files, vm.perusahaan)"
+                      ng-disabled="false"
+                      ngf-multiple="true"
+                      ngf-accept="'image/*'"
+                      ngf-max-size="3MB"
+                      aria-label="upload">
+                      <md-icon md-font-icon
+                               ng-class="{ 'zmdi zmdi-cloud-upload': vm.upload_status == 'idle', 'fa fa-spinner fa-pulse': vm.upload_status == 'uploading', 'zmdi zmdi-check': vm.upload_status == 'complete'}"></md-icon>
+                  </md-button>
+                </div>
+              </div>
+              <div layout="column" flex="40" style="padding-left:5px;">
+                <md-input-container class="md-block">
+                  <label>Kode Perusahaan</label>
+                  <input ng-model="vm.perusahaan.kode">
+                </md-input-container>
+                <md-input-container class="md-block">
+                  <label>Visi</label>
+                  <input ng-model="vm.perusahaan.visi">
+                </md-input-container>
+                <md-input-container>
+                  <label>Misi</label>
+                  <input ng-model="vm.perusahaan.misi">
+                </md-input-container>
+              </div>
+              <div layout="column" flex="40">
+                <md-input-container class="md-block">
+                  <label>Nama Perusahaan</label>
+                  <input ng-model="vm.perusahaan.nama">
+                </md-input-container>
+                <md-input-container>
+                  <label>Alamat</label>
+                  <textarea rows="2" ng-model="vm.perusahaan.alamat"></textarea>
+                </md-input-container>
+              </div>
+            </div>
+          </div>
+          <div layout="column" flex="40" id="report-result">
+            <div id="chart" google-chart chart="vm.saham"></div>
+          </div>
+        </md-card-content>
+        <md-card-content layout="row" layout-xs="column" flex="100" style="margin-top:-15px;">
+          <div layout="column" flex="45" style="padding-right:5px;">
+            <md-input-container>
+              <label>Analisa</label>
+              <textarea rows="2" ng-model="vm.perusahaan.analisa"></textarea>
+            </md-input-container>
+            <md-input-container>
+              <label>Bidang Usaha</label>
+              <textarea rows="2" ng-model="vm.perusahaan.jenis_usaha"></textarea>
+            </md-input-container>
+          </div>
+          <div layout="column" flex="55" id="report-result">
+            <md-button class="md-icon-button"
+                     ng-click="vm.addNewPemegangSaham()">
+              <md-tooltip md-direction="left">Tambah Pemegang Saham</md-tooltip>
+              <i class="fa fa-plus"
+                 style="color:blue;font-size:20px"></i>
+            </md-button>
+            <table class="dynamic-form-table">
+              <thead>
+                <th>Pemegang Saham</th>
+                <th>Persentase</th>
+                <th>Aksi</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="(index, pemegang) in vm.perusahaan.c_perusahaan_saham">
+                  <td>
+                    <div layout="column" flex="100">
+                      <md-input-container>
+                        <input ng-model="pemegang.id" type="hidden">
+                        <md-autocomplete ng-disabled="vm.isDisabled"
+                               md-no-cache="vm.noCache"
+                               md-selected-item="pemegang.pemegang_saham"
+                               md-search-text="vm.searchText[index]"
+                               md-selected-item-change="vm.selectedItemChange(item, index)"
+                               md-items="item in vm.querySearchSaham(vm.searchText[index])"
+                               md-item-text="item.pemegang_saham"
+                               md-item-value="item.id"
+                               md-min-length="0">
+                          <span md-highlight-text="vm.searchText[index]"
+                               md-highlight-flags="^i">{{item.pemegang_saham}}</span>
+                        </md-autocomplete>
+                      </md-input-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div layout="column" style="margin-left:50px">
+                      <md-input-container>
+                        <input type="number" ng-model="pemegang.persentase">
+                      </md-input-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div layout="column" style="margin-left:50px">
+                      <md-button class="md-icon-button"
+                               ng-click="vm.removePemegangSaham(index)">
+                        <md-tooltip md-direction="left">Hapus
+                          Pemegang Saham
+                        </md-tooltip>
+                        <i class="fa fa-trash"
+                           style="color:blue;font-size:20px"></i>
+                      </md-button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+
+    <div layout="row" layout-align="end center">
+      <md-button class="md-primary md-raised" ng-click="vm.createAction()">
+        Buat
+      </md-button>
+      <md-button class="md-primary md-raised" ng-click="vm.cancelAction()">
+        Batal
+      </md-button>
+    </div>
+  </form>
+</md-content>

@@ -1,0 +1,109 @@
+<md-content class="padded-content-page">
+    <h2 translate>RETRIBUSI.TITLE</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button ng-click="vm.hitungRetribusi()">Hitung</md-button>
+            <md-button class="md-primary md-raised" ng-click="vm.saveRetribusi()"
+                       ng-disabled="!vm.enableSubmit || mainForm.$invalid">Simpan
+            </md-button>
+            <md-button class="md-primary" ng-click="vm.saveAndNext()"
+                       ng-disabled="!vm.enableSubmit || mainForm.$invalid">Proses Berikutnya
+            </md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Jenis Izin</label>
+            <input type="text" ng-disabled="true"
+                   ng-model="vm.permohonan_izin.jenis_izin.jenis_izin">
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nomor Permohonan</label>
+            <input type="text" ng-disabled="true"
+                   ng-model="vm.permohonan_izin.no_permohonan">
+        </md-input-container>
+
+        <table class="md-table">
+            <thead>
+            <th class="text-center">Item Retribusi</th>
+            <th class="text-center">Jumlah</th>
+            <th class="text-center">Subtotal</th>
+            </thead>
+            <tbody>
+            <tr class="item" ng-repeat="(index, itemRetribusi) in vm.tarif_item">
+                <!--Jika tidak ada option, asumsi sebagai input text-->
+                <td ng-if="itemRetribusi.tarif_harga.length == 0">
+                    <md-input-container class="full-width">
+                        <label class="field-title">
+                            {{itemRetribusi.nama_item}} :
+                        </label>
+                        <input name="nama_item_{{index}}" type="number"
+                               ng-model="vm.formData.items[itemRetribusi.kode_item][0]"
+                               ng-change="vm.pilihItem(itemRetribusi.kode_item, vm.formData.items[itemRetribusi.kode_item])">
+                        <div ng-messages="mainForm['nama_item_'+index].$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                </td>
+
+                <!--Jika ada option, buat dropdown-->
+                <td ng-if="itemRetribusi.tarif_harga.length > 0">
+                    <md-input-container class="full-width md-block">
+                        <label class="field-title">
+                            {{itemRetribusi.nama_item}} :
+                        </label>
+                        <select placeholder="pilih {{itemRetribusi.nama_item}}" name="nama_item_{{index}}"
+                                class="md-select-form"
+                                ng-options="optKategori.harga as optKategori.kategori for optKategori in itemRetribusi.tarif_harga"
+                                ng-model="vm.formData.items[itemRetribusi.kode_item][0]"
+                                ng-change="vm.pilihItem(itemRetribusi.kode_item, vm.formData.items[itemRetribusi.kode_item])">
+                            <option>Pilih</option>
+                        </select>
+                        <div ng-messages="mainForm['nama_item_'+index].$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                </td>
+                <td>
+                    <md-input-container class="full-width">
+                        <input name="qty_{{index}}" type="number"
+                               ng-model="vm.formData.items[itemRetribusi.kode_item][1]"
+                               ng-change="vm.pilihItem(itemRetribusi.kode_item, vm.formData.items[itemRetribusi.kode_item])">
+                        <div ng-messages="mainForm['qty_'+index].$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                </td>
+                <td>
+                    <md-input-container class="full-width">
+                        <input class="full-width" disabled type="number" placeholder=""
+                               ng-model="vm.formData.items[itemRetribusi.kode_item][2]" value="0">
+                    </md-input-container>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <td colspan="2">Total</td>
+            <td>
+                <md-input-container class="full-width">
+                    <input class="requiredField full-width" disabled type="number" placeholder=""
+                           ng-model="vm.total">
+                </md-input-container>
+            </td>
+            </tfoot>
+        </table>
+
+        <div layout="row" layout-align="end center">
+            <md-button ng-click="vm.hitungRetribusi()">Hitung</md-button>
+            <md-button class="md-primary md-raised" ng-click="vm.saveRetribusi()"
+                       ng-disabled="!vm.enableSubmit || mainForm.$invalid">Simpan
+            </md-button>
+            <md-button class="md-primary" ng-click="vm.saveAndNext()"
+                       ng-disabled="!vm.enableSubmit || mainForm.$invalid">Proses Berikutnya
+            </md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

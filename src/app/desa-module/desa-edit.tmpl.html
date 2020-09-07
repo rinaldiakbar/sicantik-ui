@@ -1,0 +1,59 @@
+<md-content class="padded-content-page">
+    <h2 translate>DESA.EDIT</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Kode Desa</label>
+            <input type="text" name="kode_daerah" placeholder="Kode Desa" ng-required="true" ng-model="vm.desa.kode_daerah" md-maxlength="15">
+            <div ng-messages="mainForm.kode_daerah.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Desa</label>
+            <input type="text" name="nama_daerah" placeholder="Nama Desa" ng-required="true" ng-model="vm.desa.nama_daerah" md-maxlength="100">
+            <div ng-messages="mainForm.nama_daerah.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Kecamatan</label>
+            <md-autocomplete
+                class="margin-bottom-20"
+                ng-disabled="vm.isDisabled"
+                md-no-cache="vm.noCache"
+                md-selected-item="selectedItem"
+                md-search-text="vm.searchText"
+                md-selected-item-change="vm.selectedItemChange(item)"
+                md-items="item in vm.querySearch(vm.searchText)"
+                md-item-text="item.nama_daerah"
+                md-min-length="0"
+                placeholder="Cari Kecamatan">
+                <div flex="100" layout="row">
+                    <div flex="40" layout="column">
+                        <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.nama_daerah}}</span>
+                    </div>
+                    <div flex=30" layout="column">
+                        {{item.kabupaten.kode_daerah}} - {{item.kabupaten.nama_daerah}}
+                    </div>
+                    <div flex=30" layout="column">
+                        {{item.kabupaten.provinsi.kode_daerah}} - {{item.kabupaten.provinsi.nama_daerah}}
+                    </div>
+                </div>
+                <div ng-messages="mainForm.kecamatan.$error">
+                    <div ng-messages-include="app/include/validation-messages.html"></div>
+                </div>
+            </md-autocomplete>
+        </md-input-container>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid"  ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

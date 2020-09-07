@@ -1,0 +1,28 @@
+<md-dialog aria-label="Dialog Query SQL" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Web Service</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div ng-if="canvasData.fields[0].field">
+                <h3>format web service inisial</h3>
+                <div class="json-prettify" ng-if="strJson">
+                    <pre ng-bind-html="strJson"></pre>
+                </div>
+            </div>
+            <div>
+                <h3>parameter:</h3>
+                <ol>
+                    <li>key_id : id dengan tipe data integer</li>
+                </ol>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

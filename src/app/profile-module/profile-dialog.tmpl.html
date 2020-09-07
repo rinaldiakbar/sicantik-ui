@@ -1,0 +1,132 @@
+<md-dialog aria-label="Alur Proses" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Override Daftar Proses</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <table class="md-table">
+                    <thead>
+                        <th width="10%" class="number-col">No</th>
+                        <th width="40%">Default</th>
+                        <th width="40%">Override</th>
+                        <th width="10%" class="action-col">Aksi</th>
+                    </thead>
+                    <tbody ng-repeat="(index, proses) in alur_proses.daftar_proses">
+                        <tr ng-show="!isShowingOverrideForm[index] && !hideAllRow">
+                            <td class="number-col">
+                                <input type="hidden" value="{{proses.id}}" ng-model="proses.id">
+                                <md-input-container md-no-float class="md-block">
+                                    <input type="text" placeholder="No*" ng-required="true" ng-model="proses.no" ng-disabled="true">
+                                </md-input-container>
+                            </td>
+                            <td>
+                                <md-input-container md-no-float class="md-block">
+                                    <label>Jenis Proses</label>
+                                    <input type="text" placeholder="" ng-model="proses.jenis_prose.nama_proses" ng-disabled="true">
+                                </md-input-container>
+                                <md-input-container md-no-float class="md-block">
+                                    <label>Tautan</label>
+                                    <input type="text" placeholder="" ng-required="false" ng-model="proses.tautan" ng-disabled="true">
+                                </md-input-container>
+                                <md-input-container md-no-float class="md-block">
+                                    <label>Form</label>
+                                    <input type="text" placeholder="" ng-model="proses.form.nama_form" ng-disabled="true">
+                                </md-input-container>
+                                <md-input-container md-no-float class="md-block">
+                                    <label>Report</label>
+                                    <input type="text" placeholder="" ng-model="proses.template_data.keterangan" ng-disabled="true">
+                                </md-input-container>
+                            </td>
+                            <td>
+                                <div ng-if="proses.jenis_izin_prose !== null">
+                                    <md-input-container md-no-float class="md-block">
+                                        <label>Jenis Proses</label>
+                                        <input type="text" placeholder="" ng-model="proses.jenis_prose.nama_proses" ng-disabled="true">
+                                    </md-input-container>
+                                    <md-input-container md-no-float class="md-block">
+                                        <label>Tautan</label>
+                                        <input type="text" placeholder="" ng-required="false" ng-model="proses.jenis_izin_prose.tautan" ng-disabled="true">
+                                    </md-input-container>
+                                    <md-input-container md-no-float class="md-block">
+                                        <label>Form</label>
+                                        <input type="text" placeholder="" ng-model="proses.jenis_izin_prose.form.nama_form" ng-disabled="true">
+                                    </md-input-container>
+                                    <md-input-container md-no-float class="md-block">
+                                        <label>Report</label>
+                                        <input type="text" placeholder="" ng-model="proses.jenis_izin_prose.template_data.keterangan" ng-disabled="true">
+                                    </md-input-container>
+                                </div>
+
+                                <div ng-if="proses.jenis_izin_prose === null">
+                                    &nbsp;
+                                </div>
+                            </td>
+                            <td class="action-col">
+                                <button class="btn btn-success btn-circle" type="button" ng-click="openOverrideForm(index)">
+                                    <md-icon md-font-icon="zmdi zmdi-collection-item-1"></md-icon>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr ng-show="isShowingOverrideForm[index]">
+                            <td class="number-col">{{proses.no}}</td>
+                            <td>
+                                <md-input-container md-no-float class="md-block">
+                                    <label>Jenis Proses</label>
+                                    <input type="text" placeholder="" ng-model="proses.jenis_prose.nama_proses" ng-disabled="true">
+                                </md-input-container>
+
+                                <md-input-container md-no-float class="md-block">
+                                    <label>Tautan</label>
+                                    <!-- <md-select placeholder="Tautan" name="proses_tautan_{{index}}" ng-model="proses.jenis_izin_prose.tautan" ng-required="true">
+                                        <md-option ng-value="opt.kode" ng-repeat="opt in tautanList">{{opt.label}}</md-option>
+                                    </md-select> -->
+                                    <input type="text" placeholder="" ng-model="proses.jenis_izin_prose.tautan" readonly="true">
+                                    <div ng-messages="mainForm['proses_tautan_'+index].$error">
+                                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                                    </div>
+                                </md-input-container>
+                            </td>
+                            <td>
+                                <md-input-container md-no-float class="md-block" ng-if="proses.jenis_izin_prose.tautan === 'form-add'">
+                                    <label>Form</label>
+                                    <md-autocomplete ng-disabled="false" ng-required="true" md-no-cache="true" md-search-text="searchTextForm[index]" md-selected-item-change="selectedItemChangeForm(item, index)" md-items="item in querySearchForm(searchTextForm[index])" md-item-text="item.nama_form"
+                                        md-item-value="item.id" md-min-length="0" placeholder="Form">
+                                        <span md-highlight-text="proses.jenis_izin_prose.form.nama_form" md-highlight-flags="^i">{{item.nama_form}}</span>
+                                    </md-autocomplete>
+                                </md-input-container>
+
+                                <md-input-container md-no-float class="md-block" ng-if="proses.jenis_izin_prose.tautan === 'report'">
+                                    <label>Report</label>
+                                    <md-autocomplete ng-disabled="false" ng-required="true" md-no-cache="true" md-search-text="searchTextTemplateData[index]" md-selected-item-change="selectedItemChangeTemplateData(item, index)" md-items="item in querySearchTemplateData(searchTextTemplateData[index])"
+                                        md-item-text="item.keterangan" md-item-value="item.id" md-min-length="0" placeholder="TemplateData">
+                                        <span md-highlight-text="proses.jenis_izin_prose.template_data.keterangan" md-highlight-flags="^i">{{item.keterangan}}</span>
+                                    </md-autocomplete>
+                                </md-input-container>
+                            </td>
+                            <td class="action-col">
+                                <md-button class="md-primary md-raised" ng-click="closeOverrideForm(index)">
+                                    Simpan Proses
+                                </md-button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="save()" ng-show="!hideAllRow">
+                Simpan
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

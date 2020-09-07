@@ -1,0 +1,662 @@
+// import material icons
+$zmdi-font-path: "../bower_components/material-design-iconic-font/dist/fonts";
+@import "bower_components/material-design-iconic-font/scss/material-design-iconic-font.scss";
+// import angular material scss
+@import "angular-material/angular-material.scss";
+// import triangular module scss
+@import "triangular/triangular";
+// set template font family
+button,
+select,
+html,
+textarea,
+input {
+    font-family: RobotoDraft, Roboto, 'Helvetica Neue', sans-serif;
+}
+
+// import app scss
+@import "scss/material-backgrounds";
+// Add your CSS here
+@import "scss/rating";
+
+/**
+ *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+
+// injector
+// endinjector
+$theme-color: rgb(0, 188, 212);
+
+md-content.no-scroll {
+    display: table;
+    width: 95%;
+}
+
+#main-scrol {
+    height: auto !important;
+}
+
+.border-box {
+    border: 1px solid #607D8B !important;
+}
+
+.border-box h4 {
+    margin-left: 20px;
+}
+
+.form-title {
+    margin-bottom: 10px;
+}
+
+
+/*** Basic Tree ***/
+
+.tree-view {
+    margin-top: 10px;
+}
+
+ul.ivh-treeview li.ivh-treeview-node-leaf .ivh-treeview-twistie-leaf {
+    display: none;
+}
+
+.tree-view ul {
+    list-style: none;
+}
+
+.tree-view li {
+    margin-left: 20px;
+    list-style: none;
+}
+
+.tree-view .ascii-box,
+.tree-view .ascii-box-view {
+    cursor: pointer;
+    font-family: monospace;
+}
+
+.tree-view .x {
+    color: red;
+}
+
+.tree-view .y {
+    color: green;
+}
+
+/*** .Basic Tree ***/
+
+
+/*** Menu & Structure Tree ***/
+
+.tree-view-row {
+    height: auto;
+    margin: 0.5px;
+    display: inline-table;
+    user-select: none;
+    width: 100%;
+}
+
+.ivh-treeview-twistie-expanded,
+.ivh-treeview-twistie-collapsed {
+    margin-left: -5px;
+}
+
+.ivh-treeview-node-label {
+    margin-left: 5px;
+}
+
+.ivh-treeview-toggle {
+    display: inline;
+    cursor: pointer;
+}
+
+.node-toggle {
+    float: left;
+    width: auto;
+    margin-left: -25px;
+    color: $theme-color;
+    font-size: 20px;
+}
+
+.node-row {
+    float: left;
+    width: 90%;
+    padding: 5px;
+}
+
+.node-label {
+    width: 60%;
+    float: left;
+}
+
+.node-actions {
+    width: 40%;
+    float: left;
+}
+
+/*** .Menu & Structure Tree ***/
+
+
+/*** Tabs ***/
+
+md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+    min-height: 1000px;
+}
+
+md-tabs.md-cyan-theme.md-primary > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item.md-active:not([disabled]),
+md-tabs.md-cyan-theme.md-primary > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item.md-active:not([disabled]) md-icon,
+md-tabs.md-cyan-theme.md-primary > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item.md-focused:not([disabled]),
+md-tabs.md-cyan-theme.md-primary > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item.md-focused:not([disabled]) md-icon {
+    color: #212121;
+}
+
+.no-scroll {
+    overflow-x: hidden;
+}
+
+md-tab-item.md-active {
+    // background-color: lightgray;
+}
+
+
+/*** .Tabs ***/
+
+
+/*** Table ***/
+
+table.md-data-table tbody {
+    tr td {
+        font-size: 15px;
+        color: #000000;
+    }
+    tr:nth-child(even) {
+        background-color: lightgrey !important;
+    }
+}
+
+table.md-table {
+    tr,
+    td,
+    th,
+    thead tr th {
+        border: 1px rgba(0, 0, 0, .12) solid !important;
+    }
+    .number-col,
+    .action-col {
+        text-align: center;
+    }
+}
+
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+    vertical-align: middle;
+}
+
+table[md-data-table]>thead:not([md-table-progress])>tr>th {
+    color: $theme-color;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+table.static-table {
+    th,
+    td {
+        padding: 2px;
+    }
+    th {
+        text-align: center !important;
+    }
+    td.center {
+        text-align: center !important;
+    }
+}
+
+
+/*** .Table ***/
+
+
+/*** .Button ***/
+
+.full-button {
+    width: 100%;
+}
+
+/*** .Button ***/
+
+
+/*** Autocomplete ***/
+
+md-autocomplete.md-default-theme,
+md-autocomplete {
+    background: none !important;
+}
+
+md-autocomplete {
+    height: auto;
+    md-autocomplete-wrap {
+        height: 53px;
+    }
+    button {
+        margin: 0em 0em 0em 0em;
+    }
+}
+
+.md-whiteframe-1dp,
+.md-whiteframe-z1 {
+    box-shadow: none !important;
+}
+
+.md-virtual-repeat-container {
+    width: 500px;
+    .md-contact-chips-suggestions {
+        width: 100%;
+        .md-contact-suggestion {
+            width: 100%;
+            .md-contact-name {
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+/*** .Autocomplete ***/
+
+
+/*** Form Style ***/
+
+md-input-container > md-select {
+    margin-bottom: 23px;
+}
+
+md-input-container.md-cyan-theme .md-input[disabled],
+md-input-container.md-cyan-theme .md-input [disabled],
+md-input-container.md-cyan-theme input[disabled],
+md-select.md-cyan-theme[disabled] .md-select-value {
+    color: rgb(13, 71, 161);
+}
+
+//md-input-container.md-cyan-theme label, md-input-container.md-cyan-theme:not(.md-input-invalid).md-input-has-value label {
+//    color: #212121;
+//}
+
+/*** .Form Style ***/
+
+
+/*** Anchor style ***/
+
+.md-dialog-content a {
+    cursor: pointer;
+}
+
+
+/*** .Anchor style ***/
+
+
+/*** Additional Stlye ***/
+
+.no-minwidth {
+    min-width: 0px !important;
+}
+
+
+/*** .Additional Style ***/
+
+
+/*** Combogrid ***/
+
+div.combogrid {
+    font-family: RobotoDraft, Roboto, "Helvetica Neue", sans-serif;
+    background: white;
+}
+
+div.combogrid div.cg-comboItem {
+    border-bottom: 1px solid gainsboro;
+}
+
+div.ui-state-hover {
+    background: $theme-color !important;
+    border: none !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+div .ui-state-default .ui-icon {
+    background-image: url("../assets/css/smoothness/images/ui-icons_228ef1_256x240.png") !important;
+}
+
+#cg-divHeader {
+    color: $theme-color;
+    border-bottom: 2px solid $theme-color;
+}
+
+
+/*** .Combogrid ***/
+
+
+/*** Filter ***/
+
+#filter-text {
+    margin-left: 8px;
+}
+
+
+/*** .Filter ***/
+
+
+/*** Toast ***/
+
+.md-toast-error > .md-toast-content {
+    background-color: rgb(198, 40, 40) !important;
+}
+
+.md-toast-warning > .md-toast-content {
+    background-color: rgb(245, 127, 23) !important;
+}
+
+/*** .Toast ***/
+
+/*** Ajax Loader ***/
+
+#loaderDiv {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1100;
+    background-color: white;
+    opacity: .6;
+}
+
+.ajax-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -32px;
+    /* -1 * image width / 2 */
+    margin-top: -32px;
+    /* -1 * image height / 2 */
+    display: block;
+}
+
+
+/*** .Ajax Loader ***/
+
+
+/*** Dynamic Form View ***/
+
+.report-filter {
+    padding: 10px;
+}
+
+.report-result {
+    padding: 10px;
+}
+
+.btn-download {
+    cursor: pointer;
+    font-weight: bold;
+    color: rgb(0, 188, 212);
+    font-style: italic;
+}
+
+.thumb-photo {
+    width: 120px;
+    height: 160px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, .3);
+}
+
+text-angular {
+    .ta-bind {
+        border: 1px solid #607D8B !important;
+    }
+}
+
+table.dynamic-form-table {
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+    tr:nth-child(even) {
+        background-color: lightgrey !important;
+    }
+    thead th.action,
+    tr td.action {
+        /** todo replace this with action-col **/
+        text-align: center;
+    }
+}
+
+table[md-data-table].dynamic-form-table {
+    tbody:nth-child(even) {
+        background-color: lightgrey !important;
+    }
+}
+
+.canvas-title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.action-canvas {
+    margin-top: 5px;
+    padding-top: 5px;
+}
+
+/*** .Dynamic Form View ***/
+
+
+/*** Template Form ***/
+
+.card-element {
+    margin-top: 16px;
+}
+
+.button-toolbar button.md-raised {
+    padding-left: 16px;
+    padding-right: 16px;
+
+    md-icon {
+    margin-right: 4px;
+    }
+}
+
+.menudemoBasicUsage {
+    .md-menu-demo {
+    padding: 24px;
+    }
+
+    .menu-demo-container {
+    min-height: auto;
+    }
+}
+
+table.template-table-form {
+    .table-head th {
+        text-align: center;
+        min-width: 200px;
+        border-width: 1px 1px 0px 1px;
+        border-color: rgba(0, 0, 0, 0.12);
+        border-style: solid;
+    }
+    tr td {
+        border-width: 0px 1px 1px 1px;
+        border-color: rgba(0, 0, 0, 0.12);
+        border-style: solid;
+    }
+}
+
+.table-body-form {
+    overflow-x: scroll;
+}
+
+md-icon {
+    height: auto;
+}
+
+.dynamic-form-table {
+    md-input-container {
+    margin: 0px;
+    padding: 0px;
+    }
+    tr {
+    height: 30px;
+    }
+}
+
+.search-bar .search-icon {
+    margin-right: 8px;
+}
+
+button.button-set {
+    width: 40px;
+    position: relative;
+    left: 50%;
+}
+
+
+/*** .Template Form ***/
+.json-prettify {
+    pre {
+        outline: 1px solid #ccc;
+        padding: 5px;
+        margin: 5px;
+    }
+    .string {
+        color: green;
+    }
+    .number {
+        color: darkorange;
+    }
+    .boolean {
+        color: blue;
+    }
+    .null {
+        color: magenta;
+    }
+    .key {
+        color: red;
+    }
+}
+
+.orgchart {
+    display: inline-block;
+    background-color: white;
+    font-size: 14px !important;
+    line-height: 20px !important;
+
+    margin: 5px;
+    vertical-align: top;
+    color: #333;
+
+    border-radius: 5px;
+    margin: 10px;
+    padding-bottom: 20px;
+    border: 1px solid lightgray;
+
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+
+    display: inline-block;
+    page-break-after: always;
+
+}
+
+.links:hover {
+   font-weight: bold;
+   color: rgb(0, 188, 212);
+   cursor: pointer;
+}
+
+.maman {
+	color: green;
+	width: 60px;
+	border: 1px solid #fff;
+	text-align: center;
+}
+
+.google-visualization-orgchart-lineleft {
+    border-left: 2px solid #333 !important;
+}
+
+.google-visualization-orgchart-linebottom {
+    border-bottom: 2px solid #333 !important;
+}
+
+.google-visualization-orgchart-lineright {
+    border-right: 2px solid #333 !important;
+}
+
+//menghilangkan border antar boks di org chart
+table.google-visualization-orgchart-table {
+  border-collapse: inherit;
+}
+
+//end menghilangkan border antar boks di org chart
+.maman img {
+	clear: both;
+	display: block;
+	margin: auto;
+}
+
+// Notification Panel
+.notification-panel {
+  // - Tab adjustment to match toolbar height
+  md-tabs-canvas, md-pagination-wrapper {
+    height: 64px;
+  }
+  md-tabs-content-wrapper {
+    top: 64px;
+  }
+  // - Tab icon adjustment to match toolbar positino
+  .md-tab .md-font {
+    font-size: 2.0rem;
+    vertical-align: middle;
+    line-height: 4rem;
+  }
+
+  md-tab-item {
+    max-width:100%!important;
+  }
+  // - List item font size
+  md-list-item {
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    border-color: lightgray;
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+
+    h4 {
+        font-weight: bold !important;
+    }
+    h5 {
+        font-weight: normal;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    p {
+      font-size: 1.3rem;
+      text-overflow: ellipsis;
+      overflow: auto;
+      margin-right: 1rem;
+      text-align: justify;
+    }
+    md-icon, .md-list-item-inner md-icon {
+      margin-right: 12px;
+    }
+  }
+  // - List items in column layout
+  md-list-item[layout="column"] {
+    min-height: initial;
+    margin-bottom: 3rem;
+  }
+}
+

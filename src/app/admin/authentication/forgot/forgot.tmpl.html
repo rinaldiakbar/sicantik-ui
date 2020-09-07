@@ -1,0 +1,34 @@
+<div layout="row" flex layout-padding layout-fill layout-align="center center">
+    <div flex="40" flex-lg="50" flex-md="70" flex-xs="100">
+        <md-card>
+            <md-toolbar class="padding-20">
+                <div layout="row" layout-align="center center">
+                    <img ng-src="{{::vm.triSettings.logo}}" alt="{{vm.triSettings.name}}">
+                </div>
+                <div layout="row" layout-align="center center">
+                    <h1 class="md-headline">Forgot Password</h1>
+                </div>
+            </md-toolbar>
+
+            <md-content class="md-padding">
+                <p>Masukkan username anda di bawah ini</p>
+                <form name="forgot">
+                    <md-input-container class="md-block">
+                        <label for="username">username</label>
+                        <input id="username" label="username" name="username" type="text" ng-model="vm.user.username" required/>
+                        <div ng-messages="forgot.username.$error" ng-if="forgot.username.$dirty">
+                            <div ng-message when="required"><span translate>FORGOT.USERNAME.PLEASE_ENTER</span></div>
+                        </div>
+                    </md-input-container>
+
+                    <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" ng-click="vm.resetClick()" ng-disabled="forgot.$invalid" translate="FORGOT.RESET" aria-label="{{'FORGOT.RESET' | translate}}"></md-button>
+
+                    <md-button class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" href="#/login">
+                        Ingat password anda? Login di sini
+                    </md-button>
+                </form>
+            </md-content>
+        </md-card>
+
+    </div>
+</div>

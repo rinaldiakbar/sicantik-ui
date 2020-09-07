@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "PENGUMUMAN": {
+            "PENGUMUMAN-MODULE": "Menu",
+            "PENGUMUMAN-LIST": "Daftar Pengumuman"
+        }
+    },
+    "PENGUMUMAN": {
+        "TITLE": "Pengumuman",
+        "LIST": "Daftar",
+        "ADD": "Tambah Pengumuman",
+        "EDIT": "Ubah Pengumuman",
+        "VIEW": "Lihat Pengumuman",
+        "SEARCH": "Cari"
+    }
+}

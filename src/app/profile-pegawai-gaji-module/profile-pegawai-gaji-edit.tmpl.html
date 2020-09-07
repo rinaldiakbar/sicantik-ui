@@ -1,0 +1,255 @@
+<md-content class="padded-content-page">
+    <h2 translate>PROFILE-GAJI.EDIT</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+        <div layout="row" flex>
+            <div layout="column" flex="20">
+                <div>
+                    <md-input-container md-no-float class="md-block">
+                        <label>{{data.label}}</label>
+                    </md-input-container>
+                    <br>
+                </div>
+                <img src="{{vm.foto}}" class="thumb-photo" ng-if="vm.pegawai.photo != null">
+                <img src="assets/images/no-image.120x160.png" class="thumb-photo" ng-if="vm.pegawai.photo == null">
+            </div>
+            <div layout="column" flex="40">
+                <md-input-container md-no-float class="md-block">
+                    <label>Nomor Induk Pegawai</label>
+                    <input type="hidden" ng-model="vm.pegawai.c_pegawai.c_personal_id">
+                    <input type="text" name="no_induk" ng-model="vm.pegawai.c_pegawai.no_induk" md-maxlength="75" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Nama</label>
+                    <input type="hidden" ng-model="vm.pegawai.id">
+                    <input type="text" name="nama" ng-required="true" ng-model="vm.pegawai.nama" md-maxlength="75" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Nomor KTP</label>
+                    <input type="text" name="no_idcard" ng-model="vm.pegawai.no_idcard" md-maxlength="75" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tempat Lahir</label>
+                    <input type="text" name="tempat_lahir" ng-model="vm.pegawai.tempat_lahir" md-maxlength="75" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Perusahaan</label>
+                    <input type="text" name="perusahaan" ng-model="vm.pegawai.c_pegawai.c_perusahaan.nama" md-maxlength="75" disabled>
+                </md-input-container>
+            </div>
+            <div layout="column" flex="5"></div>
+            <div layout="column" flex="35">
+                <md-input-container md-no-float class="md-block">
+                    <label>Agama</label>
+                    <md-select name="agama" ng-model="vm.pegawai.agama" disabled>
+                        <md-option ng-value="opt.kode" ng-repeat="opt in vm.agamaList">{{opt.label}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Jenis Kelamin</label>
+                    <md-select name="jenis_kelamin" ng-model="vm.pegawai.jenis_kelamin" disabled>
+                        <md-option ng-value="opt.kode" ng-repeat="opt in vm.genderList">{{opt.label}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Golongan Darah</label>
+                    <md-select name="golongan_darah" ng-model="vm.pegawai.golongan_darah" disabled>
+                        <md-option ng-value="opt.kode" ng-repeat="opt in vm.bloodList">{{opt.label}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tanggal Lahir</label>
+                    <md-datepicker ng-model="vm.pegawai.tgl_lahir" name="tanggal_lahir" disabled>
+                    </md-datepicker>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tanggal Mulai</label>
+                    <md-datepicker ng-model="vm.pegawai.c_pegawai.tgl_mulai" name="tgl_mulai" ng-required="true" disabled>
+                    </md-datepicker>
+                </md-input-container>
+            </div>
+        </div>
+        
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+            <!-- BEGIN - Gaji -->
+            <md-tab label="Gaji">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <table class="md-table">
+                            <thead>
+                                <th width="5%" class="number-col">#</th>
+                                <th width="45%" align="center">Gaji</th>
+                                <th width="20%" align="center">Mata Uang</th>
+                                <th width="20%" align="center">Mulai Berlaku</th>
+                                <th width="10%" class="action-col">Aksi</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(index, data_gaji) in vm.pegawai.c_pegawai.c_pegawai_gaji">
+                                    <td class="number-col">{{ index+1 }}</td>
+                                    <td>
+                                        <input type="hidden" ng-model="data_gaji.id">
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="number" name="data_gaji_gaji_{{index}}" ng-model="data_gaji.gaji">
+                                            <div ng-messages="mainForm['data_gaji_mata_gaji'+index].$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" name="data_gaji_mata_uang_{{index}}" ng-model="data_gaji.mata_uang">
+                                            <div ng-messages="mainForm['data_gaji_mata_uang'+index].$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <md-datepicker ng-model="data_gaji.tgl_mulai" name="data_gaji_tgl_mulai_{{index}}" md-placeholder="Mulai Berlaku">
+                                            </md-datepicker>
+                                            <div ng-messages="mainForm['data_gaji_tgl_mulai'+index].$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+                                    </td>
+                                    <td class="action-col">
+                                        <button class="btn btn-success btn-circle" type="button" ng-click="vm.removeGaji(index)">
+                                            <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addNewGaji()" aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            </md-button>
+                        </md-list-item>
+
+                        <table class="md-table">
+                            <thead>
+                                <th width="5%" class="number-col">#</th>
+                                <th width="35%" align="center">Payroll Area</th>
+                                <th width="30%" align="center">Payroll Group</th>
+                                <th width="25%">Mulai Berlaku</th>
+                                <th width="10%" class="action-col">Aksi</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(index, gaji) in vm.pegawai.c_pegawai.c_pegawai_atribut_gaji">
+                                    <td class="number-col">{{ index+1 }}</td>
+                                    <td>
+                                        <input type="hidden" ng-model="gaji.id">
+                                        <md-input-container md-no-float class="md-block">
+                                            <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabledArea" md-no-cache="vm.noCacheArea" md-selected-item="vm.gaji.area" md-search-text="vm.searchTextArea" md-selected-item-change="vm.selectedItemChangeArea(item, index)" md-items="item in vm.querySearchArea(vm.searchTextArea)" md-item-text="item.label" md-item-value="item.id" md-min-length="0" placeholder="Cari Payroll Area">
+                                            <span md-highlight-text="vm.searchTextArea" md-highlight-flags="^i">{{item.label}}</span>
+                                            </md-autocomplete>
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabledGroup" md-no-cache="vm.noCacheGroup" md-selected-item="vm.gaji.group" md-search-text="vm.searchTextGroup" md-selected-item-change="vm.selectedItemChangeGroup(item, index)" md-items="item in vm.querySearchGroup(vm.searchTextGroup)" md-item-text="item.label" md-item-value="item.id" md-min-length="0" placeholder="Cari Payroll Group">
+                                            <span md-highlight-text="vm.searchTextGroup" md-highlight-flags="^i">{{item.label}}</span>
+                                            </md-autocomplete>
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <md-datepicker ng-model="gaji.tgl_mulai" name="gaji_tgl_mulai_{{index}}" md-placeholder="Mulai Berlaku" ng-required="true">
+                                            </md-datepicker>
+                                            <div ng-messages="mainForm['gaji_tgl_mulai'+index].$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+                                    </td>
+                                    <td class="action-col">
+                                        <button class="btn btn-success btn-circle" type="button" ng-click="vm.removeAtributGaji(index)">
+                                            <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addNewAtributGaji()" aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Gaji -->
+            <!-- BEGIN - Pajak -->
+            <md-tab label="Pajak">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <table class="md-table">
+                            <thead>
+                                <th width="5%" class="number-col">#</th>
+                                <th width="45%" align="center">Status Pajak</th>
+                                <th width="20%" align="center">NPWP</th>
+                                <th width="20%" align="center">Mulai Berlaku</th>
+                                <th width="10%" class="action-col">Aksi</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(index, pajak) in vm.pegawai.c_pegawai.c_pegawai_pajak">
+                                    <td class="number-col">{{ index+1 }}</td>
+                                    <td>
+                                        <input type="hidden" ng-model="pajak.id">
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" name="pajak_status_pajak_{{index}}" ng-model="pajak.status_pajak">
+                                            <div ng-messages="mainForm['pajak_status_pajak'+index].$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" name="pajak_npwp_{{index}}" ng-model="pajak.npwp">
+                                            <div ng-messages="mainForm['pajak_npwp'+index].$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <md-datepicker ng-model="pajak.tgl_mulai" name="pajak_tgl_mulai_{{index}}" md-placeholder="Mulai Berlaku" ng-required="true">
+                                            </md-datepicker>
+                                            <div ng-messages="mainForm['pajak_tgl_mulai'+index].$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+                                    </td>
+                                    <td class="action-col">
+                                        <button class="btn btn-success btn-circle" type="button" ng-click="vm.removePajak(index)">
+                                            <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addNewPajak()" aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Pajak -->
+        </md-tabs>
+        <!-- END - Tabs -->
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

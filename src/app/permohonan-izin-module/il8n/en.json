@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "PERMOHONAN-IZIN": {
+            "PERMOHONAN-IZIN-MODULE": "Menu",
+            "PERMOHONAN-IZIN-LIST": "Daftar Permohonan Izin"
+        }
+    },
+    "PERMOHONAN-IZIN": {
+        "TITLE": "Permohonan Izin",
+        "LIST": "Daftar",
+        "ADD": "Tambah Permohonan Izin",
+        "EDIT": "Ubah Permohonan Izin",
+        "VIEW": "Lihat Permohonan Izin",
+        "SEARCH": "Cari"
+    }
+}

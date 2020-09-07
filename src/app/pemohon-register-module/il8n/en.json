@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "PEMOHON-REGISTER": {
+            "PEMOHON-REGISTER-MODULE": "Menu",
+            "PEMOHON-REGISTER-LIST": "Daftar Registrasi PemohonRegister"
+        }
+    },
+    "PEMOHON-REGISTER": {
+        "TITLE": "Registrasi Pemohon",
+        "LIST": "Daftar",
+        "ADD": "Tambah Pemohon",
+        "EDIT": "Ubah Pemohon",
+        "VIEW": "Form Pemohon",
+        "SEARCH": "Cari"
+    }
+}

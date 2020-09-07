@@ -1,0 +1,108 @@
+<!-- Action buttons -->
+<div ng-repeat="(dataIndex, data) in field.field | filter:{type:'button-action', del:false} | orderBy:'no_urut':false" 
+    ng-if="data.type !== 'photo' &&
+        (
+            sectionPosition === 'center' || 
+            (sectionPosition === 'left' && data.no_urut % 2 === 1) || 
+            (sectionPosition === 'right' && data.no_urut % 2 === 0)
+        )"
+    layout="row">
+
+    <div class="md-block">
+        <div class="layout-margin layout-xs-column layout-row" layout-margin="" layout-xs="column" layout="row">
+            <div class="widget-blog widget layout-column" layout="column" flex="90" content-layout-align="start center" content-layout="column">
+                <span ng-include="'app/form-module/element.html'"></span>
+            </div>
+            <div layout="column" flex="10">
+                <md-menu>
+                    <md-button class="md-icon-button" aria-label="open menu" ng-click="$mdOpenMenu()">
+                        <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                    </md-button>
+
+                    <md-menu-content width="4">
+                        <md-menu-item>
+                            <md-button ng-click="showActionButton($event, 'edit', data)">
+                                <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                Edit
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-divider></md-menu-divider>
+                        <md-menu-item>
+                            <md-button ng-click="delElm(data)">
+                                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                                Hapus
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- .Action buttons -->
+
+<div ng-repeat="(dataIndex, data) in field.field | filter:{type:'!button-action', del:false} | orderBy:'no_urut':false" 
+    ng-if="data.type !== 'photo' && 
+        (
+            sectionPosition === 'center' || 
+            (sectionPosition === 'left' && data.no_urut % 2 === 1) || 
+            (sectionPosition === 'right' && data.no_urut % 2 === 0)
+        )"
+    layout="row">
+
+    <div class="md-block">
+        <div class="layout-margin layout-xs-column layout-row" layout-margin="" layout-xs="column" layout="row">
+            <div class="widget-blog widget layout-column" layout="column" flex="90" content-layout-align="start center" content-layout="column">
+                <span ng-include="'app/form-module/element.html'"></span>
+            </div>
+            <div layout="column" flex="10">
+                <md-menu>
+                    <md-button class="md-icon-button" aria-label="open menu" ng-click="$mdOpenMenu()">
+                        <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                    </md-button>
+
+                    <md-menu-content width="4">
+                        <md-menu-item>
+                            <md-button ng-click="showElement($event, form, 'edit', data)">
+                                <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                Edit
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item ng-if="data.type=='select'">
+                            <md-button ng-click="showOption($event,data)">
+                                <md-icon md-font-icon="zmdi zmdi-format-list-bulleted"></md-icon>
+                                List
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item ng-if="data.type == 'autocomplete' || data.type == 'select-ws'">
+                            <md-button ng-click="showSource($event,data)">
+                                <md-icon md-font-icon="zmdi zmdi-storage"></md-icon>
+                                Sumber
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item ng-if="data.type=='numbering'">
+                            <md-button ng-click="showNumbering($event,data)">
+                                <md-icon md-font-icon="zmdi zmdi-n-1-square"></md-icon>
+                                Format Nomor
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item ng-if="data.type === 'add' || data.type==='cancel' || data.type === 'save'">
+                            <md-button ng-click="showActionButton($event, 'edit', data)">
+                                <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                Edit
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-divider></md-menu-divider>
+                        <md-menu-item>
+                            <md-button ng-click="delElm(data)">
+                                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                                Hapus
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                    
+                </md-menu>
+            </div>
+        </div>
+    </div>
+</div>

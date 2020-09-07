@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "PROFILE-TIME": {
+            "PROFILE-PEGAWAI-MODULE": "Menu",
+            "PROFILE-PEGAWAI-LIST": "Daftar Profile Pegawai Time"
+        }
+    },
+    "PROFILE-TIME": {
+        "TITLE": "Profile Pegawai Time",
+        "LIST": "Daftar Profile Pegawai Time",
+        "ADD": "Tambah Profile Pegawai Time",
+        "EDIT": "Ubah Profile Pegawai Time",
+        "VIEW": "Lihat Profile Pegawai Time",
+        "SEARCH": "Cari"
+    }
+}

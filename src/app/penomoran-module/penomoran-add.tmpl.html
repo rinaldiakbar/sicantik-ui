@@ -1,0 +1,97 @@
+<md-content class="padded-content-page">
+    <h2 translate>PENOMORAN.ADD</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Deskripsi</label>
+            <input name="deskripsi" type="text" placeholder="deskripsi format" ng-required="true" ng-model="vm.penomoran.deskripsi" md-maxlength="255">
+            <div ng-messages="mainForm.deskripsi.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Format</label>
+            <input type="text" name="format" placeholder="format nomor" ng-required="true" ng-model="vm.penomoran.format" md-maxlength="50">
+            <div ng-messages="mainForm.format.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nomor Terakhir</label>
+            <input type="number" name="no_terakhir" ng-required="true" ng-model="vm.penomoran.no_terakhir">
+            <div ng-messages="mainForm.format.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Instansi</label>
+            <md-autocomplete
+                    class="margin-bottom-20"
+                    ng-required="true"
+                    ng-disabled="vm.isDisabledInstansi"
+                    md-no-cache="vm.noCacheInstansi"
+                    md-selected-item="selectedItemInstansi"
+                    md-search-text="vm.searchTextInstansi"
+                    md-selected-item-change="vm.selectedItemChangeInstansi(item)"
+                    md-items="item in vm.querySearchInstansi(vm.searchTextInstansi)"
+                    md-item-text="item.nama"
+                    md-item-value="item.id"
+                    md-min-length="0"
+                    placeholder="Cari Instansi">
+                <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.nama}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+            <md-tab label="Unit Kerja">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <md-list-item layout="row" layout-align="space-around center" ng-repeat="(index, unit) in vm.penomoran.penomoran_detail">
+                            <input type="hidden" value="{{unit.id}}" ng-model="unit.id">
+                            <md-input-container flex>
+                                <md-autocomplete
+                                        ng-disabled="false"
+                                        md-no-cache="true"
+                                        md-search-text="vm.searchTextUnit[index]"
+                                        md-selected-item-change="vm.selectedItemChangeUnit(item, index)"
+                                        md-items="item in vm.querySearchUnit(vm.searchTextUnit[index])"
+                                        md-item-text="item.nama"
+                                        md-item-value="item.id"
+                                        md-min-length="0"
+                                        placeholder="Unit Kerja">
+                                    <span md-highlight-text="unit.nama" md-highlight-flags="^i">{{item.nama}}</span>
+                                </md-autocomplete>
+                            </md-input-container>
+                            <md-input-container>
+                                <button class="btn btn-success btn-circle" type="button"
+                                        ng-click="vm.removeDetail(index)">
+                                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                </button>
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addNewDetail()" aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+        <!-- END - Tabs -->
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

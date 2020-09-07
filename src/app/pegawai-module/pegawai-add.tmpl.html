@@ -1,0 +1,80 @@
+<md-content class="padded-content-page">
+    <h2 translate>PEGAWAI.ADD</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nama</label>
+            <input type="text" name="nama" placeholder="Nama Lengkap" ng-required="true" ng-model="vm.pegawai.nama" md-maxlength="100">
+            <div ng-messages="mainForm.nama.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nomor Induk</label>
+            <input type="text" name="nomor_induk" placeholder="NIP" ng-required="true" ng-model="vm.pegawai.nomor_induk" md-maxlength="25">
+            <div ng-messages="mainForm.nomor_induk.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Instansi</label>
+            <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabledInstansi" md-no-cache="vm.noCacheInstansi" md-selected-item="selectedItemInstansi" md-search-text="vm.searchTextInstansi" md-selected-item-change="vm.selectedItemChangeInstansi(item)"
+                md-items="item in vm.querySearchInstansi(vm.searchTextInstansi)" md-item-text="item.nama" md-item-value="item.id" md-min-length="0" placeholder="Cari Instansi">
+                <span md-highlight-text="vm.searchTextInstansi" md-highlight-flags="^i">{{item.nama}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Unit</label>
+            <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabledUnit" md-no-cache="vm.noCacheUnit" md-selected-item="selectedItemUnit" md-search-text="vm.searchTextUnit" md-selected-item-change="vm.selectedItemChangeUnit(item)" md-items="item in vm.querySearchUnit(vm.searchTextUnit, vm.pegawai.instansi_id)"
+                             md-item-text="item.nama" md-item-value="item.id" md-min-length="0" placeholder="Cari Unit">
+                <span md-highlight-text="vm.searchTextUnit" md-highlight-flags="^i">{{item.nama}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Posisi</label>
+            <input type="text" name="posisi" placeholder="Posisi" ng-required="true" ng-model="vm.pegawai.posisi" md-maxlength="100">
+            <div ng-messages="mainForm.posisi.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Jabatan</label>
+            <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabledJabatan" md-no-cache="vm.noCacheJabatan" md-selected-item="selectedItemJabatan"
+                             md-search-text="vm.searchTextJabatan" md-selected-item-change="vm.selectedItemChangeJabatan(item)" md-items="item in vm.querySearchJabatan(vm.searchTextJabatan)"
+                             md-item-text="item.jabatan" md-item-value="item.id" md-min-length="0" placeholder="Cari Jabatan">
+                <span md-highlight-text="vm.searchTextJabatan" md-highlight-flags="^i">{{item.jabatan}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>No HP</label>
+            <input type="text" name="no_hp" placeholder="No HP" ng-required="true" ng-model="vm.pegawai.no_hp" md-maxlength="100">
+            <div ng-messages="mainForm.no_hp.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Alamat Email" ng-required="true" ng-model="vm.pegawai.email" md-maxlength="100">
+            <div ng-messages="mainForm.email.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

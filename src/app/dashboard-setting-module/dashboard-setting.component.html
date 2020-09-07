@@ -1,0 +1,79 @@
+<md-card flex="100" class="card-element">
+    <md-button class="md-raised md-primary md-default" ng-click="vm.showTabDialog()">
+        <md-icon md-font-icon="zmdi zmdi-add" 
+            class="ng-scope ng-isolate-scope md-cyan-theme md-font zmdi material-icons" 
+            aria-hidden="true">
+        </md-icon> + Tab
+    </md-button>
+
+    <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+        <md-tab ng-repeat="(tabIndex, tab) in vm.tabs | orderBy:'tab.tab_idx':false" label="{{tab.label}}" ng-if="tab.del === 0">
+            <md-content>
+                <div layout="row">
+                    <div layout="column" flex="20">
+                        <md-button class="md-raised md-primary md-default"
+                            ng-click="vm.showContentDialog(null, tab.tab_idx)">
+                            <md-icon md-font-icon="zmdi zmdi-edit" 
+                                class="ng-scope ng-isolate-scope md-cyan-theme md-font zmdi material-icons" 
+                                aria-hidden="true">
+                            </md-icon> Tambah Chart
+                        </md-button>
+                    </div>
+                    <div layout column flex="40"></div>
+                    <div layout="column" flex="20">
+                        <md-button class="md-raised md-primary md-default"
+                            ng-click="vm.showTabDialog(tabIndex, tab)">
+                            <md-icon md-font-icon="zmdi zmdi-edit" 
+                                class="ng-scope ng-isolate-scope md-cyan-theme md-font zmdi material-icons" 
+                                aria-hidden="true">
+                            </md-icon> Edit Tab
+                        </md-button>
+                    </div>
+                    <div layout="column" flex="20">
+                        <md-button class="md-raised md-primary md-default"
+                            ng-click="vm.deleteTab(tab)">
+                            <md-icon md-font-icon="zmdi zmdi-delete" 
+                                class="ng-scope ng-isolate-scope md-cyan-theme md-font zmdi material-icons" 
+                                aria-hidden="true">
+                            </md-icon> Hapus Tab
+                        </md-button>
+                    </div>
+                </div>
+            </md-content>
+            <md-content class="md-padding">
+                <div class="dashboard-container overlay-10 padded-content-page" 
+                    layout="row" layout-wrap>
+                    <div class="drag-container" layout="row" layout-xs="column" 
+                        layout-margin dragula='"drag-analytics-container"' 
+                        ng-repeat="(contentId, objchart) in vm.charts | orderObjectBy:'posisi'" layout-wrap>
+                        <tri-widget google-geochart-widget content-padding 
+                            ng-if="objchart.tab_idx == tab.tab_idx">
+
+                            <md-menu align="right">
+                                <md-button class="md-icon-button" aria-label="open menu" layout-align="top" ng-click="$mdMenu.open()">
+                                    <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                                </md-button>
+                                <md-menu-content width="4">
+                                    <md-menu-item>
+                                        <md-button ng-click="vm.showContentDialog(contentId)">
+                                            <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                            Edit
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-divider></md-menu-divider>
+                                    <md-menu-item>
+                                        <md-button ng-click="vm.deleteContent(contentId)">
+                                            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                                            Hapus
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                            <div google-chart chart="objchart" ></div>
+                        </tri-widget>
+                    </div>
+                </div>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</md-card>

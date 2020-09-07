@@ -1,0 +1,140 @@
+<md-content class="padded-content-page">
+    <h2>Ubah Alur Proses</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Alur Proses</label>
+            <input type="text" name="keterangan" placeholder="Nama Alur Proses*" ng-required="true" ng-model="vm.alur_proses.keterangan" md-maxlength="100">
+            <div ng-messages="mainForm.keterangan.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+            <md-tab label="Jenis Proses">
+                <md-content class="md-padding">
+                    
+                    <table class="md-table">
+                        <thead>
+                            <th width="10%" class="number-col">No</th>
+                            <th width="40%">Jenis Proses & Tautan</th>
+                            <th width="40%">Form & Report</th>
+                            <th width="10%" class="action-col">Aksi</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(index, proses) in vm.alur_proses.daftar_proses">
+                                <td class="number-col">
+                                    <input type="hidden" value="{{proses.id}}" ng-model="proses.id">
+                                    <md-input-container md-no-float class="md-block">
+                                        <input ng-init="proses.no=index+1" type="text" name="proses_no_{{index}}" placeholder="No*" ng-required="true" ng-model="proses.no">
+                                    </md-input-container>
+                                    <div ng-messages="mainForm['proses_no_'+index].$error">
+                                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <md-input-container md-no-float class="md-block">
+                                        <label>Jenis Proses</label>
+                                        <md-autocomplete
+                                                ng-disabled="false"
+                                                ng-required="true"
+                                                md-no-cache="true"
+                                                md-search-text="vm.searchTextJenisProses[index]"
+                                                md-selected-item-change="vm.selectedItemChangeJenisProses(item, index)"
+                                                md-items="item in vm.querySearchJenisProses(vm.searchTextJenisProses[index])"
+                                                md-item-text="item.nama_proses"
+                                                md-item-value="item.id"
+                                                md-min-length="0"
+                                                placeholder="Jenis Proses">
+                                            <span md-highlight-text="proses.jenis_prose.nama_proses" md-highlight-flags="^i">{{item.nama_proses}}</span>
+                                        </md-autocomplete>
+                                    </md-input-container>
+                                    <md-input-container md-no-float class="md-block">
+                                        <label>Tautan</label>
+                                        <md-select name="proses_tautan_{{index}}" placeholder="Tautan" ng-model="proses.tautan" ng-required="true"
+                                            ng-change="vm.onChangeTautan(index)">
+                                            <md-option ng-value="opt.kode" ng-repeat="opt in vm.tautanList">{{opt.label}}</md-option>
+                                        </md-select>
+                                        <div ng-messages="mainForm['proses_tautan_'+index].$error">
+                                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                                        </div>
+                                    </md-input-container>
+                                </td>
+                                <td>
+                                    <md-select placeholder="Pilih" name="proses_tipe_{{index}}" ng-model="proses.tipe" ng-required="true"
+                                       ng-show="false">
+                                        <md-option ng-value="opt.kode" ng-repeat="opt in vm.tipeProsesList">{{opt.label}}</md-option>
+                                    </md-select>
+                                    <div ng-messages="mainForm['proses_tipe_'+index].$error">
+                                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                                    </div>
+
+                                    <md-input-container md-no-float class="md-block" ng-if="proses.tautan === 'form-add'">
+                                        <label>Form</label>
+                                        <md-autocomplete
+                                                ng-disabled="false"
+                                                ng-required="true"
+                                                md-no-cache="true"
+                                                md-search-text="vm.searchTextForm[index]"
+                                                md-selected-item-change="vm.selectedItemChangeForm(item, index)"
+                                                md-items="item in vm.querySearchForm(vm.searchTextForm[index])"
+                                                md-item-text="item.nama_form"
+                                                md-item-value="item.id"
+                                                md-min-length="0"
+                                                placeholder="Form">
+                                            <span md-highlight-text="proses.form.nama_form" md-highlight-flags="^i">{{item.nama_form}}</span>
+                                        </md-autocomplete>
+                                    </md-input-container>
+
+                                    <md-input-container md-no-float class="md-block" ng-if="proses.tautan === 'report' || proses.tautan === 'signature-report'">
+                                        <label>Report</label>
+                                        <md-autocomplete
+                                                ng-disabled="false"
+                                                ng-required="true"
+                                                md-no-cache="true"
+                                                md-search-text="vm.searchTextTemplateData[index]"
+                                                md-selected-item-change="vm.selectedItemChangeTemplateData(item, index)"
+                                                md-items="item in vm.querySearchTemplateData(vm.searchTextTemplateData[index])"
+                                                md-item-text="item.keterangan"
+                                                md-item-value="item.id"
+                                                md-min-length="0"
+                                                placeholder="TemplateData">
+                                            <span md-highlight-text="proses.template_data.keterangan" md-highlight-flags="^i">{{item.keterangan}}</span>
+                                        </md-autocomplete>
+                                    </md-input-container>
+                                </td>
+                                <td class="action-col">
+                                    <button class="btn btn-success btn-circle" type="button"
+                                        ng-click="vm.removeDaftarProses(index)">
+                                        <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <md-list class="no-scroll">
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addNewDaftarProses()" aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+
+                </md-content>
+            </md-tab>
+        </md-tabs>
+        <!-- END - Tabs -->
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

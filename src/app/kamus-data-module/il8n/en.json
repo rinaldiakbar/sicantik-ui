@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "KAMUS-DATA": {
+            "KAMUS-DATA-MODULE": "Menu",
+            "KAMUS-DATA-LIST": "Daftar Datatabel"
+        }
+    },
+    "KAMUS-DATA": {
+        "TITLE": "Datatabel",
+        "LIST": "Daftar",
+        "ADD": "Tambah Datatabel",
+        "EDIT": "Ubah Datatabel",
+        "VIEW": "Lihat Datatabel",
+        "SEARCH": "Cari"
+    }
+}

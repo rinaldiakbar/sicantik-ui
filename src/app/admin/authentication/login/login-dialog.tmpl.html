@@ -1,0 +1,32 @@
+<md-dialog aria-label="Pilih Pemohon" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Dokumen Lampiran</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content style="max-width:1600px;">
+            <div class="md-dialog-content">
+                <md-input-container class="md-block">
+                    <label for="sic_password" translate>LOGIN.PASSWORD.LABEL</label>
+                    <input id="sic_password" label="password" name="sic_password" type="password" ng-model="vm.user.password" required/>
+                    <div ng-messages for="login.password.$error" ng-if="login.password.$dirty">
+                        <div ng-message when="required"><span translate>LOGIN.PASSWORD.PLEASE_ENTER</span></div>
+                    </div>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="hide()">
+                Tutup
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

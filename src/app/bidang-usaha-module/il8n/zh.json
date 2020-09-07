@@ -1,0 +1,12 @@
+{
+    "MENU": {
+        "NAVIGATION": {
+            "NAVIGATION-MODULE": "种子模块",
+            "NAVIGATION-PAGE": "开始页"
+        }
+    },
+    "NAVIGATION": {
+        "TITLE": "欢迎来到第三角测试页",
+        "DATA_TABLE": "Data Table"
+    }
+}

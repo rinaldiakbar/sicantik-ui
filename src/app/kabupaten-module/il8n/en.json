@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "KABUPATEN": {
+            "KABUPATEN-MODULE": "Menu",
+            "KABUPATEN-LIST": "Daftar Kabupaten/Kota"
+        }
+    },
+    "KABUPATEN": {
+        "TITLE": "Kabupaten/Kota",
+        "LIST": "Daftar",
+        "ADD": "Tambah Kabupaten/Kota",
+        "EDIT": "Ubah Kabupaten/Kota",
+        "VIEW": "Lihat Kabupaten/Kota",
+        "SEARCH": "Cari"
+    }
+}

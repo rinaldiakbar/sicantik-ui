@@ -1,0 +1,76 @@
+<md-dialog aria-label="Proses Pengajuan" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Dokumen</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-card flex="100" class="card-element" ng-if="form.ftype=='tabel'">
+                <md-card-content>
+                    <table class="dynamic-form-table">
+                        <thead>
+                            <th style="padding-right:5px;">
+                                Jenis Dokumen
+                            </th>
+                            <th style="padding-right:5px;">
+                                Dokumen
+                            </th>
+                            <th class="action">Action</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="doc in data | filter:{type:'!button-action'}" >
+                                <td style="padding-right:5px;">
+                                    <md-input-container ng-if="data.type=='text'" class="md-block">
+                                        <input type="text" data-ng-model="doc.jenis_dokumen"/>
+                                    </md-input-container>
+                                </td>
+                                <td>
+                                    <div layout="column" flex="100">
+                                      <md-input-container md-no-float class="md-block">
+                                        <div layout="row" layout-align="space-around center">
+                                            <div layout="column" flex="75">
+                                                <md-input-container md-no-float class="md-block">
+                                                    <input type="text" ng-model="doc.path" ng-readonly="true" style="color: black">
+                                                    <div ng-if="vm.data.file_lampiran.length > 0" ng-click="vm.downloadFile(vm.data.file_url)" class="btn-download">{{vm.data.file_lampiran}}</div>
+                                                </md-input-container>
+                                            </div>
+                                            <div layout="column" flex="10">
+                                                <md-button class="md-primary md-raised md-fab"
+                                                ngf-select="vm.uploadFile($files, 'lampiran')"
+                                                    ng-disabled="false"
+                                                    ngf-multiple="true"
+                                                    ngf-accept="'image/*'"
+                                                    ngf-max-size="2MB"
+                                                    aria-label="upload">
+                                                    <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.upload_status == 'idle', 'fa fa-spinner fa-pulse': vm.upload_status == 'uploading', 'zmdi zmdi-check': vm.upload_status == 'complete'}"></md-icon>
+                                                </md-button>
+                                            </div>
+                                        </div>
+                                      </md-input-container>
+                                      <md-input-container md-no-float class="md-block">
+                                          <label>Keterangan</label>
+                                          <input type="text" ng-model="vm.data.keterangan" placeholder="Keterangan" md-maxlength="1000">
+                                      </md-input-container>
+                                    </div>
+                                </td>
+                                <td class="action" style="width:10px">
+                                    <button ng-click="deleteData(record)" class="btn btn-danger btn-circle no-minwidth" type="button">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <md-button ng-click="addData(form.fields,form.ftype)" class="md-primary md-hue-2 md-raised" ng-hide="(data.disabled && limitAccess) || isReadOnly">
+                        Tambah Data
+                    </md-button>
+                </md-card-content>
+            </md-card>
+        </md-dialog-content>
+    </form>
+</md-dialog>

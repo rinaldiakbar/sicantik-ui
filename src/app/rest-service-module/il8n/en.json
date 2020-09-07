@@ -1,0 +1,15 @@
+{
+    "MENU": {
+        "REST-SERVICE": {
+            "REST-SERVICE-MODULE": "REST Service"
+        }
+    },
+    "REST-SERVICE": {
+        "TITLE": "REST Service",
+        "LIST": "Daftar",
+        "ADD": "Tambah REST Service",
+        "EDIT": "Ubah REST Service",
+        "VIEW": "Lihat REST Service",
+        "SEARCH": "Cari"
+    }
+}

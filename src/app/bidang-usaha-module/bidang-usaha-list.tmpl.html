@@ -1,0 +1,51 @@
+<md-content class="padded-content-page">
+    <div layout="row" layout-align="center center">
+        <h2 class="md-display-3" translate>BIDANG-USAHA.TITLE</h2>
+        <md-button class="md-fab md-primary md-fab-top-right" ng-click="vm.showFormAdd()" aria-label="bottom right toast">
+            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+            <md-tooltip>Add</md-tooltip>
+        </md-button>
+    </div>
+
+    <div>
+        <md-data-table-toolbar class="md-data-table-toolbar">
+            <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+            <form flex="" name="vm.filter.form">
+                <input id="filter-text" type="text" ng-model="vm.query.filter" ng-model-options="vm.filter.options" placeholder="Cari Bidang Usaha">
+            </form>
+        </md-data-table-toolbar>
+
+        <md-data-table-container>
+            <table md-data-table class="md-primary md-data-table" md-progress="vm.deferred">
+                <thead md-order="vm.query.order" md-trigger="vm.getData">
+                    <tr>
+                        <th order-by="no" name="#"></th>
+                        <th name="Kode"></th>
+                        <th name="Keterangan"></th>
+                        <th name=""></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.data.items">
+                        <td>{{item.no}}</td>
+                        <td>{{item.kode}}</td>
+                        <td>{{item.keterangan}}</td>
+                        <td>
+                            <button class="btn btn-success btn-circle" type="button" ng-click="vm.showFormEdit(item.id)">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                            <button class="btn btn-info btn-circle" type="button" ng-click="vm.showFormView(item.id)">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                            <button class="btn btn-danger btn-circle" type="button" ng-click="vm.confirmDelete(item.id)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+
+        <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.data.total_items}}" md-trigger="vm.getData"></md-data-table-pagination>
+    </div>
+</md-content>

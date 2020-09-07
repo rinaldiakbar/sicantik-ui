@@ -1,0 +1,32 @@
+<md-content class="padded-content-page">
+    <h2 translate>JENIS-PROSES.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.desa.id">
+
+    <md-input-container md-no-float class="md-block">
+        <label>Kode</label>
+        <input type="text" placeholder="Kode*" ng-required="true" ng-model="vm.jenis_proses.kode" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Nama Proses</label>
+        <input type="text" placeholder="Nama Proses*" ng-required="true" ng-model="vm.jenis_proses.nama_proses" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Tautan</label>
+        <input type="text" placeholder="Tautan*" ng-required="true" ng-model="vm.jenis_proses.tautan" ng-disabled="true">
+    </md-input-container>
+
+    <md-switch ng-model="vm.jenis_proses.is_drop" ng-disabled="true" aria-label="Is Default DROP">
+        Is Default DROP
+    </md-switch>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "PROSESPENGEMBANGAN": {
+            "PROSESPENGEMBANGAN-MODULE": "Menu",
+            "PROSESPENGEMBANGAN-LIST": "Daftar Aduan"
+        }
+    },
+    "PROSESPENGEMBANGAN": {
+        "TITLE": "Proses Pengembangan",
+        "LIST": "Daftar",
+        "ADD": "Tambah Proses Pengembangan",
+        "Edit": "Ubah Proses Pengembangan",
+        "VIEW": "Lihat Proses Pengembangan",
+        "SEARCH": "Cari"
+    }
+}

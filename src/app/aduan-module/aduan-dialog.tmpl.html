@@ -1,0 +1,31 @@
+<md-dialog aria-label="Pilih Pemohon" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Dokumen Lampiran</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content style="max-width:1600px;">
+            <div class="md-dialog-content">
+                <div ng-if="tipe != '.pdf'">
+                    <img src="{{url}}">
+                </div>
+                <div ng-if="tipe == '.pdf'">
+                    <object data="{{url}}" type="application/pdf" width="1000" height="900"></object>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="hide()">
+                Tutup
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

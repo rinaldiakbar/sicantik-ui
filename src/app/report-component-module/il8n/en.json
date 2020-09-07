@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "REPORT-COMPONENT": {
+            "REPORT-COMPONENT-MODULE": "Menu",
+            "REPORT-COMPONENT-LIST": "Daftar Report Component"
+        }
+    },
+    "REPORT-COMPONENT": {
+        "TITLE": "Setting Report Component",
+        "LIST": "Daftar",
+        "ADD": "Tambah",
+        "EDIT": "Ubah",
+        "VIEW": "Lihat Report Component",
+        "SEARCH": "Cari"
+    }
+}

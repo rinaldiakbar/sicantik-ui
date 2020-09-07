@@ -1,0 +1,65 @@
+<md-content class="padded-content-page">
+    <h2 translate>FISCAL.VIEW</h2>
+
+    <form>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+        <div layout="row" flex>
+            <div layout="column" flex="40">
+                <md-input-container md-no-float class="md-block">
+                    <label>Periode Mulai</label>
+                    <md-datepicker ng-model="vm.fiscal.periode_mulai" ng-required="true" disabled>
+                    </md-datepicker>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Periode Akhir</label>
+                    <md-datepicker ng-model="vm.fiscal.periode_akhr" disabled>
+                    </md-datepicker>
+                </md-input-container>
+            </div>
+            <div layout="column" flex="60">
+                <md-input-container md-no-float class="md-block">
+                    <label>Perusahaan</label>
+                    <input type="text" ng-model="vm.fiscal.c_perusahaan.nama" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Year</label>
+                    <input type="text" ng-required="true" ng-model="vm.fiscal.c_year" disabled>
+                </md-input-container>
+            </div>
+        </div>       
+        
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+            <!-- BEGIN - Ledger -->
+            <md-tab label="Ledger">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <md-list-item layout="row" layout-align="space-around center" ng-repeat="(index, data) in vm.fiscal.c_ledger">
+                            <md-input-container flex>
+                                <label>Currency</label>
+                                <input type="hidden" ng-model="data.id">
+                                <input type="text" ng-model="data.currency" disabled>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Item</label>
+                                <input type="text" ng-model="data.item" disabled>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Nilai</label>
+                                <input type="text" ng-model="data.nilai" disabled>
+                            </md-input-container>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Ledger -->
+        </md-tabs>
+        <!-- END - Tabs -->
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

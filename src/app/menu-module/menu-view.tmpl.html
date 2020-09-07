@@ -1,0 +1,46 @@
+<md-content class="padded-content-page">
+    <h2>Lihat Menu</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.menu.id">
+    <md-input-container md-no-float class="md-block">
+        <label>Label Menu</label>
+        <input type="text" placeholder="Label Menu" ng-required="true" ng-model="vm.menu.label_menu" ng-disabled="true">
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label>Tautan</label>
+        <input type="text" placeholder="Tautan" ng-required="true" ng-model="vm.menu.tautan" ng-disabled="true">
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label>Parent</label>
+        <input type="text" placeholder="-" ng-required="true" ng-model="vm.menu.parent_menu.label_menu" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>No Urut</label>
+        <input type="number" placeholder="No Urut*" ng-required="true" ng-model="vm.menu.no_urut" ng-disabled="true">
+    </md-input-container>
+
+    <!-- BEGIN - Tabs -->
+    <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+        <md-tab label="Module">
+            <md-content class="md-padding">
+                <md-list class="no-scroll">
+                    <md-list-item layout="row" layout-align="space-around center" ng-repeat="(index, detail) in vm.menu.menu_module">
+                        <md-input-container flex>
+                            <input type="text" name="tautan" placeholder="Tautan" ng-required="true" ng-model="detail.tautan" md-maxlength="500" ng-disabled="true">
+                        </md-input-container>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+    <!-- END - Tabs -->
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

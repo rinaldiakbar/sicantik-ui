@@ -1,0 +1,254 @@
+<md-content class="padded-content-page">
+    <h2 translate>PERMOHONAN-IZIN.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.backToProfilePemohonView(vm.key_id)">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.permohonan_izin.id">
+
+    <md-input-container md-no-float class="md-block">
+        <label>Jenis Permohonan</label>
+        <md-select placeholder="Jenis Permohonan" ng-disabled="true" ng-model="vm.permohonan_izin.jenis_permohonan">
+            <md-option ng-value="opt.kode" ng-repeat="opt in vm.jenisPermohonanList">{{opt.label}}</md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Jenis Izin</label>
+        <input type="text" placeholder="Jenis Izin" ng-required="true" ng-model="vm.permohonan_izin.jenis_izin.jenis_izin" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>No Permohonan</label>
+        <input type="text" placeholder="No Permohonan" ng-required="true" ng-model="vm.permohonan_izin.no_permohonan" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Tipe ProfilePemohon</label>
+        <md-select ng-disabled="true" name="tipe_pemohon" placeholder="Tipe ProfilePemohon" ng-model="vm.permohonan_izin.tipe_pemohon" ng-change="vm.checkTipeProfilePemohon()">
+            <md-option ng-value="opt.kode" ng-repeat="opt in vm.tipeProfilePemohonList">{{opt.label}}</md-option>
+        </md-select>
+        <div ng-messages="mainForm.tipe_pemohon.$error">
+            <div ng-messages-include="app/include/validation-messages.html"></div>
+        </div>
+    </md-input-container>
+
+    <!-- BEGIN - Tabs -->
+    <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+        <md-tab label="Pemohon">
+            <md-content class="md-padding">
+                <md-input-container md-no-float class="md-block">
+                    <label>Nama</label>
+                    <input type="text" placeholder="Nama" ng-required="true" ng-model="vm.permohonan_izin.pemohon.nama" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tipe Identitas</label>
+                    <md-select placeholder="Tipe Identitas" ng-disabled="true" ng-model="vm.permohonan_izin.pemohon.tipe_identitas">
+                        <md-option ng-value="opt.kode" ng-repeat="opt in vm.jenisIdentitasList">{{opt.label}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>No. Identitas</label>
+                    <input type="text" placeholder="No. Identitas" ng-required="true" ng-model="vm.permohonan_izin.pemohon.no_identitas" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tempat Lahir</label>
+                    <input type="text" placeholder="Tempat Lahir" ng-required="true" ng-model="vm.permohonan_izin.pemohon.tempat_lahir" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tanggal Lahir</label>
+                    <input type="text" placeholder="Tanggal Lahir" ng-required="true" ng-model="vm.permohonan_izin.pemohon.tgl_lahir_display" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Jenis Kelamin</label>
+                    <md-select placeholder="Jenis Kelamin" ng-disabled="true" ng-model="vm.permohonan_izin.pemohon.jenis_kelamin">
+                        <md-option ng-value="opt.kode" ng-repeat="opt in vm.genderList">{{opt.label}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Pekerjaan</label>
+                    <input type="text" placeholder="Pekerjaan" ng-required="true" ng-model="vm.permohonan_izin.pemohon.pekerjaan" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>No. Telepon</label>
+                    <input type="text" placeholder="No. Telepon" ng-required="true" ng-model="vm.permohonan_izin.pemohon.no_tlp" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>No. HP</label>
+                    <input type="text" placeholder="No. HP" ng-required="true" ng-model="vm.permohonan_izin.pemohon.no_hp" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Email</label>
+                    <input type="email" placeholder="Email" ng-required="true" ng-model="vm.permohonan_izin.pemohon.email" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Alamat</label>
+                    <input type="text" placeholder="Alamat" ng-required="true" ng-model="vm.permohonan_izin.pemohon.alamat" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Provinsi</label>
+                    <input type="text" placeholder="Provinsi" ng-required="true" ng-model="vm.permohonan_izin.pemohon.provinsi.nama_daerah" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Kabupaten</label>
+                    <input type="text" placeholder="Kabupaten" ng-required="true" ng-model="vm.permohonan_izin.pemohon.kabupaten.nama_daerah" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Kecamatan</label>
+                    <input type="text" placeholder="Kecamatan" ng-required="true" ng-model="vm.permohonan_izin.pemohon.kecamatan.nama_daerah" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Desa</label>
+                    <input type="text" placeholder="Desa" ng-required="true" ng-model="vm.permohonan_izin.pemohon.desa.nama_daerah" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Kode Pos</label>
+                    <input type="text" placeholder="Kodepos" ng-required="true" ng-model="vm.permohonan_izin.pemohon.kode_pos" ng-disabled="true">
+                </md-input-container>
+            </md-content>
+        </md-tab>
+        
+        <md-tab label="Perusahaan">
+            <md-content class="md-padding">
+                <md-input-container md-no-float class="md-block">
+                    <label>Nama Perusahaan</label>
+                    <input type="text" placeholder="Nama Perusahaan" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.nama_perusahaan" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>NPWP</label>
+                    <input type="text" placeholder="NPWP" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.npwp" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>No. Register</label>
+                    <input type="text" placeholder="No. Register" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.no_register" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Jenis Perusahaan</label>
+                    <input type="text" placeholder="Jenis Perusahaan" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.jenis_perusahaan" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Jenis Usaha</label>
+                    <input type="text" placeholder="Jenis Usaha" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.jenis_usaha_id" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Bidang Usaha</label>
+                    <input type="text" placeholder="Bidang Usaha" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.bidang_usaha_id" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Jumlah Pegawai</label>
+                    <input type="number" placeholder="Jumlah Pegawai" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.jumlah_pegawai" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Nilai Investasi</label>
+                    <input type="number" placeholder="Nilai Investasi" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.nilai_investasi" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Telepon</label>
+                    <input type="text" placeholder="Telepon" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.no_tlp" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Fax</label>
+                    <input type="text" placeholder="Fax" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.fax" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Email</label>
+                    <input type="email" placeholder="Email" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.email" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Alamat</label>
+                    <input type="text" placeholder="Alamat" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.alamat" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Provinsi</label>
+                    <input type="text" placeholder="Provinsi" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.provinsi.nama_daerah" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Kab/Kota</label>
+                    <input type="text" placeholder="Kab/Kota" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.kabupaten.nama_daerah" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Kecamatan</label>
+                    <input type="text" placeholder="Kecamatan" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.kecamatan.nama_daerah" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Desa</label>
+                    <input type="text" placeholder="Desa" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.desa.nama_daerah" ng-disabled="true">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Kode Pos</label>
+                    <input type="text" placeholder="Kode Pos" ng-required="true" ng-model="vm.permohonan_izin.perusahaan.kode_pos" ng-disabled="true">
+                </md-input-container>
+
+            </md-content>
+        </md-tab>
+        <md-tab label="Persyaratan">
+            <md-content class="md-padding">
+                <table class="md-table">
+                    <thead>
+                        <th>No</th>
+                        <th>No Dokumen</th>
+                        <th>Syarat</th>
+                        <th>Masa Berlaku</th>
+                        <th>Terpenuhi</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(index, syarat) in vm.permohonan_izin.persyaratan" >
+                            <td>{{index+1}}</td>
+                            <td>{{syarat.no_dokumen}}</td>
+                            <td>{{syarat.keterangan}}</td>
+                            <td>{{syarat.awal_berlaku_display}} - {{syarat.akhir_berlaku_display}}</td>
+                            <td>
+                                <md-checkbox class="md-primary" ng-model="syarat.terpenuhi" ng-disabled="true" aria-label="Visible" ng-true-value="1" ng-false-value="0" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-content>
+        </md-tab>
+
+        <md-tab label="Proyek">
+            <md-content class="md-padding">
+                <md-input-container md-no-float class="md-block">
+                    <label>Jenis Proyek</label>
+                    <md-select ng-disabled="true" name="jenis_proyek" placeholder="Jenis Proyek" ng-model="vm.permohonan_izin.jenis_proyek_id">
+                        <md-option ng-value="opt.id" ng-repeat="opt in vm.jenisProyekList">{{opt.keterangan}}</md-option>
+                    </md-select>
+                    <div ng-messages="mainForm.jenis_permohonan.$error">
+                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                    </div>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Target PAD</label>
+                    <input type="number" placeholder="Target PAD" ng-disabled="true" name="target_pad"
+                           ng-model="vm.permohonan_izin.target_pad">
+                    <div ng-messages="mainForm.target_pad.$error">
+                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                    </div>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Nilai Investasi</label>
+                    <input type="number" placeholder="Nilai Investasi" ng-disabled="true" name="nilai_investasi"
+                           ng-model="vm.permohonan_izin.nilai_investasi">
+                    <div ng-messages="mainForm.nilai_investasi.$error">
+                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                    </div>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Jumlah Tenaga Kerja</label>
+                    <input type="number" placeholder="Jumlah Tenaga Kerja" ng-disabled="true" name="jumlah_tenaga_kerja"
+                           ng-model="vm.permohonan_izin.jumlah_tenaga_kerja">
+                    <div ng-messages="mainForm.jumlah_tenaga_kerja.$error">
+                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                    </div>
+                </md-input-container>
+            </md-content>
+        </md-tab>
+
+    </md-tabs>
+    <!-- END - Tabs -->
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.backToProfilePemohonView()">Batal</md-button>
+    </div>
+</md-content>

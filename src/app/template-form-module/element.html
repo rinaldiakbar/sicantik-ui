@@ -1,0 +1,226 @@
+<!-- Input Text -->
+<!-- Button Configuration: hide Link if action is 'delete'-->
+<md-input-container
+        ng-if="data.type === 'text' && (field.field[0].data !== 'delete' || dataKey !== 1)" class="md-block">
+    <label>{{data.label}}</label>
+    <input type="{{ data.type }}" name="{{data.id}}" data-ng-model="data.data" ng-required="data.required && validateForm" />
+</md-input-container>
+
+<!-- Input Text for Save Eksternal -->
+<!-- Action Button Configuration: hide target_path if button type !== 'save' && target_simpan is 'internal'-->
+<md-input-container
+        ng-if="data.type === 'text-save-eksternal' && field.field[0].data === 'save' && field.field[3].data === 'eksternal'" class="md-block">
+    <label>{{data.label}}</label>
+    <input type="text" name="{{data.id}}" data-ng-model="data.data" ng-required="data.required && validateForm" />
+</md-input-container>
+
+<!-- Input Text for Tautan -->
+<!-- Button Configuration: hide Link if action is 'delete'-->
+<md-input-container
+        ng-if="data.type === 'text-tautan' && field.field[2].data === 'hyperlink'" class="md-block">
+    <label>{{data.label}}</label>
+    <input type="text" name="{{data.id}}" data-ng-model="data.data" ng-required="data.required && validateForm" />
+</md-input-container>
+
+<!-- EMAIL data -->
+<md-input-container ng-if="data.type === 'email'" class="md-block">
+    <label>{{data.label}}</label>
+    <input type="{{ data.type }}" name="{{data.id}}" data-ng-model="data.data" />
+</md-input-container>
+
+<!-- Date -->
+<md-datepicker ng-if="data.type=='date'" data-ng-model="data.data" name="{{data.id}}" md-placeholder="Enter date"></md-datepicker>
+
+<!-- Checkbox -->
+<md-input-container ng-if="data.type === 'checkbox'" class="md-block">
+    <md-checkbox class="md-primary" ng-model="data.data" name="{{data.id}}" aria-label="{{data.label}}" ng-true-value="1" ng-false-value="0">
+        {{data.label}}
+    </md-checkbox>
+</md-input-container>
+
+<!-- PASSWORD data -->
+<md-input-container ng-if="data.type === 'password'" class="md-block">
+    <label>{{data.label}}</label>
+    <input type="{{ data.type }}" name="{{data.id}}" data-ng-model="data.data" ng-minlength="6" ng-maxlength="12" />
+</md-input-container>
+
+<!-- Select -->
+<!-- Element Configuration: hide mandatory if element type is 'button-set'-->
+<!-- Element Configuration: hide datatabel option if element type is 'button-set'-->
+<md-input-container ng-if="data.type === 'select' && (field.field[2].data !== 'button-set' || (dataKey !== 3 && dataKey !== 0))" class="md-block">
+    <label>{{data.label}}</label>
+    <md-select name="{{data.id}}" id="repeatSelect" ng-model="data.data" placeholder="{{data.label}}" ng-required="data.required && validateForm">
+
+        <!-- If form type is not 'form', do not apply any filter -->
+        <md-optgroup label="{{data.label}}" ng-if="elementFormType !== 'form'">
+            <md-option ng-repeat="option in data.options" value="{{option.id}}">{{option.name}}</md-option>
+        </md-optgroup>
+
+        <!-- If form type is 'form', filter the button-set option -->
+        <md-optgroup label="{{data.label}}" ng-if="elementFormType === 'form'">
+            <md-option ng-repeat="option in data.options | filter:{id: '!button-set'}" value="{{option.id}}">
+                {{option.name}}
+            </md-option>
+        </md-optgroup>
+    </md-select>
+</md-input-container>
+
+<!-- Select for Action Button Save -->
+<!-- Action Button Configuration: hide if button type !== 'save' -->
+<md-input-container ng-if="data.type === 'select-save' && field.field[0].data === 'save'" class="md-block">
+    <label>{{data.label}}</label>
+    <md-select name="{{data.id}}" id="repeatSelect" ng-model="data.data" placeholder="{{data.label}}" ng-required="data.required && validateForm">
+
+        <!-- If form type is not 'form', do not apply any filter -->
+        <md-optgroup label="{{data.label}}" ng-if="elementFormType !== 'form'">
+            <md-option ng-repeat="option in data.options" value="{{option.id}}">{{option.name}}</md-option>
+        </md-optgroup>
+
+        <!-- If form type is 'form', filter the button-set option -->
+        <md-optgroup label="{{data.label}}" ng-if="elementFormType === 'form'">
+            <md-option ng-repeat="option in data.options | filter:{id: '!button-set'}" value="{{option.id}}">
+                {{option.name}}
+            </md-option>
+        </md-optgroup>
+    </md-select>
+</md-input-container>
+
+<!-- Input Type Number -->
+<md-input-container ng-if="data.type === 'number'" class="md-block">
+    <label>{{data.label}}</label>
+    <input type="{{ data.type }}" name="{{data.id}}" ng-model="data.data" min="0">
+</md-input-container>
+
+<md-input-container ng-if="data.type === 'button'" class="md-block">
+    <div class="col-sm-6">
+        <md-button ng-click="delElm(data)" class="btn btn-danger pull-right">X</md-button>
+    </div>
+</md-input-container>
+
+<!-- Autocomplete Datatabel -->
+<md-input-container md-no-float class="md-block" ng-if="data.type == 'autocomplete-datakolom' && (field.field[2].data !== 'button-set' || (dataKey !== 3 && dataKey !== 0))">
+    <label>{{data.label}}</label>
+    <md-autocomplete class="margin-bottom-20" ng-disabled="isDisabledUpdate" md-no-cache="noCacheUpdate" md-selected-item="selectedItemUpdate"
+        md-search-text="searchTextUpdate" md-selected-item-change="selectedItemChangeUpdate(item)" md-items="item in querySearchUpdate(searchTextUpdate, data.datatabel_id)"
+        md-item-text="item.label" md-min-length="0" placeholder="Cari Data Kolom" ng-required="true">
+        <span md-highlight-text="searchTextUpdate" md-highlight-flags="^i">{{item.label}}</span>
+    </md-autocomplete>
+</md-input-container>
+
+<md-input-container ng-if="data.type === 'autocomplete-datatabel'" md-no-float class="md-block">
+    <label>{{data.label}}</label>
+    <md-autocomplete class="margin-bottom-20" ng-disabled="isDisabled" md-no-cache="noCache" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="selectedItemChange(item)" md-items="item in querySearch(searchText)" md-item-text="item.nama_datatabel"
+        md-min-length="0" placeholder="Cari Datatabel">
+        <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.nama_datatabel}}</span>
+    </md-autocomplete>
+</md-input-container>
+
+<!-- Autocomplete TemplateData -->
+<md-input-container ng-if="data.type === 'autocomplete-templatedata'" md-no-float class="md-block">
+    <label>{{data.label}}</label>
+    <md-autocomplete class="margin-bottom-20" ng-disabled="isDisabledTemplateData" md-no-cache="noCacheTemplateData" md-selected-item="selectedItemTemplateData" md-search-text="searchTextTemplateData" md-selected-item-change="selectedItemChangeTemplateData(item)"
+        md-items="item in querySearchTemplateData(searchTextTemplateData)" md-item-text="item.keterangan" md-min-length="0" placeholder="Cari Template Data">
+        <span md-highlight-text="searchTextTemplateData" md-highlight-flags="^i">{{item.keterangan}}</span>
+    </md-autocomplete>
+</md-input-container>
+
+<!-- Autocomplete KelompokData -->
+<md-input-container ng-if="data.type === 'autocomplete-kelompokdata'" md-no-float class="md-block">
+    <label>{{data.label}}</label>
+    <md-autocomplete class="margin-bottom-20" ng-disabled="false" md-no-cache="true" md-selected-item="selectedItemTemplateData" md-search-text="searchTextKelompokData" md-selected-item-change="selectedItemChangeKelompokData(item)"
+        md-items="item in querySearchKelompokData(searchTextKelompokData)" md-item-text="item.label" md-min-length="0" placeholder="Cari Kelompok Data">
+        <span md-highlight-text="searchTextKelompokData" md-highlight-flags="^i">{{item.label}}</span>
+    </md-autocomplete>
+</md-input-container>
+
+<!-- Autocomplete ServiceEksternal -->
+<!-- Action Button Configuration: hide Web Service Eksternal if button type !== 'save' && target_simpan is 'internal'-->
+<md-input-container ng-if="data.type === 'autocomplete-serviceeksternal' && field.field[0].data === 'save' && field.field[3].data === 'eksternal'" md-no-float class="md-block">
+    <label>{{data.label}}</label>
+    <md-autocomplete class="margin-bottom-20" ng-disabled="isDisabledServiceEksternal" md-no-cache="noCacheServiceEksternal" md-selected-item="selectedItemServiceEksternal" md-search-text="searchTextServiceEksternal" md-selected-item-change="selectedItemChangeServiceEksternal(item)"
+        md-items="item in querySearchServiceEksternal(searchTextServiceEksternal)" md-item-text="item.nama" md-min-length="0" placeholder="Cari Service Eksternal" ng-required="true">
+        <span md-highlight-text="searchTextServiceEksternal" md-highlight-flags="^i">{{item.nama}}</span>
+    </md-autocomplete>
+</md-input-container>
+
+<!-- Combogrid -->
+<md-input-container ng-if="data.type === 'autocomplete'" md-no-float class="md-block">
+    <label>{{data.label}}</label>
+    <input type="text" ng-if="data.type === 'autocomplete'" name="{{data.id}}" cg-label-model="data.data_label" cg-model="data.data" my-combogrid cg-url="{{data.cg_url}}" cg-fields="{{data.cg_fields}}" cg-value-col="{{data.cg_value_col}}" cg-label-col={{data.cg_label_col}}
+        ng-required="data.required" />
+</md-input-container>
+<input ng-if="data.type=='autocomplete'" type="hidden" data-ng-model="data.data" />
+<input ng-if="data.type=='autocomplete'" type="hidden" data-ng-model="data.data_label" />
+
+<!-- Label -->
+<md-input-container ng-if="data.type === 'label'" class="md-block">
+    <input type="text" name="{{data.id}}" data-ng-model="data.data" ng-disabled="true" placeholder="{{data.label}}" />
+</md-input-container>
+
+<!-- Formatted Number -->
+<md-input-container ng-if="data.type === 'numbering'" class="md-block">
+    <label>{{data.label}}</label>
+    <input type="{{ data.type }}" name="{{data.id}}" data-ng-model="data.data" ng-required="data.required" ng-disabled="true" />
+</md-input-container>
+
+<!-- Button Set -->
+<button ng-if="data.type === 'button-set' && data.tombol_aksi === 'edit'" class="btn btn-success btn-circle button-set" type="button">
+    <i class="fa fa-pencil"></i>
+</button>
+<button ng-if="data.type === 'button-set' && data.tombol_aksi === 'view'" class="btn btn-success btn-circle button-set" type="button">
+    <i class="fa fa-eye"></i>
+</button>
+<button ng-if="data.type == 'button-set' && data.tombol_aksi === 'delete'" class="btn btn-danger btn-circle button-set" type="button">
+    <i class="fa fa-trash"></i>
+</button>
+
+<!-- Button Action -->
+<md-button ng-if="data.type === 'button-action' && data.tombol_aksi === 'add'" class="md-fab md-primary md-fab" ng-click="" aria-label="bottom right toast">
+    <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+    <md-tooltip>{{data.label ? data.label : 'Tambah'}}</md-tooltip>
+</md-button>
+<md-button ng-if="data.type === 'button-action' && data.tombol_aksi === 'save'" class="md-raised md-primary md-default" ng-disabled="mainForm.$invalid">
+    {{data.label ? data.label : 'Simpan'}}
+</md-button>
+<md-button ng-if="data.type === 'button-action' && data.tombol_aksi === 'cancel'" class="md-raised" ng-disabled="mainForm.$invalid">{{data.label ? data.label : 'Batal'}}</md-button>
+
+<!-- Upload File -->
+<div layout="row" ng-if="data.type === 'file'" layout-align="space-around center">
+    <div layout="column" flex="80">
+        <md-input-container md-no-float class="md-block">
+            <label>{{data.label}}</label>
+            <input type="text" placeholder="" name="{{data.id}}" ng-model="data.data" ng-required="data.required" ng-readonly="true">
+        </md-input-container>
+    </div>
+    <div layout="column" flex="20">
+        <md-button class="md-primary md-raised md-fab" ngf-select="uploadFile($files, data)" ng-disabled="data.upload_status != 'idle'" ngf-multiple="true" aria-label="upload">
+            <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': data.upload_status == 'idle', 'fa fa-spinner fa-pulse': data.upload_status == 'uploading', 'zmdi zmdi-check': data.upload_status == 'complete'}"></md-icon>
+        </md-button>
+    </div>
+</div>
+
+<!-- Photo File -->
+<div ng-if="data.type === 'photo'" layout-align="space-around center">
+    <div layout="row">
+        <label>{{data.label}}</label>
+    </div>
+    <div ng-if="data.data === null || data.data.length === 0" layout="row">
+        <img src="assets/images/no-image.120x160.png" class="thumb-photo">
+    </div>
+    <div ng-if="data.data !== null && data.data.length > 0" layout="row">
+        <img ng-src="{{data.file_url}}" class="thumb-photo">
+    </div>
+</div>
+
+<!-- Input Textarea -->
+<md-input-container ng-if="data.type === 'textarea'" flex class="md-block">
+    <label>{{data.label}}</label>
+    <text-angular name="{{data.id}}" data-ng-model="data.data" ng-required="data.required && validateForm" 
+        ta-target-toolbars="editor-toolbar">
+    </text-angular>
+</md-input-container>
+
+<!-- Hyperlink -->
+<md-input-container ng-if="data.type === 'hyperlink'" class="md-block">
+    <a href="javascript:void(0);" name="{{data.id}}">{{data.label}}</a>
+</md-input-container>

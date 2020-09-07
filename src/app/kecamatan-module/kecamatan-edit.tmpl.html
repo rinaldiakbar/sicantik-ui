@@ -1,0 +1,87 @@
+<md-content class="padded-content-page">
+    <h2 translate>KECAMATAN.EDIT</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid"  ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Kode Kecamatan</label>
+            <input type="text" name="kode_daerah" placeholder="Kode Kecamatan" ng-required="true" ng-model="vm.kecamatan.kode_daerah" md-maxlength="11">
+            <div ng-messages="mainForm.kode_daerah.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Kecamatan</label>
+            <input type="text" name="nama_daerah" placeholder="Nama Kecamatan" ng-required="true" ng-model="vm.kecamatan.nama_daerah" md-maxlength="100">
+            <div ng-messages="mainForm.nama_daerah.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Kabupaten/Kota</label>
+            <md-autocomplete
+                class="margin-bottom-20"
+                ng-disabled="vm.isDisabled"
+                md-no-cache="vm.noCache"
+                md-selected-item="selectedItem"
+                md-search-text="vm.searchText"
+                md-selected-item-change="vm.selectedItemChange(item)"
+                md-items="item in vm.querySearch(vm.searchText)"
+                md-item-text="item.nama_daerah"
+                md-min-length="0"
+                placeholder="Cari Kabupaten/Kota">
+                <div flex="100" layout="row">
+                    <div flex="50" layout="column">
+                        <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.nama_daerah}}</span>
+                    </div>
+                    <div flex="50" layout="column">
+                        {{item.provinsi.kode_daerah}} - {{item.provinsi.nama_daerah}}
+                    </div>
+                </div>
+                <div ng-messages="mainForm.kabupaten.$error">
+                    <div ng-messages-include="app/include/validation-messages.html"></div>
+                </div>
+            </md-autocomplete>
+        </md-input-container>
+    </form>
+
+    <div>
+        <md-data-table-toolbar class="md-data-table-toolbar search-bar">
+            <md-icon md-font-icon="zmdi zmdi-search search-icon"></md-icon>
+            <form flex="" name="vm.filter.form">
+                <input type="text" ng-model="vm.query.filter" ng-model-options="vm.filter.options" placeholder="Cari Desa">
+            </form>
+        </md-data-table-toolbar>
+
+        <md-data-table-container>
+            <table md-data-table class="md-primary md-data-table" md-progress="vm.deferred">
+                <thead md-order="vm.query.order" md-trigger="vm.getData">
+                <tr>
+                    <th order-by="no" name="#"></th>
+                    <th name="Kode Desa"></th>
+                    <th name="Nama Desa"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in vm.data.items">
+                    <td>{{item.no}}</td>
+                    <td>{{item.kode_daerah}}</td>
+                    <td>{{item.nama_daerah}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+
+        <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.data.total_items}}" md-trigger="vm.getData"></md-data-table-pagination>
+        
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid"  ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </div>
+
+</md-content>

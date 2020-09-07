@@ -1,0 +1,20 @@
+<md-content class="padded-content-page">
+    <div layout="row">
+        <h2>Struktur Organisasi</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="editUnit()">
+            <md-tooltip md-direction="left">Edit Unit</md-tooltip>
+            <i class="fa fa-edit" style="color:blue;font-size:20px"></i>
+        </md-button>
+        <md-button class="md-icon-button" href="#/home/unit">
+            <md-tooltip md-direction="left">Tambah Unit</md-tooltip>
+            <i class="fa fa-edit" style="color:blue;font-size:20px"></i>
+        </md-button>
+        <md-button aria-label="menu" class="md-icon-button" ng-click="download()">
+            <md-tooltip md-direction="left">Download</md-tooltip>
+            <i class="fa fa-download" style="color:blue;font-size:20px"></i>
+        </md-button>
+    </div>
+    <div id="orgchart" google-chart chart="vm.structure" agc-on-select="vm.selected(selectedItem)"
+         style="display: block;visibility: visible"></div>
+</md-content>

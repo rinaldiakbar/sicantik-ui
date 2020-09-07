@@ -1,0 +1,119 @@
+<md-content class="padded-content-page">
+    <h2 translate>PROSESPENGEMBANGAN.ADD</h2>
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+        <div layout="row" flex=100  layout-xs="column" > 
+            <div flex=50>
+                <md-input-container md-no-float class="md-block">
+                    <label>No Tiket</label>
+                    <input type="text" name="no_tiket" placeholder="No Tiket" ng-model="vm.ProsesPengembangan.no_tiket" md-maxlength="255" ng-required="true">
+                    <div ng-messages="mainForm.no_tiket.$error">
+                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                    </div>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Status</label>
+                    <md-select name="status" ng-model="vm.ProsesPengembangan.status">
+                        <md-option value="pengajuan" selected>Pengajuan</md-option>
+                        <md-option value="diskusi_usulan">Diskusi Usulan</md-option>
+                        <md-option value="close">Close</md-option>
+                        <md-option value="ditampung">Ditampung</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Penanggung Jawab</label>
+                    <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabledPegawai" ng-required="vm.pegawaiMandatory" md-no-cache="vm.noCachePegawai"
+                        md-selected-item="selectedItemPegawai" md-search-text="vm.searchTextPegawai" md-selected-item-change="vm.selectedItemChangePegawai(item)"
+                        md-items="item in vm.querySearchPegawai(vm.searchTextPegawai)" md-item-text="item.nama" md-item-value="item.id"
+                        md-min-length="0" placeholder="Cari Pegawai">
+                        <span md-highlight-text="vm.searchTextPegawai" md-highlight-flags="^i">{{item.nama}}</span>
+                    </md-autocomplete>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tanggal Pengajuan</label>
+                    <md-datepicker ng-model="vm.ProsesPengembangan.tgl_aduan" name="tgl_aduan"
+                        md-placeholder="Tanggal Pengajuan">
+                    </md-datepicker>
+                    <div ng-messages="vm.ProsesPengembangan.tgl_aduan.$error">
+                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                    </div>  
+                </md-input-container>
+            </div>
+            <div flex=50>
+                <md-input-container md-no-float class="md-block">
+                    <label>Pengajuan</label>
+                    <input type="text" name="aduan" placeholder="Pengajuan" ng-required="true" ng-model="vm.ProsesPengembangan.aduan" md-maxlength="100">
+                    <div ng-messages="mainForm.nama_daerah.$error">
+                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                    </div>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Kategori</label>
+                    <md-select name="type" ng-model="vm.ProsesPengembangan.kategori">
+                        <md-option value="inovasi" selected>Inovasi</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Type</label>
+                    <md-select name="type" ng-model="vm.ProsesPengembangan.type">
+                        <md-option value="pengajuan_pengembangan" selected>Pengajuan Pengembangan</md-option>
+                        <md-option value="penanganan_bugs">Penanganan Bugs</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                <md-input-container md-no-float class="md-block">
+                    <label>Catatan</label>
+                    <input type="text" name="penyelesaian" ng-disabled="false" placeholder="Catatan"ng-model="vm.ProsesPengembangan.penyelesaian" md-maxlength="1000">
+                    <div ng-messages="mainForm.penyelesaian.$error">
+                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                    </div>
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row" layout-xs="column" >
+            <div flex=50>
+                <tri-widget todo-widget class="dashboard-todo-widget" palette-background="" title="Lampiran" subtitle="" title-position="top" content-layout-align="space-between" content-padding>
+                    <md-list flex class="padding-left-0">
+                        <md-list-item >
+                            <div layout="column" flex="100">
+                                <md-input-container md-no-float class="md-block">
+                                    <label>Keterangan</label>
+                                    <input type="text" name="keterangan" placeholder="Keterangan" ng-model="vm.ProsesPengembangan.keterangan" md-maxlength="1000">
+                                    <div ng-messages="mainForm.keterangan.$error">
+                                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container md-no-float class="md-block">
+                                    <div layout="row" layout-align="space-around center">
+                                        <div layout="column" flex="75">
+                                            <md-input-container md-no-float class="md-block">
+                                                <label>File Dokumen (*.jpg, *.png, *.pdf)</label>
+                                                <input type="text" ng-model="vm.ProsesPengembangan.file_lampiran" ng-readonly="true" style="color: black">
+                                                <div ng-if="vm.ProsesPengembangan.file_lampiran.length > 0" ng-click="vm.downloadFile(vm.ProsesPengembangan.file_url)" class="btn-download">{{vm.ProsesPengembangan.file_lampiran}}</div>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout="column" flex="12.5">
+                                            <md-button class="md-primary md-raised md-fab" ngf-select="vm.upload($files, 'lampiran')"
+                                                       ng-disabled="vm.upload_status != 'idle'" ngf-multiple="true" aria-label="upload">
+                                                <md-icon md-font-icon
+                                                         ng-class="{ 'zmdi zmdi-cloud-upload': vm.upload_status == 'idle', 'fa fa-spinner fa-pulse': vm.upload_status == 'uploading', 'zmdi zmdi-check': vm.upload_status == 'complete'}"></md-icon>
+                                            </md-button>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-list>
+                </tri-widget>
+            </div>            
+        </div>     
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "STATUD": {
+            "STATUD-MODULE": "Status Kepegawaian",
+            "STATUD-LIST": "Daftar Status Kepegawaian"
+        }
+    },
+    "STATUS": {
+        "TITLE": "Status Kepegawaian",
+        "LIST": "Daftar",
+        "ADD": "Tambah Status Kepegawaian",
+        "EDIT": "Ubah Status Kepegawaian",
+        "VIEW": "Lihat Status Kepegawaian",
+        "SEARCH": "Cari"
+    }
+}

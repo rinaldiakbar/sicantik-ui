@@ -1,0 +1,48 @@
+<md-dialog aria-label="Proses Pengajuan" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Proses Pengajuan</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-list>
+
+                    <md-list-item ng-repeat="(index, proses) in prosesPermohonan">
+                        <span ng-if="!proses.disabled">
+                            <strong ng-if="proses.status === 'Proses'">
+                                <a ng-if="proses.tipe === 'form'" ng-click="openForm(proses.tautan, proses.form_id, proses.id)"><h3>{{index+1}}. {{proses.nama_proses}}</h3></a>
+                                <a ng-if="proses.tipe === 'report'" ng-click="downloadReport(proses.template_data_id, proses.id)"><h3>{{index+1}}. {{proses.nama_proses}} <md-icon md-font-icon="zmdi zmdi-file-text"></md-icon></h3></a>
+                            </strong>
+
+                            <span ng-if="proses.status === 'Selesai'">
+                                <a ng-if="proses.tipe === 'form'" ng-click="openForm(proses.tautan, proses.form_id, proses.id)">{{index+1}}. {{proses.nama_proses}}</a>
+                                <a ng-if="proses.tipe === 'report'" ng-click="downloadReport(proses.template_data_id, proses.id)">{{index+1}}. {{proses.nama_proses}} <md-icon md-font-icon="zmdi zmdi-file-text"></md-icon></a>
+                            </span>
+
+                        <span ng-if="proses.status === 'Menunggu'">
+                                {{index+1}}. {{proses.nama_proses}}
+                            </span>
+                        </span>
+
+                        <span ng-if="proses.disabled">
+                            <strong ng-if="proses.status === 'Proses'">
+                                {{index+1}}. {{proses.nama_proses}}
+                            </strong>
+                            <span ng-if="proses.status !== 'Proses'">
+                                {{index+1}}. {{proses.nama_proses}}
+                            </span>
+                        </span>
+
+                    </md-list-item>
+
+                </md-list>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

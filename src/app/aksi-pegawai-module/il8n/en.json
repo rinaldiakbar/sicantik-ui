@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "POSISI": {
+            "POSISI-MODULE": "Aksi Pegawai",
+            "POSISI-LIST": "Daftar Aksi Pegawai"
+        }
+    },
+    "POSISI": {
+        "TITLE": "Aksi Pegawai",
+        "LIST": "Daftar",
+        "ADD": "Tambah Aksi Pegawai",
+        "EDIT": "Ubah Aksi Pegawai",
+        "VIEW": "Lihat Aksi Pegawai",
+        "SEARCH": "Cari"
+    }
+}

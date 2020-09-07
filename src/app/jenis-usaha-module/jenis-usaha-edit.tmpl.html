@@ -1,0 +1,38 @@
+<md-content class="padded-content-page">
+    <h2>Ubah Jenis Usaha</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Kode</label>
+            <input type="text" name="kode" placeholder="Kode" ng-required="true" ng-model="vm.jenis_usaha.kode" md-maxlength="10">
+            <div ng-messages="mainForm.kode.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Keterangan</label>
+            <input type="text" name="keterangan" placeholder="Keterangan" ng-required="true" ng-model="vm.jenis_usaha.keterangan" md-maxlength="100">
+            <div ng-messages="mainForm.keterangan.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Bidang Usaha</label>
+            <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabled" md-no-cache="vm.noCache" md-selected-item="selectedItem" md-search-text="vm.searchText" md-selected-item-change="vm.selectedItemChange(item)" md-items="item in vm.querySearch(vm.searchText)"
+                md-item-text="item._lowername" md-item-value="item.id" md-min-length="0" placeholder="Cari Bidang Usaha">
+                <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item._lowername}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+
+</md-content>

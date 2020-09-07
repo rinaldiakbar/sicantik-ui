@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "FISCAL": {
+            "FISCAL-MODULE": "Menu",
+            "FISCAL-LIST": "Daftar Fiscal Year"
+        }
+    },
+    "FISCAL": {
+        "TITLE": "Fiscal Year",
+        "LIST": "Daftar Fiscal Year",
+        "ADD": "Tambah Fiscal Year",
+        "EDIT": "Ubah Fiscal Year",
+        "VIEW": "Lihat Fiscal Year",
+        "SEARCH": "Cari"
+    }
+}

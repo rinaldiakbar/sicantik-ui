@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "NOTIFIKASI": {
+            "NOTIFIKASI-MODULE": "Menu",
+            "NOTIFIKASI-LIST": "Daftar Notifikasi"
+        }
+    },
+    "NOTIFIKASI": {
+        "TITLE": "Setting Notifikasi",
+        "LIST": "Daftar",
+        "ADD": "Tambah",
+        "EDIT": "Ubah",
+        "VIEW": "Lihat Notifikasi",
+        "SEARCH": "Cari"
+    }
+}

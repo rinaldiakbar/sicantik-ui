@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "PROFILE-PEGAWAI": {
+            "PROFILE-PEGAWAI-MODULE": "Menu",
+            "PROFILE-PEGAWAI-LIST": "Daftar Personal Data"
+        }
+    },
+    "PROFILE-PEGAWAI": {
+        "TITLE": "Profile Personal Data",
+        "LIST": "Daftar Personal Data",
+        "ADD": "Tambah Personal Data",
+        "EDIT": "Ubah Personal Data",
+        "VIEW": "Lihat Personal Data",
+        "SEARCH": "Cari"
+    }
+}

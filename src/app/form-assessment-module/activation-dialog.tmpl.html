@@ -1,0 +1,39 @@
+<md-dialog aria-label="Pilih Pelanggan" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Aktivasi</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-input-container md-no-float class="md-block">
+                    <label>Tgl Mulai</label>
+                    <md-datepicker ng-model="event.publish_begin"
+                        name="tgl_mulai"
+                        md-placeholder="Tanggal Mulai">
+                    </md-datepicker>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tgl Akhir</label>
+                    <md-datepicker ng-model="event.publish_end"
+                        name="tgl_akhir"
+                        md-placeholder="Tanggal Akhir">
+                    </md-datepicker>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="hide()">
+                Simpan
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

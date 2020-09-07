@@ -1,0 +1,35 @@
+<md-dialog aria-label="Dialog Format Pesan" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Format Pesan</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <p>Variabel
+                    <ol>
+                        <li>{$nama_pemohon}</li>
+                        <li>{$telp_pemohon}</li>
+                        <li>{$email_pemohon}</li>
+                        <li>{$no_pendaftaran}</li>
+                    </ol>
+                </p>
+                <md-input-container>
+                    <label>Ketik di sini</label>
+                    <textarea name="format_pesan" ng-model="formData.format_pesan" required md-maxlength="10000" cols="500" ng-disabled="formData.disabled"></textarea>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="save()">
+                Simpan
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

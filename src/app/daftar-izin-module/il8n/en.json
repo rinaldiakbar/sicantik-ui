@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "DAFTAR-IZIN": {
+            "DAFTAR-IZIN-MODULE": "Menu",
+            "DAFTAR-IZIN-LIST": "Daftar Izin"
+        }
+    },
+    "DAFTAR-IZIN": {
+        "TITLE": "Daftar Izin",
+        "LIST": "Daftar",
+        "ADD": "Tambah Pengajuan",
+        "EDIT": "Ubah Pengajuan",
+        "VIEW": "Lihat Pengajuan",
+        "SEARCH": "Cari"
+    }
+}

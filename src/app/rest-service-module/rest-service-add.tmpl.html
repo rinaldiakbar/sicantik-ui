@@ -1,0 +1,53 @@
+<md-content class="padded-content-page">
+    <h2 translate>REST-SERVICE.ADD</h2>
+    <form autocomplete="off" name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat
+            </md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Datatabel</label>
+            <md-autocomplete
+                    ng-required="true"
+                    class="margin-bottom-20"
+                    md-no-cache="vm.noCacheDatatabel"
+                    md-selected-item="vm.selectedItemDatatabel"
+                    md-search-text="vm.searchTextDatatabel"
+                    md-selected-item-change="vm.selectedItemChangeDatatabel(item)"
+                    md-items="item in vm.querySearchDatatabel(vm.searchTextDatatabel)"
+                    md-item-text="item.nama_datatabel" md-item-value="item.id" md-min-length="0"
+                    placeholder="Cari Datatabel">
+                <span md-highlight-text="vm.searchTextDatatabel" md-highlight-flags="^i">{{item.nama_datatabel}}</span>
+            </md-autocomplete>
+        </md-input-container>
+        
+        <md-input-container md-no-float class="md-block">
+            <label>Instansi</label>
+            <md-autocomplete
+                    ng-required="true"
+                    class="margin-bottom-20"
+                    md-no-cache="vm.noCacheInstansi"
+                    md-selected-item="vm.selectedItemInstansi"
+                    md-search-text="vm.searchTextInstansi"
+                    md-selected-item-change="vm.selectedItemChangeInstansi(item)"
+                    md-items="item in vm.querySearchInstansi(vm.searchTextInstansi)"
+                    md-item-text="item.nama" md-item-value="item.id" md-min-length="0"
+                    placeholder="Cari Instansi">
+                <span md-highlight-text="vm.searchTextInstansi" md-highlight-flags="^i">{{item.nama}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <md-switch ng-model="vm.restService.is_active" aria-label="Aktif">
+            Aktif
+        </md-switch>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat
+            </md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+    </form>
+</md-content>

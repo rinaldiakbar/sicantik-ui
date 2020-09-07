@@ -1,0 +1,40 @@
+<md-dialog aria-label="Daftar Icon" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Daftar Icon</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout="column">
+                    <div layout="row">
+                        <md-input-container flex="" class="md-cyan-theme flex">
+                            <label for="input_12">Cari icon</label>
+                            <input type="text" ng-model="searchIcon" class="ng-pristine ng-untouched ng-valid md-input" id="input_12" aria-invalid="false">
+                            <div class="md-errors-spacer"></div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-wrap>
+                        <div class="ui-icons-box-icon padding-10 ng-scope" flex="20" layout="column" layout-align="start center" ng-repeat="icon in icons | filter:{ name: searchIcon}" ng-click="selectIcon($event, icon.class)" role="button" tabindex="0">
+                            <md-icon class="font-size-4 ng-isolate-scope md-cyan-theme" md-font-icon="zmdi {{icon.class}}" aria-hidden="true"></md-icon>
+                            <span class="md-caption margin-top-10 ng-binding">{{ icon.name }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="save()">
+                Pilih
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

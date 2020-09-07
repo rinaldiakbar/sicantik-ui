@@ -1,0 +1,98 @@
+<md-content class="padded-content-page">
+    <div layout="row" layout-align="center center">
+        <h2 translate>PEMOHON-REGISTER.VIEW</h2>
+    </div>
+
+    <div layout="row" layout-align="end center">
+        <md-button ng-if="vm.key_id" class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Nama</label>
+        <input type="text" placeholder="Nama" ng-required="true" ng-model="vm.pemohon.nama" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Tipe Identitas</label>
+        <md-select placeholder="Tipe Identitas" ng-disabled="true" ng-model="vm.pemohon.tipe_identitas">
+            <md-option ng-value="opt.kode" ng-repeat="opt in vm.jenisIdentitasList">{{opt.label}}</md-option>
+        </md-select>
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>No. Identitas</label>
+        <input type="text" placeholder="No. Identitas" ng-required="true" ng-model="vm.pemohon.no_identitas" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Tempat Lahir</label>
+        <input type="text" placeholder="Tempat Lahir" ng-required="true" ng-model="vm.pemohon.tempat_lahir" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Tanggal Lahir</label>
+        <input type="text" placeholder="Tanggal Lahir" ng-required="true" ng-model="vm.pemohon.tgl_lahir" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Jenis Kelamin</label>
+        <md-select placeholder="Jenis Kelamin" ng-disabled="true" ng-model="vm.pemohon.jenis_kelamin">
+            <md-option ng-value="opt.kode" ng-repeat="opt in vm.genderList">{{opt.label}}</md-option>
+        </md-select>
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Pekerjaan</label>
+        <input type="text" placeholder="Pekerjaan" ng-required="true" ng-model="vm.pemohon.pekerjaan" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>No. Telepon</label>
+        <input type="text" placeholder="No. Telepon" ng-required="true" ng-model="vm.pemohon.no_tlp" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>No. HP</label>
+        <input type="text" placeholder="No. HP" ng-required="true" ng-model="vm.pemohon.no_hp" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Email</label>
+        <input type="email" placeholder="Email" ng-required="true" ng-model="vm.pemohon.email" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Alamat</label>
+        <input type="text" placeholder="Alamat" ng-required="true" ng-model="vm.pemohon.alamat" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Provinsi</label>
+        <input type="text" placeholder="Provinsi" ng-required="true" ng-model="vm.pemohon.provinsi.nama_daerah" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Kabupaten</label>
+        <input type="text" placeholder="Kabupaten" ng-required="true" ng-model="vm.pemohon.kabupaten.nama_daerah" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Kecamatan</label>
+        <input type="text" placeholder="Kecamatan" ng-required="true" ng-model="vm.pemohon.kecamatan.nama_daerah" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Desa</label>
+        <input type="text" placeholder="Desa" ng-required="true" ng-model="vm.pemohon.desa.nama_daerah" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Kode Pos</label>
+        <input type="text" placeholder="Kodepos" ng-required="true" ng-model="vm.pemohon.kode_pos" ng-disabled="true">
+    </md-input-container>
+
+    <div layout="row" layout-align="end center">
+        <md-button ng-if="vm.key_id" class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+    
+</md-content>

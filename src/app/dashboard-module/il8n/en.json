@@ -1,0 +1,15 @@
+{
+    "MENU": {
+        "DASHBOARD": {
+            "DASHBOARD-MODULE": "DASHBOARD"
+        }
+    },
+    "DASHBOARD": {
+        "TITLE": "Dashboard",
+        "LIST": "Daftar",
+        "ADD": "Tambah Dashboard",
+        "EDIT": "Ubah Dashboard",
+        "VIEW": "Lihat Dashboard",
+        "SEARCH": "Cari"
+    }
+}

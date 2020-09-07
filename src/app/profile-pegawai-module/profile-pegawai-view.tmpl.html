@@ -1,0 +1,113 @@
+<md-content class="padded-content-page">
+    <h2 translate>PROFILE.VIEW</h2>
+
+    <form>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+        <div layout="row" flex>
+            <div layout="column" flex="20">
+                <div>
+                    <md-input-container md-no-float class="md-block">
+                        <label>{{data.label}}</label>
+                    </md-input-container>
+                    <br>
+                </div>
+                <img src="assets/images/no-image.120x160.png" class="thumb-photo">
+            </div>
+            <div layout="column" flex="40">
+                <md-input-container md-no-float class="md-block">
+                    <label>Nama</label>
+                    <input type="hidden" ng-model="vm.pegawai.id">
+                    <input type="text" ng-required="true" ng-model="vm.pegawai.nama" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Nomor KTP</label>
+                    <input type="text" ng-required="false" ng-model="vm.pegawai.no_idcard" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tempat Lahir</label>
+                    <input type="text" ng-required="false" ng-model="vm.pegawai.tempat_lahir" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Nomor Induk Pegawai</label>
+                    <input type="text" ng-required="false" ng-model="vm.pegawai.c_pegawai.no_induk" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Perusahaan</label>
+                    <input type="text" ng-required="false" ng-model="vm.pegawai.c_pegawai.c_perusahaan.nama" disabled>
+                </md-input-container>
+            </div>
+            <div layout="column" flex="5"></div>
+            <div layout="column" flex="35">                
+                <md-input-container md-no-float class="md-block">
+                    <label>Agama</label>
+                    <md-select ng-model="vm.pegawai.agama" disabled>
+                        <md-option ng-value="opt.kode" ng-repeat="opt in vm.agamaList">{{opt.label}}</md-option>
+                        <md-option ng-value=""></md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Jenis Kelamin</label>
+                    <md-select ng-model="vm.pegawai.jenis_kelamin" disabled>
+                        <md-option ng-value="opt.kode" ng-repeat="opt in vm.genderList">{{opt.label}}</md-option>
+                        <md-option ng-value=""></md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Golongan Darah</label>
+                    <md-select ng-model="vm.pegawai.golongan_darah" disabled>
+                        <md-option ng-value="opt.kode" ng-repeat="opt in vm.bloodList">{{opt.label}}</md-option>
+                        <md-option ng-value=""></md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tanggal Lahir</label>
+                    <md-datepicker ng-model="vm.pegawai.tgl_lahir" ng-required="true" disabled>
+                    </md-datepicker>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tanggal Mulai</label>
+                    <md-datepicker ng-model="vm.pegawai.c_pegawai.tgl_mulai" ng-required="true" disabled>
+                    </md-datepicker>
+                </md-input-container>
+            </div>
+        </div>       
+        
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+            <!-- BEGIN - Organization -->
+            <md-tab label="Organization">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <md-list-item layout="row" layout-align="space-around center" ng-repeat="(index, atribut) in vm.pegawai.c_pegawai.c_pegawai_atribut">
+                            <input type="hidden" value="{{atribut.id}}" ng-model="atribut.id">
+                            <md-input-container flex>
+                                <label>Unit</label>
+                                <input type="text" ng-model="atribut.unit.nama" disabled>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Jabatan</label>
+                                <input type="text" ng-model="atribut.c_jabatan.keterangan" disabled>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Posisi</label>
+                                <input type="text" ng-model="atribut.c_posisi.keterangan" disabled>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Mulai Berlaku</label>
+                                <md-datepicker ng-model="atribut.tgl_mulai" ng-required="true" disabled></md-datepicker>
+                            </md-input-container>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Organization -->
+        </md-tabs>
+        <!-- END - Tabs -->
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

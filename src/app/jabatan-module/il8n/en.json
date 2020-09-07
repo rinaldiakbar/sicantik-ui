@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "JABATAN": {
+            "JABATAN-MODULE": "Jabatan",
+            "JABATAN-LIST": "Daftar Jabatan"
+        }
+    },
+    "JABATAN": {
+        "TITLE": "Jabatan",
+        "LIST": "Daftar",
+        "ADD": "Tambah Jabatan",
+        "EDIT": "Ubah Jabatan",
+        "VIEW": "Lihat Jabatan",
+        "SEARCH": "Cari"
+    }
+}

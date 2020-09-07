@@ -1,0 +1,34 @@
+<md-content class="padded-content-page">
+    <h2>
+        <a href="javascript:void(0);" name="faq-home"
+            ng-click="vm.openLink('faq', null, null, false)">
+            FAQ 
+        </a>
+    </h2>
+    <h3>
+        <a href="javascript:void(0);" name="{{vm.faq.faq_category.id}}"
+            ng-click="vm.openLink('faq-search', null, vm.faq.faq_category.id, false)">
+            {{vm.faq.faq_category.nama}}
+        </a>
+    </h3>
+
+    <div>&nbsp;</div>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Pertanyaan</label>
+        <input type="text" placeholder="Pertanyaan" ng-required="true" ng-model="vm.faq.pertanyaan" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Jawaban</label>
+        <textarea name="jawaban" ng-model="vm.faq.jawaban" rows="5" cols="500" ng-disabled="true"></textarea>
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <div>
+            File Lampiran: {{vm.faq.file_lampiran}}
+        </div>
+        <div ng-if="vm.faq.file_lampiran.length > 0" ng-click="vm.downloadFile(vm.faq.url_lampiran)" class="btn-download">Download</div>
+    </md-input-container>
+
+</md-content>

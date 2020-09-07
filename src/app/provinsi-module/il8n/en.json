@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "PROVINSI": {
+            "PROVINSI-MODULE": "Menu",
+            "PROVINSI-LIST": "Daftar Provinsi"
+        }
+    },
+    "PROVINSI": {
+        "TITLE": "Provinsi",
+        "LIST": "Daftar",
+        "ADD": "Tambah Provinsi",
+        "EDIT": "Ubah Provinsi",
+        "VIEW": "Lihat Provinsi",
+        "SEARCH": "Cari"
+    }
+}

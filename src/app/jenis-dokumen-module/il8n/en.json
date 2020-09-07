@@ -1,0 +1,16 @@
+{
+  "MENU": {
+    "JENIS-DOKUMEN": {
+      "JENIS-DOKUMEN-MODULE": "Menu",
+      "JENIS-DOKUMEN-LIST": "Daftar Jenis Dokumen"
+    }
+  },
+  "JENIS-DOKUMEN": {
+    "TITLE": "Jenis Dokumen",
+    "LIST": "Daftar",
+    "ADD": "Tambah Jenis Dokumen",
+    "EDIT": "Ubah Jenis Dokumen",
+    "VIEW": "Lihat Jenis Dokumen",
+    "SEARCH": "Cari"
+  }
+}

@@ -1,0 +1,29 @@
+{
+    "MENU": {
+        "PEMOHON": {
+            "PEMOHON-MODULE": "Menu",
+            "PEMOHON-LIST": "Profile Pemohon"
+        }
+    },
+    "PEMOHON": {
+        "TITLE": "Profile Pemohon",
+        "LIST": "Daftar",
+        "ADD": "Tambah Profile Pemohon",
+        "EDIT": "Ubah Profile Pemohon",
+        "VIEW": "Form Profile Pemohon",
+        "SEARCH": "Cari"
+    },
+     "IZIN": {
+        "TITLE": "Izin",
+        "VIEW": "Lihat Izin"
+    },
+    "PERUSAHAAN": {
+        "TITLE": "Perusahaan",
+        "VIEW": "Lihat Perusahaan"
+    },
+    "DOKUMEN": {
+        "TITLE": "Dokumen",
+        "ADD": "Tambah Dokumen",
+        "VIEW": "Lihat Dokumen"
+    }
+}

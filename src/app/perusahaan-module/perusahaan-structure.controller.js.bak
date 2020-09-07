@@ -1,0 +1,199 @@
+(function () {
+    'use strict';
+
+    angular
+        .module('perusahaan-module')
+        .controller('PerusahaanStructureController', PerusahaanStructureController);
+
+    /* @ngInject */
+    function PerusahaanStructureController($http, $state, EnvironmentConfig, ElementConfig, $stateParams, AppFactory, PerusahaanFactory, $mdDialog, $mdToast) {
+        var vm = this;
+        var id = $stateParams.id;
+
+        vm.structure = {
+            type: "OrgChart",
+            data: {}
+        };
+        vm.structure.options = {
+            title: 'My Chart',
+            allowHtml: true,
+            allowCollapse: true,
+            'width': 60
+        }
+
+        vm.saham = vm.structure;
+        vm.performa = vm.structure;
+
+        vm.structure.data.cols = [{
+            "label": "Name",
+            "pattern": "",
+            "type": "string"
+        },
+            {
+                "label": "Manager",
+                "pattern": "",
+                "type": "string"
+            },
+            {
+                "label": "ToolTip",
+                "pattern": "",
+                "type": "string"
+            }
+        ];
+
+
+        PerusahaanFactory.getStructure(id).then(function (res) {
+            vm.structure.data.rows = res.data.data;
+        }, function (err) {
+            if (err.message) {
+                AppFactory.showToast(err.message, 'error', err.errors);
+            }
+        });
+
+
+        vm.selected = function (item) {
+            if (angular.isDefined(item)) {
+                //alert(vm.structure.data.rows[item.row].c[0].v);
+                vm.PerusahaanDetail(vm.structure.data.rows[item.row].c[0].v);
+            }
+        };
+
+        vm.PerusahaanDetail = function (mdata) {
+            $mdDialog.show({
+                locals: {
+                    data: mdata
+                },
+                controller: TDCTRL,
+                templateUrl: 'app/perusahaan-module/perusahaan-detail.dlg.html',
+                parent: angular.element(document.body),
+                //targetEvent: ev,
+                clickOutsideToClose: true
+            })
+                .then(function (respon) {
+
+                }, function () {
+
+                });
+        };
+
+        function TDCTRL($scope, $mdDialog, data, $state) {
+            //alert(data);
+            $scope.datadetail = [];
+            $http({
+                method: "GET",
+                url: EnvironmentConfig.api + "cperusahaan/view/" + data,
+                headers: {
+                    'Content-Type': 'application/json'
+                } //,
+                //data: data
+            }).then(function mySuccess(response) {
+                $scope.detail = response.data.data;
+            }, function myError(response) {
+                alert(response.statusText);
+            });
+
+
+            $scope.addDetail = function (detail) {
+                $state.go('triangular.admin-default.perusahaan-edit', {
+                    'id': detail.id
+                });
+                $mdDialog.hide();
+            }
+
+            //Data chart saham
+            $scope.saham = {
+                type: "PieChart",
+                data: {}
+            };
+
+            $scope.saham.options = {
+                title: 'Saham',
+                allowHtml: true,
+                allowCollapse: true,
+                'width': 200,
+                'height': 200
+            }
+
+            $scope.saham.data.cols = [{
+                "label": "Pemegang Saham",
+                "pattern": "",
+                "type": "string"
+            },
+                {
+                    "label": "Nilai",
+                    "pattern": "",
+                    "type": "number"
+                }
+            ];
+
+            PerusahaanFactory.getChartSaham(data).then(function (res) {
+                $scope.saham.data.rows = res.data.data;
+                //alert(JSON.stringify(vm.structure.data));
+            }, function (err) {
+                if (err.message) {
+                    AppFactory.showToast(err.message, 'error', err.errors);
+                }
+            });
+
+            //End Data chart saham
+
+            //Data Chart Performa Perusahaan
+            $scope.performa = {
+                type: "PieChart",
+                data: {}
+            };
+
+            $scope.performa.options = {
+                title: 'performa',
+                allowHtml: true,
+                allowCollapse: true,
+                'height': 100
+            }
+
+
+            $scope.performa.data.cols = [{
+                "label": "Item",
+                "pattern": "",
+                "type": "string"
+            },
+                {
+                    "label": "Tahun",
+                    "pattern": "",
+                    "type": "number"
+                },
+                {
+                    "label": "Jumlah",
+                    "pattern": "",
+                    "type": "number"
+                }
+            ];
+
+            $http({
+                method: "GET",
+                url: EnvironmentConfig.api + "cperusahaan/chartperforma/" + data,
+                headers: {
+                    'Content-Type': 'application/json'
+                } //,
+                //data: data
+            }).then(function mySuccess(response) {
+                $scope.performa.data.rows = response.data.data;
+            }, function myError(response) {
+                alert(response.statusText);
+            });
+
+            //End Data Chart Performa Perusahaan         
+            $scope.hide = function () {
+                $mdDialog.hide();
+            };
+
+            $scope.cancel = function () {
+                $mdDialog.cancel();
+            };
+
+            $scope.answer = function (respon) {
+                //alert(JSON.stringify(answer));
+                $mdDialog.hide(respon);
+            };
+        };
+    }
+})();

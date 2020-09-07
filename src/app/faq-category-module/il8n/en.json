@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "FAQ-CATEGORY": {
+            "FAQ-MODULE": "Menu",
+            "FAQ-LIST": "Daftar Kategori FAQ"
+        }
+    },
+    "FAQ-CATEGORY": {
+        "TITLE": "Kategori FAQ",
+        "LIST": "Daftar",
+        "ADD": "Tambah Kategori",
+        "EDIT": "Ubah Kategori",
+        "VIEW": "Lihat Kategori",
+        "SEARCH": "Cari"
+    }
+}

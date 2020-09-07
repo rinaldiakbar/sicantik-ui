@@ -1,0 +1,18 @@
+{
+    "MENU": {
+        "FORM": {
+            "FORM-MODULE": "Menu",
+            "FORM-LIST": "Daftar Template Form"
+        }
+    },
+    "FORM": {
+        "TITLE": "Template Form",
+        "LIST": "Daftar",
+        "ADD": "Tambah Template Form",
+        "EDIT": "Ubah Template Form",
+        "VIEW": "Lihat Template Form",
+        "CREATE": "Input Data",
+        "UPDATE": "Ubah Data",
+        "SEARCH": "Cari"
+    }
+}

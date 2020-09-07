@@ -1,0 +1,149 @@
+<md-content class="padded-content-page">
+    <h2 translate>PENANGANANADUAN.Edit</h2>
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction(vm.penanganan_aduan.id)">Update</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+        <div layout="row" flex=100  layout-xs="column" >
+            <div flex=60 layout-align="space-around center" layout-margin>
+                <tri-widget content-padding title="Tiket" >
+                    <md-input-container md-no-float class="md-block">
+                        <label>No Tiket</label>
+                        <input type="text" name="no_tiket" placeholder="No Tiket" ng-model="vm.penanganan_aduan.no_tiket" md-maxlength="255" ng-disabled="true">
+                    </md-input-container> 
+                    <div layout="row" flex=100  layout-xs="column" >
+                        <md-input-container md-no-float class="md-block">
+                            <label>Status</label>
+                            <md-select name="status" ng-model="vm.penanganan_aduan.status" ng-disabled="vm.penanganan_aduan.disableField">
+                                <md-option value="open" selected>Open</md-option>
+                                <md-option value="inprogress">Inprogress</md-option>
+                                <md-option value="freeze">Freeze</md-option>
+                                <md-option value="close">Close</md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container md-no-float class="md-block">
+                            <label>Tgl Aduan</label>
+                            <md-datepicker ng-model="vm.penanganan_aduan.tgl_aduan" name="tgl_aduan"
+                                md-placeholder="Tanggal Aduan" ng-disabled="true" >
+                            </md-datepicker>
+                        </md-input-container>
+                        <md-input-container md-no-float class="md-block" >
+                            <label>Type</label>
+                            <md-select name="type" ng-model="vm.penanganan_aduan.type" ng-disabled="vm.penanganan_aduan.disableField">
+                                <md-option value="bug" selected>Bug</md-option>
+                                <md-option value="kendala konfigurasi">Kendala Konfigurasi</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>         
+                    <md-input-container md-no-float class="md-block">
+                        <label>Kendala Teknis</label>
+                        <input type="text" name="keterangan" ng-disabled="true" placeholder="Kendala Teknis" ng-model="vm.penanganan_aduan.aduan" md-maxlength="1000">
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Kategori</label>
+                        <md-autocomplete 
+                            ng-disabled="vm.penanganan_aduan.disableField"
+                            md-input-name="kategori"
+                            md-no-cache="vm.noCache"
+                            md-selected-item="selectedItem"
+                            md-search-text="vm.searchText"
+                            md-selected-item-change="vm.selectedItemChange(item)"
+                            md-items="item in vm.querySearch(vm.searchText)"
+                            md-item-text="item.path" md-item-value="item.path" md-min-length="0">
+                            <span md-highlight-text="vm.searchText" md-highlight-flags="^i">
+                            {{item.path}}</span>
+                            <div ng-messages="mainForm.kategori.$error">
+                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                            </div>
+                        </md-autocomplete>
+                    </md-input-container>
+                    <md-list flex class="padding-left-0">
+                        <md-list-item >
+                            <div layout="column" flex="100">
+                                <md-input-container md-no-float class="md-block">
+                                    <label>Lampiran Kronologi Kendala Teknis</label>
+                                    <input type="text" ng-required="vm.penanganan_aduan.lokasi_dokumen_lampiran != null" name="keterangan_lampiran" placeholder="Lampiran Kronologi Kendala Teknis" ng-disabled="vm.penanganan_aduan.disableField" ng-model="vm.penanganan_aduan.keterangan_lampiran" md-maxlength="1000">
+                                </md-input-container>
+                                <md-input-container md-no-float class="md-block">
+                                    <div layout="row" layout-align="space-around center">
+                                        <div layout="column" flex="75">
+                                            <md-input-container md-no-float class="md-block">
+                                                <label>File Dokumen (*.jpg, *.png, *.docx, *.pdf) </label>
+                                                <input type="text" placeholder="" ng-model="vm.penanganan_aduan.lokasi_dokumen_lampiran" ng-readonly="true" style="color: black">
+                                                <div ng-if="vm.penanganan_aduan.lokasi_dokumen_lampiran" ng-click="vm.downloadFile()" class="btn-download">Download</div>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout="column" flex="12.5">
+                                            <button ng-if="vm.penanganan_aduan.lokasi_dokumen_lampiran" class="btn btn-success btn-circle" type="button" ng-click="vm.showDokumen(vm.penanganan_aduan.lokasi_dokumen_lampiran)">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div layout="column" flex="12.5">
+                                            <md-button class="md-primary md-raised md-fab" ngf-select="vm.upload($files, 'lampiran')"
+                                                       ng-disabled="vm.upload_status != 'idle' || vm.penanganan_aduan.disableField != false" ngf-multiple="true" aria-label="upload">
+                                                <md-icon md-font-icon
+                                                         ng-class="{ 'zmdi zmdi-cloud-upload': vm.upload_status == 'idle', 'fa fa-spinner fa-pulse': vm.upload_status == 'uploading', 'zmdi zmdi-check': vm.upload_status == 'complete'}"></md-icon>
+                                            </md-button>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </tri-widget>
+            </div>
+            <div flex=40 layout-align="space-around center" layout-margin>
+                <tri-widget content-padding title="Penyeslesaian" palette-background="triCyan:600">
+                    <md-input-container md-no-float class="md-block">
+                        <label>Penanggung Jawab</label>
+                        <md-autocomplete class="margin-bottom-20" ng-disabled="vm.penanganan_aduan.disableField" ng-required="false" md-no-cache="vm.noCachePegawai"
+                            md-selected-item="selectedItemPegawai" md-search-text="vm.searchTextPegawai" md-selected-item-change="vm.selectedItemChangePegawai(item)"
+                            md-items="item in vm.querySearchPegawai(vm.searchTextPegawai)" md-item-text="item.nama" md-item-value="item.id"
+                            md-min-length="0" placeholder="Cari Pegawai">
+                            <span md-highlight-text="vm.searchTextPegawai" md-highlight-flags="^i">{{item.nama}}</span>
+                        </md-autocomplete>
+                    </md-input-container>
+                    <md-input-container md-no-float class="md-block">
+                        <label>Penyelesaian</label>
+                        <input type="text" name="penyelesaian" ng-disabled="vm.penanganan_aduan.disableField" placeholder="Penyelesaian" ng-required="false" ng-model="vm.penanganan_aduan.penyelesaian" md-maxlength="1000">
+                    </md-input-container>
+                </tri-widget>
+                <tri-widget chat-widget flex class="widget-chat" title="Komentar" content-layout="column" content-layout-align="space-between">
+                    <md-content style="height: 300px;" class="full-height">
+                            <md-list flex>
+                                    <md-list-item class="md-3-line" ng-repeat="komentar in vm.komentar" ng-click="null">
+                                        <img ng-src="assets/images/avatars/avatar-5.png" class="md-avatar" alt="{{item.who}}" />
+                                        <div class="md-list-item-text" layout="column">
+                                            <h3>{{komentar.dibuat_oleh}}</h3>
+                                            <p>{{komentar.tgl_dibuat}}</p>
+                                            <p style="word-wrap: break-word;">{{komentar.komentar}}</p>
+                                        </div>
+                                        <md-button ng-if="komentar.file_lampiran" class="md-icon-button md-button md-cyan-theme md-ink-ripple" ng-click="vm.showDokumen(komentar.file_lampiran)">
+                                            <md-icon class="zmdi zmdi-eye zmdi-hc-2x"></md-icon>
+                                        </md-button>
+                                    </md-list-item>
+                                </md-list>
+                    </md-content>
+                    <div layout="row" layout-align="space-between center" ng-hide="vm.penanganan_aduan.hideAddKomentar">
+                        <md-input-container flex class="margin-left-20 margin-right-20">
+                            <label>{{Message}}</label>
+                            <input name="new_komentar" data-ng-model="vm.penanganan_aduan.new_komentar" type="text">
+                        </md-input-container>
+                        <input name="lokasi_dokumen_komentar" data-ng-model="vm.penanganan_aduan.lokasi_dokumen_komentar" type="text" hidden="true">
+                        <md-button class="md-primary md-raised md-fab" ngf-select="vm.upload($files, 'lampiran_komentar')"
+                            ng-disabled="vm.upload_status != 'idle'" ngf-multiple="true" aria-label="upload">
+                        <md-icon md-font-icon
+                            ng-class="{ 'zmdi zmdi-cloud-upload': vm.upload_status == 'idle', 'fa fa-spinner fa-pulse': vm.upload_status == 'uploading', 'zmdi zmdi-check': vm.upload_status == 'complete'}"></md-icon>
+                        </md-button>
+                        <md-button class="md-raised" ng-click="vm.saveKomentar(vm.penanganan_aduan.id)">Kirim</md-button>
+                    </div>
+                </tri-widget>
+            </div>
+        </div>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction(vm.penanganan_aduan.id)">Update</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

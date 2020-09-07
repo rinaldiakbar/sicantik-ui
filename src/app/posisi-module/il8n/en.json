@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "POSISI": {
+            "POSISI-MODULE": "Posisi",
+            "POSISI-LIST": "Daftar Posisi"
+        }
+    },
+    "POSISI": {
+        "TITLE": "Posisi",
+        "LIST": "Daftar",
+        "ADD": "Tambah Posisi",
+        "EDIT": "Ubah Posisi",
+        "VIEW": "Lihat Posisi",
+        "SEARCH": "Cari"
+    }
+}

@@ -1,0 +1,119 @@
+<md-content class="padded-content-page">
+    <h2 translate>Edit Datatabel</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.desa.id">
+
+    <md-input-container md-no-float class="md-block">
+        <label>Nama Datatabel</label>
+        <input type="text" placeholder="Nama Datatbel" ng-required="true" ng-model="vm.datatabel.nama_datatabel" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Label</label>
+        <input type="text" placeholder="Label" ng-required="true" ng-model="vm.datatabel.label" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <md-checkbox class="md-primary" ng-model="vm.datatabel.visible" ng-disabled="true" aria-label="Visible" ng-true-value="1" ng-false-value="0">
+            Visible
+        </md-checkbox>
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <md-checkbox class="md-primary" ng-model="vm.datatabel.is_custom" aria-label="Is Custom" ng-true-value="1" ng-false-value="0" ng-disabled="true">
+            Is Custom
+        </md-checkbox>
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <md-checkbox class="md-primary" ng-model="vm.datatabel.is_view" aria-label="Is View" ng-true-value="1" ng-false-value="0" ng-disabled="true">
+            Is View
+        </md-checkbox>
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <md-checkbox class="md-primary" ng-model="vm.datatabel.use_mapper" aria-label="Use Mapper" ng-true-value="1" ng-false-value="0" ng-disabled="true">
+            Use Mapper
+        </md-checkbox>
+    </md-input-container>
+
+    <!-- BEGIN - Tabs -->
+    <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+        <md-tab label="Data Kolom">
+            <md-content class="md-padding">
+                <table class="md-table">
+                    <thead>
+                        <th width="30%">Kolom</th>
+                        <th width="40%">Label</th>
+                        <th width="20%">Tipe Kolom</th>
+                        <th width="10%">Panjang</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(index, kolom) in vm.data_kolom">
+                            <td>
+                                <input type="hidden" value="{{kolom.id}}" ng-model="kolom.id">
+                                <md-input-container md-no-float class="md-block">
+                                    <input type="text" placeholder="Nama Kolom*" ng-required="true" ng-model="kolom.data_kolom" md-maxlength="25" ng-change="vm.dataKolomChange(index)" ng-disabled="true">
+                                </md-input-container>
+                            </td>
+                            <td>
+                                <md-input-container md-no-float class="md-block">
+                                    <input type="text" placeholder="Label*" ng-required="true" ng-model="kolom.label" md-maxlength="100" ng-disabled="true">
+                                </md-input-container>
+                            </td>
+                            <td>
+                                <md-input-container md-no-float class="md-block">
+                                    <md-select placeholder="Tipe Kolom" ng-model="kolom.tipe_kolom" ng-disabled="true">
+                                        <md-option ng-value="opt.kode" ng-repeat="opt in vm.tipeKolomList">{{opt.label}}</md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </td>
+                            <td>
+                                <md-input-container md-no-float class="md-block">
+                                    <input type="number" placeholder="Panjang*" ng-required="true" ng-model="kolom.panjang" ng-disabled="true">
+                                </md-input-container>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-content>
+        </md-tab>
+
+        <!-- Tab Unit Akses -->
+        <md-tab label="Unit Akses">
+            <md-content class="md-padding">
+                <div flex="100" layout="row">
+                    <div flex="60" layout="column">
+                        <table class="md-table">
+                            <thead>
+                                <th width="10%">No</th>
+                                <th width="90%">Unit Kerja</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(index, akses) in vm.unit_datatabel">
+                                    <td>{{ index+1 }}</td>
+                                    <td>
+                                        <input type="hidden" value="{{akses.id}}" ng-model="akses.id">
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" placeholder="Nama Unit" ng-required="true" ng-model="akses.unit.nama" md-maxlength="25" ng-disabled="true">
+                                        </md-input-container>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </md-content>
+        </md-tab>
+        <!-- .Tab Unit Akses -->
+    </md-tabs>
+    <!-- END - Tabs -->
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

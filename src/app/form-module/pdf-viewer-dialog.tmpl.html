@@ -1,0 +1,30 @@
+<md-dialog aria-label="View Document" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Dokumen</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content style="max-width:1600px;">
+            <div class="md-dialog-content">
+                <object data="{{url}}" ng-if="isPDF" type="application/pdf" width="1000" height="900"></object>
+                <img src="{{ url }}" width="100%" height="auto"/>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="downloadFile()">
+                Download
+            </md-button>
+            <md-button ng-click="hide()">
+                Tutup
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

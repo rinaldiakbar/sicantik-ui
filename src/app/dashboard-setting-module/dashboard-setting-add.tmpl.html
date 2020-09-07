@@ -1,0 +1,39 @@
+<md-content class="padded-content-page">
+    <h2 translate>DASHBOARD-SETTING.ADD</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Title</label>
+            <input type="text" name="title" placeholder="Title" ng-model="vm.page.title" md-maxlength="100" ng-required="true">
+            <div ng-messages="mainForm.title.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Instansi</label>
+            <md-autocomplete
+                    ng-required="false"
+                    class="margin-bottom-20" ng-disabled="vm.isDisabledInstansi"
+                    md-no-cache="vm.noCacheInstansi"
+                    md-selected-item="selectedItemInstansi"
+                    md-search-text="vm.searchTextInstansi"
+                    md-selected-item-change="vm.selectedItemChangeInstansi(item)"
+                    md-items="item in vm.querySearchInstansi(vm.searchTextInstansi)"
+                    md-item-text="item.nama" md-item-value="item.id" md-min-length="0"
+                    placeholder="Cari Instansi">
+                <span md-highlight-text="vm.searchTextInstansi" md-highlight-flags="^i">{{item.nama}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

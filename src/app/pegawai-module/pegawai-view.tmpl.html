@@ -1,0 +1,53 @@
+<md-content class="padded-content-page">
+    <h2 translate>PEGAWAI.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.pegawai.id">
+
+    <md-input-container md-no-float class="md-block">
+        <label>Nama</label>
+        <input type="text" placeholder="Nama Lengkap" ng-required="true" ng-model="vm.pegawai.nama" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Nomor Induk</label>
+        <input type="text" placeholder="NIP" ng-required="true" ng-model="vm.pegawai.nomor_induk" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Instansi</label>
+        <input type="text" placeholder="Instansi" ng-required="true" ng-model="vm.pegawai.instansi.nama" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Unit</label>
+        <input type="text" placeholder="Unit" ng-required="true" ng-model="vm.pegawai.unit.nama" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Posisi</label>
+        <input type="text" placeholder="Posisi" ng-required="true" ng-model="vm.pegawai.posisi" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Jabatan</label>
+        <input type="text" placeholder="Jabatan" ng-required="true" ng-model="vm.pegawai.jabatan.jabatan" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>No HP</label>
+        <input type="text" placeholder="No HP" ng-required="true" ng-model="vm.pegawai.no_hp" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Email</label>
+        <input type="email" placeholder="Alamat Email" ng-required="true" ng-model="vm.pegawai.email" ng-disabled="true">
+    </md-input-container>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

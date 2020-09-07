@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "TEMPLATE-DATA": {
+            "TEMPLATE-DATA-MODULE": "Menu",
+            "TEMPLATE-DATA-LIST": "Daftar Template Data"
+        }
+    },
+    "TEMPLATE-DATA": {
+        "TITLE": "Template Data",
+        "LIST": "Daftar",
+        "ADD": "Tambah Template Data",
+        "EDIT": "Ubah Template Data",
+        "VIEW": "Lihat Template Data",
+        "SEARCH": "Cari"
+    }
+}

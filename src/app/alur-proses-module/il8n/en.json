@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "ALUR-PROSES": {
+            "ALUR-PROSES-MODULE": "Menu",
+            "ALUR-PROSES-LIST": "Daftar Alur Proses"
+        }
+    },
+    "ALUR-PROSES": {
+        "TITLE": "Alur Proses",
+        "LIST": "Daftar",
+        "ADD": "Tambah Alur Proses",
+        "EDIT": "Ubah Alur Proses",
+        "VIEW": "Lihat Alur Proses",
+        "SEARCH": "Cari"
+    }
+}

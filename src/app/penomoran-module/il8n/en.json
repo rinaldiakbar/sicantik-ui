@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "PENOMORAN": {
+            "PENOMORAN-MODULE": "Menu",
+            "PENOMORAN-LIST": "Daftar Penomoran"
+        }
+    },
+    "PENOMORAN": {
+        "TITLE": "Penomoran",
+        "LIST": "Daftar",
+        "ADD": "Tambah Penomoran",
+        "EDIT": "Ubah Penomoran",
+        "VIEW": "Lihat Penomoran",
+        "SEARCH": "Cari"
+    }
+}

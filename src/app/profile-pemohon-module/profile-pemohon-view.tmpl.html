@@ -1,0 +1,306 @@
+<md-content class="padded-content-page">
+    <div layout="row" layout-align="center center">
+        <h2 translate>PEMOHON.VIEW</h2>
+    </div>
+
+    <div layout="row" layout-align="end center">
+        <md-button ng-if="vm.key_id" class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Nama</label>
+        <input type="text" placeholder="Nama" ng-required="true" ng-model="vm.pemohon.nama" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Tipe Identitas</label>
+        <md-select placeholder="Tipe Identitas" ng-disabled="true" ng-model="vm.pemohon.tipe_identitas">
+            <md-option ng-value="opt.kode" ng-repeat="opt in vm.jenisIdentitasList">{{opt.label}}</md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>No. Identitas</label>
+        <input type="text" placeholder="No. Identitas" ng-required="true" ng-model="vm.pemohon.no_identitas" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Tempat Lahir</label>
+        <input type="text" placeholder="Tempat Lahir" ng-required="true" ng-model="vm.pemohon.tempat_lahir" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Tanggal Lahir</label>
+        <input type="text" placeholder="Tanggal Lahir" ng-required="true" ng-model="vm.pemohon.tgl_lahir" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Jenis Kelamin</label>
+        <md-select placeholder="Jenis Kelamin" ng-disabled="true" ng-model="vm.pemohon.jenis_kelamin">
+            <md-option ng-value="opt.kode" ng-repeat="opt in vm.genderList">{{opt.label}}</md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Pekerjaan</label>
+        <input type="text" placeholder="Pekerjaan" ng-required="true" ng-model="vm.pemohon.pekerjaan" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>No. Telepon</label>
+        <input type="text" placeholder="No. Telepon" ng-required="true" ng-model="vm.pemohon.no_tlp" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>No. HP</label>
+        <input type="text" placeholder="No. HP" ng-required="true" ng-model="vm.pemohon.no_hp" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Email</label>
+        <input type="email" placeholder="Email" ng-required="true" ng-model="vm.pemohon.email" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Alamat</label>
+        <input type="text" placeholder="Alamat" ng-required="true" ng-model="vm.pemohon.alamat" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Provinsi</label>
+        <input type="text" placeholder="Provinsi" ng-required="true" ng-model="vm.pemohon.provinsi.nama_daerah" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Kabupaten</label>
+        <input type="text" placeholder="Kabupaten" ng-required="true" ng-model="vm.pemohon.kabupaten.nama_daerah" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Kecamatan</label>
+        <input type="text" placeholder="Kecamatan" ng-required="true" ng-model="vm.pemohon.kecamatan.nama_daerah" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Desa</label>
+        <input type="text" placeholder="Desa" ng-required="true" ng-model="vm.pemohon.desa.nama_daerah" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Kode Pos</label>
+        <input type="text" placeholder="Kodepos" ng-required="true" ng-model="vm.pemohon.kode_pos" ng-disabled="true">
+    </md-input-container>
+
+    <!-- BEGIN - Tabs -->
+    <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+        <md-tab label="Permohonan">
+            <md-content class="md-padding">
+                
+                <form flex="" name="vm.filterPermohonan.form">
+                    <div layout="row">
+                        <div layout="column" flex="90" layout-align="top">
+                            <md-data-table-toolbar class="md-data-table-toolbar">
+                                <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                                <input type="text" ng-model="vm.queryPermohonan.filter" ng-model-options="vm.filterPermohonan.options" placeholder="Cari Permohonan Izin" id="filter-text-permohonan">
+                            </md-data-table-toolbar>
+                        </div>
+                        <div layout="column" flex="10" layout-align="top">
+                            <md-button class="md-raised md-primary" ng-click="vm.showFormAdd()" aria-label="Tambah">Tambah</md-button>
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <md-datepicker name="filter-date-start" data-ng-model="vm.queryPermohonan.begin_date" md-placeholder="Begin Date"></md-datepicker>
+                        <md-datepicker name="filter-date-end" data-ng-model="vm.queryPermohonan.end_date" md-placeholder="End Date"></md-datepicker>
+                    </div>
+                </form>
+
+                <md-data-table-container>
+                    <table md-data-table class="md-primary md-data-table" md-progress="vm.deferred">
+                        <thead md-order="vm.queryPermohonan.order" md-trigger="vm.getDataPermohonan">
+                            <tr>
+                                <th order-by="permohonanizin.id" name="#"></th>
+                                <th order-by="permohonanizin.no_permohonan" name="No Permohonan"></th>
+                                <th name="Jenis Izin"></th>
+                                <th name="Perusahaan"></th>
+                                <th name="Status"></th>
+                                <th name=""></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in vm.dataPermohonan.items">
+                                <td>{{item.no}}</td>
+                                <td>{{item.no_permohonan}}</td>
+                                <td>{{item.jenis_izin.jenis_izin}}</td>
+                                <td>{{item.perusahaan.nama_perusahaan}}</td>
+                                <td>{{item.latest_proses_permohonan.nama_proses}}</td>
+                                <td>
+                                    <button class="btn btn-success btn-circle" type="button" ng-click="vm.showRating(item.id)">
+                                        <i class="fa fa-star"></i>
+                                    </button>
+                                    <button class="btn btn-success btn-circle" type="button" ng-click="vm.showProcess(item.id)">
+                                        <i class="fa fa-list"></i>
+                                    </button>
+                                    <button class="btn btn-info btn-circle" type="button" ng-click="vm.showPermohonanView(item.id)">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-data-table-container>
+
+                <md-data-table-pagination md-limit="vm.queryPermohonan.limit" md-page="vm.queryPermohonan.page" 
+                    md-total="{{vm.dataPermohonan.total_items}}" md-trigger="vm.getDataPermohonan">
+                </md-data-table-pagination>
+
+            </md-content>
+        </md-tab>
+        
+        <md-tab label="Perusahaan">
+            <md-content class="md-padding">
+                <form flex="" name="vm.filterPerusahaan.form">
+                    <md-data-table-toolbar class="md-data-table-toolbar">
+                        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                        <input type="text" ng-model="vm.queryPerusahaan.filter" ng-model-options="vm.filterPerusahaan.options" placeholder="Cari Perusahaan" id="filter-text-perusahaan">
+                    </md-data-table-toolbar>
+                </form>
+
+                <md-data-table-container>
+                    <table md-data-table class="md-primary md-data-table" md-progress="vm.deferred">
+                        <thead md-order="vm.queryPerusahaan.order" md-trigger="vm.getDataPerusahaan">
+                            <tr>
+                                <th order-by="no" name="#"></th>
+                                <th name="Nama Perusahaan"></th>
+                                <th name="NPWP"></th>
+                                <th name="Jenis Perusahaan"></th>
+                                <th name="Aksi"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in vm.dataPerusahaan.items">
+                                <td>{{item.no}}</td>
+                                <td>{{item.nama_perusahaan}}</td>
+                                <td>{{item.npwp}}</td>
+                                <td>{{item.jenis_perusahaan}}</td>
+                                <td>
+                                    <button class="btn btn-info btn-circle" type="button" ng-click="vm.showPerusahaanView(item.id)">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-data-table-container>
+
+                <md-data-table-pagination md-limit="vm.queryPerusahaan.limit" md-page="vm.queryPerusahaan.page" 
+                    md-total="{{vm.dataPerusahaan.total_items}}" md-trigger="vm.getDataPerusahaan">
+                </md-data-table-pagination>
+            </md-content>
+        </md-tab>
+
+        <md-tab label="Izin">
+            <md-content class="md-padding">
+                <form flex="" name="vm.filterIzin.form">
+                    <md-data-table-toolbar class="md-data-table-toolbar">
+                        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                        <input type="text" ng-model="vm.queryIzin.filter" ng-model-options="vm.filterIzin.options" placeholder="Cari Izin" id="filter-text-izin">
+                    </md-data-table-toolbar>
+                </form>
+
+                <md-data-table-container>
+                    <table md-data-table class="md-primary md-data-table" md-progress="vm.deferred">
+                        <thead md-order="vm.queryIzin.order" md-trigger="vm.getDataIzin">
+                            <tr>
+                                <th order-by="izin.id" name="#"></th>
+                                <th order-by="izin.no_izin" name="No Izin"></th>
+                                <th name="Jenis Izin"></th>
+                                <th order-by="izin.mulai_berlaku" name="Masa Berlaku"></th>
+                                <th name="Instansi"></th>
+                                <th name="Aksi"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in vm.dataIzin.items">
+                                <td>{{item.no}}</td>
+                                <td>{{item.no_izin}}</td>
+                                <td>{{item.jenis_izin.jenis_izin}}</td>
+                                <td>{{item.mulai_berlaku}} - {{item.akhir_berlaku}}</td>
+                                <td>{{item.instansi.nama}}</td>
+                                <td>
+                                    <button class="btn btn-info btn-circle" type="button" ng-click="vm.showIzinView(item.id)">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-data-table-container>
+
+                <md-data-table-pagination md-limit="vm.queryIzin.limit" md-page="vm.queryIzin.page" 
+                    md-total="{{vm.dataIzin.total_items}}" md-trigger="vm.getDataIzin">
+                </md-data-table-pagination>
+            </md-content>
+        </md-tab>
+
+        <md-tab label="Dokumen">
+            <md-content class="md-padding">
+                <form flex="" name="vm.filterDokumenProfilePemohon.form">
+                    <div layout="row">
+                        <div layout="column" flex="90" layout-align="top">
+                            <md-data-table-toolbar class="md-data-table-toolbar">
+                                <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                                <input type="text" ng-model="vm.queryDokumenProfilePemohon.filter" ng-model-options="vm.filterDokumenProfilePemohon.options" placeholder="Cari Dokumen" id="filter-text-dokumen">
+                            </md-data-table-toolbar>
+                        </div>
+                        <div layout="column" flex="10" layout-align="top">
+                            <md-button class="md-raised md-primary" ng-click="vm.showDokumenProfilePemohonAdd()" aria-label="Tambah">Tambah</md-button>
+                        </div>
+                    </div>
+                </form>
+
+                <md-data-table-container>
+                    <table md-data-table class="md-primary md-data-table" md-progress="vm.deferred">
+                        <thead md-order="vm.queryDokumenProfilePemohon.order" md-trigger="vm.getDataDokumenProfilePemohon">
+                        <tr>
+                            <th order-by="no" name="#"></th>
+                            <th name="No Dokumen"></th>
+                            <th name="Jenis Dokumen"></th>
+                            <th name="Awal Berlaku"></th>
+                            <th name="Akhir Berlaku"></th>
+                            <th name="Aksi"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in vm.dataDokumenProfilePemohon.items">
+                            <td>{{item.no}}</td>
+                            <td>{{item.no_dokumen}}</td>
+                            <td>{{item.jenis_dokuman.deskripsi}}</td>
+                            <td>{{item.awal_berlaku}}</td>
+                            <td>{{item.akhir_berlaku}}</td>
+                            <td>
+                                <button class="btn btn-info btn-circle" type="button" ng-click="vm.showDokumenProfilePemohonView(item.id)">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <button class="btn btn-info btn-circle" type="button" ng-click="vm.showDokumen(item.lokasi_dokumen)">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-data-table-container>
+
+                <md-data-table-pagination md-limit="vm.queryDokumenProfilePemohon.limit" md-page="vm.queryDokumenProfilePemohon.page"
+                                          md-total="{{vm.dataDokumenProfilePemohon.total_items}}" md-trigger="vm.getDataDokumenProfilePemohon">
+                </md-data-table-pagination>
+            </md-content>
+        </md-tab>
+
+    </md-tabs>
+    <!-- END - Tabs -->
+
+    <div layout="row" layout-align="end center">
+        <md-button ng-if="vm.key_id" class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+    
+</md-content>

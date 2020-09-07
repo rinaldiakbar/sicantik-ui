@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "UNIT": {
+            "UNIT-MODULE": "Unit",
+            "UNIT-LIST": "Daftar Unit"
+        }
+    },
+    "UNIT": {
+        "TITLE": "Unit",
+        "LIST": "Daftar",
+        "ADD": "Tambah Unit",
+        "EDIT": "Ubah Unit",
+        "VIEW": "Lihat Unit",
+        "SEARCH": "Cari"
+    }
+}

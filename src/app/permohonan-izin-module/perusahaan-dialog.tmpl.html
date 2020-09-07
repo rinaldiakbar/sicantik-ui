@@ -1,0 +1,62 @@
+<md-dialog aria-label="Pilih Pemohon" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Daftar Perusahaan</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Tutup dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div>
+                    <md-data-table-toolbar class="md-data-table-toolbar">
+                        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                        <form flex="" name="vm.filter.form">
+                            <input id="filter-text" type="text" ng-model="vm.query.filter" ng-model-options="vm.filter.options" placeholder="Cari Perusahaan">
+                        </form>
+                    </md-data-table-toolbar>
+
+                    <md-data-table-container>
+                        <table md-data-table class="md-primary md-data-table" md-progress="vm.deferred">
+                            <thead md-order="vm.query.order" md-trigger="vm.getData">
+                            <tr>
+                                <th order-by="no" name="#"></th>
+                                <th name="Nama"></th>
+                                <th name="NPWP"></th>
+                                <th name="No Register"></th>
+                                <th name=""></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in vm.data.items">
+                                <td>{{item.no}}</td>
+                                <td>{{item.nama_perusahaan}}</td>
+                                <td>{{item.npwp}}</td>
+                                <td>{{item.no_register}}</td>
+                                <td>
+                                    <button class="btn btn-success btn-circle" type="button" ng-click="vm.pickData(item.id)">
+                                        <i class="fa fa-download"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-data-table-container>
+
+                    <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.data.total_items}}" md-trigger="vm.getData"></md-data-table-pagination>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="hide()">
+                Tutup
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

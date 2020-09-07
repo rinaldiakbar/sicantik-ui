@@ -1,0 +1,268 @@
+<md-content class="padded-content-page">
+    <h2>Ubah Jenis Izin</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">
+                Perbarui
+            </md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Jenis Izin</label>
+            <input type="text" name="jenis_izin" placeholder="Nama Jenis Izin" ng-required="true" ng-model="vm.jenis_izin.jenis_izin" md-maxlength="500">
+            <div ng-messages="mainForm.jenis_izin.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Deskripsi Singkat</label>
+            <input type="text" name="short_desc" placeholder="Deskripsi Singkat" ng-required="false" ng-model="vm.jenis_izin.short_desc" md-maxlength="500">
+            <div ng-messages="mainForm.short_desc.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Jenis Dokumen</label>
+            <md-autocomplete
+                    class="margin-bottom-20"
+                    ng-disabled="false"
+                    ng-required="false"
+                    md-no-cache="true"
+                    md-selected-item="selectedItemJenisDokumenIzin"
+                    md-search-text="vm.searchTextJenisDokumenIzin"
+                    md-selected-item-change="vm.selectedItemChangeJenisDokumenIzin(item)"
+                    md-items="item in vm.querySearchJenisDokumenIzin(vm.searchTextJenisDokumenIzin)"
+                    md-item-text="item.deskripsi"
+                    md-item-value="item.id"
+                    md-min-length="0"
+                    placeholder="Jenis Dokumen">
+                <span md-highlight-text="vm.searchTextJenisDokumenIzin" md-highlight-flags="^i">{{item.deskripsi}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Kode OSS</label>
+            <input type="text" name="kode_oss" placeholder="Kode OSS" ng-required="false" ng-model="vm.jenis_izin.kode_oss" md-maxlength="25">
+            <div ng-messages="mainForm.jenis_izin.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-switch ng-model="vm.jenis_izin.default_active" aria-label="Is Default Active">
+            Is Default Active
+        </md-switch>
+
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+            <!-- BEGIN - Jenis Pengajuan -->
+            <md-tab label="Jenis Pengajuan">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <table class="md-table">
+                            <thead>
+                                <th width="5%" class="number-col">#</th>
+                                <th width="15%">Jenis Pengajuan</th>
+                                <th width="20%">Alur Proses</th>
+                                <th width="20%">Format Nomor</th>
+                                <th width="10%">Lama Proses</th>
+                                <th width="10%">Masa Berlaku</th>
+                                <th width="10%">Satuan</th>
+                                <th width="10%" class="action-col">Aksi</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(index, pengajuan) in vm.jenis_pengajuan">
+                                    <td class="number-col">{{ index+1 }}</td>
+                                    <td>
+                                        <input type="hidden" value="{{pengajuan.id}}" ng-model="pengajuan.id">
+                                        <md-input-container md-no-float class="md-block">
+                                            <md-select name="pengajuan_jenis_pengajuan_{{index}}" placeholder="Jenis Pengajuan" ng-model="pengajuan.jenis_pengajuan" ng-required="true">
+                                                <md-option ng-value="opt.kode" ng-repeat="opt in vm.jenisPengajuanList">
+                                                    {{opt.label}}
+                                                </md-option>
+                                            </md-select>
+                                            <div ng-messages="mainForm['pengajuan_jenis_pengajuan_'+index].$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <md-autocomplete name="pengajuan_daftar_proses_{{index}}" ng-disabled="false" md-no-cache="true" md-search-text="vm.searchTextAlurProses[index]" md-selected-item-change="vm.selectedItemChangeAlurProses(item, index)" md-items="item in vm.querySearchAlurProses(vm.searchTextAlurProses[index])"
+                                                md-item-text="item.keterangan" md-item-value="item.id" md-min-length="0" required="true" placeholder="Alur Proses">
+                                                <span md-highlight-text="pengajuan.alur_prose.keterangan" md-highlight-flags="^i">{{item.keterangan}}</span>
+                                                <div ng-messages="mainForm['pengajuan_daftar_proses_'+index].$error">
+                                                    <div ng-messages-include="app/include/validation-messages.html"></div>
+                                                </div>
+                                            </md-autocomplete>
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <md-autocomplete name="pengajuan_penomoran_{{index}}" ng-disabled="false" md-no-cache="true" md-search-text="vm.searchTextPenomoran[index]" md-selected-item-change="vm.selectedItemChangePenomoran(item, index)" md-items="item in vm.querySearchPenomoran(vm.searchTextPenomoran[index])"
+                                                md-item-text="item.format" md-item-value="item.id" md-min-length="0" required="true" placeholder="Format">
+                                                <span md-highlight-text="pengajuan.alur_prose.keterangan" md-highlight-flags="^i">{{item.format}}</span>
+                                                <div ng-messages="mainForm['pengajuan_penomoran_'+index].$error">
+                                                    <div ng-messages-include="app/include/validation-messages.html"></div>
+                                                </div>
+                                            </md-autocomplete>
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="number" name="pengajuan_lama_proses_{{index}}" placeholder="Lama Proses" ng-model="pengajuan.lama_proses" ng-required="true" min="0">
+                                            <div ng-messages="mainForm['pengajuan_lama_proses_'+index].$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="number" name="pengajuan_masa_berlaku_{{index}}" placeholder="Masa Berlaku" ng-model="pengajuan.masa_berlaku_izin" min="0">
+                                            <div ng-messages="mainForm['pengajuan_masa_berlaku'+index].$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <md-select name="pengajuan_satuan_masa_berlaku_{{index}}" placeholder="Satuan" ng-model="pengajuan.satuan_masa_berlaku">
+                                                <md-option ng-value="opt.kode" ng-repeat="opt in vm.satuanList">
+                                                    {{opt.label}}
+                                                </md-option>
+                                            </md-select>
+                                            <div ng-messages="mainForm['pengajuan_satuan_masa_berlaku_'+index].$error">
+                                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                            </div>
+                                        </md-input-container>
+                                    </td>
+                                    <td class="action-col">
+                                        <button class="btn btn-success btn-circle" type="button" ng-click="vm.showOverrideAlurWindow(index)">
+                                        <md-icon md-font-icon="zmdi zmdi-collection-item-1"></md-icon>
+                                    </button>
+                                        <button class="btn btn-success btn-circle" type="button" ng-click="vm.removeJenisPengajuan(index)">
+                                        <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                    </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addNewJenisPengajuan()" aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Jenis Pengajuan -->
+
+            <!-- BEGIN - Unit Terkait -->
+            <md-tab label="Unit Terkait">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <md-list-item layout="row" layout-align="space-around center" ng-repeat="(index, terkait) in vm.unit_terkait">
+                            <input type="hidden" value="{{terkait.id}}" ng-model="terkait.id">
+                            <md-input-container flex>
+                                <md-autocomplete ng-disabled="false" md-no-cache="true" md-search-text="vm.searchTextUnitTerkait[index]" md-selected-item-change="vm.selectedItemChangeUnitTerkait(item, index)" md-items="item in vm.querySearchUnitTerkait(vm.searchTextUnitTerkait[index])"
+                                    md-item-text="item.nama" md-item-value="item.id" md-min-length="0" placeholder="Unit">
+                                    <span md-highlight-text="terkait.unit.nama" md-highlight-flags="^i">{{item.nama}}</span>
+                                </md-autocomplete>
+                            </md-input-container>
+                            <md-input-container>
+                                <button class="btn btn-success btn-circle" type="button" ng-click="vm.removeUnitTerkait(index)">
+                                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                </button>
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addNewUnitTerkait()" aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Unit Terkait -->
+
+            <!-- BEGIN - Dokumen Pendukung -->
+            <md-tab label="Persyaratan">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <md-list-item layout="row" layout-align="space-around center" ng-repeat="(index, dokumen) in vm.dokumen_pendukung">
+                            <input type="hidden" value="{{dokumen.id}}" ng-model="dokumen.id">
+
+                            <md-input-container flex>
+                                <md-autocomplete ng-disabled="false" md-no-cache="true" md-search-text="vm.searchTextJenisDokumen[index]" md-selected-item-change="vm.selectedItemChangeJenisDokumen(item, index)" md-items="item in vm.querySearchJenisDokumen(vm.searchTextJenisDokumen[index])"
+                                    md-item-text="item.deskripsi" md-item-value="item.id" md-min-length="0" placeholder="Jenis Dokumen">
+                                    <span md-highlight-text="dokumen.jenis_dokumen.deskripsi" md-highlight-flags="^i">{{item.deskripsi}}</span>
+                                </md-autocomplete>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>Status</label>
+                                <md-select placeholder="Status" ng-model="dokumen.status">
+                                    <md-option ng-value="opt.kode" ng-repeat="opt in vm.statusList">{{opt.label}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <button class="btn btn-success btn-circle" type="button" ng-click="vm.removeDokumenPendukung(index)">
+                                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                </button>
+                            </md-input-container>
+                        </md-list-item>
+
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addNewDokumenPendukung()" aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Dokumen Pendukung -->
+
+            <!-- BEGIN - Izin Paralel -->
+            <md-tab label="Izin Paralel">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <md-list-item layout="row" layout-align="space-around center" ng-repeat="(index, izin) in vm.izin_paralel">
+                            <input type="hidden" value="{{izin.id}}" ng-model="izin.id">
+                            <md-input-container flex>
+                                <md-autocomplete ng-disabled="false" md-no-cache="true" md-search-text="vm.searchTextJenisIzin[index]" md-selected-item-change="vm.selectedItemChangeJenisIzin(item, index)" md-items="item in vm.querySearchJenisIzin(vm.searchTextJenisIzin[index])" md-item-text="item.jenis_izin"
+                                    md-item-value="item.id" md-min-length="0" placeholder="Jenis izin">
+                                    <span md-highlight-text="izin._joinData.nama_izin" md-highlight-flags="^i">{{item.jenis_izin}}</span>
+                                </md-autocomplete>
+                            </md-input-container>
+                            <md-input-container>
+                                <button class="btn btn-success btn-circle" type="button" ng-click="vm.removeIzinParalel(index)">
+                                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                </button>
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addNewIzinParalel()" aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Izin Paralel -->
+        </md-tabs>
+        <!-- END - Tabs -->
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">
+                Perbarui
+            </md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

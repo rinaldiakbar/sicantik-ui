@@ -1,0 +1,17 @@
+{
+    "MENU": {
+        "PROSES-PENGAJUAN": {
+            "PROSES-PENGAJUAN-MODULE": "Menu",
+            "PROSES-PENGAJUAN-LIST": "Daftar Pengajuan Izin"
+        }
+    },
+    "PROSES-PENGAJUAN": {
+        "NIB" : "Proses NIB",
+        "TITLE": "Proses Pengajuan",
+        "LIST": "Daftar",
+        "ADD": "Tambah Pengajuan Izin",
+        "EDIT": "Ubah Pengajuan Izin",
+        "VIEW": "Lihat Pengajuan Izin",
+        "SEARCH": "Cari"
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "JENIS-ABSENSI": {
+            "JENIS-ABSENSI-MODULE": "Menu",
+            "JENIS-ABSENSI-LIST": "Daftar Jenis Absensi"
+        }
+    },
+    "JENIS-ABSENSI": {
+        "TITLE": "Jenis Absensi",
+        "LIST": "Daftar Jenis Absensi",
+        "ADD": "Add Jenis Absensi",
+        "EDIT": "Ubah Jenis Absensi",
+        "VIEW": "Lihat Jenis Absensi",
+        "SEARCH": "Cari"
+    }
+}

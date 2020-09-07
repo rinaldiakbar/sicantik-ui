@@ -1,0 +1,43 @@
+<md-content class="padded-content-page">
+    <h2 translate>FAQ-SETTING.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Pertanyaan</label>
+        <input type="text" placeholder="Pertanyaan" ng-required="true" ng-model="vm.faq.pertanyaan" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Jawaban</label>
+        <input type="text" placeholder="Jawaban" ng-required="true" ng-model="vm.faq.jawaban" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>No Urut</label>
+        <input type="number" name="no_urut" placeholder="No Urut" ng-disabled="true" ng-model="vm.faq.no_urut">
+        <div ng-messages="mainForm.no_urut.$error">
+            <div ng-messages-include="app/include/validation-messages.html"></div>
+        </div>
+    </md-input-container>
+
+    <div layout="row" layout-align="space-around center">
+        <div layout="column" flex>
+            <md-input-container md-no-float class="md-block">
+                <label>File Lampiran (*.jpg, *.png, *.docx, *.pdf)</label>
+                <input type="text" placeholder="" ng-required="false" ng-model="vm.faq.file_lampiran" ng-readonly="true">
+                <div ng-if="vm.faq.file_lampiran.length > 0" ng-click="vm.downloadFile(vm.faq.url_lampiran)" class="btn-download">Download</div>
+            </md-input-container>
+        </div>
+    </div>
+
+    <md-switch ng-model="vm.faq.is_active" aria-label="Aktif" ng-disabled="true">
+        Aktif
+    </md-switch>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

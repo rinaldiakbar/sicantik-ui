@@ -1,0 +1,15 @@
+{
+    "MENU": {
+        "PENGGUNA-GATEWAY": {
+            "PENGGUNA-GATEWAY-MODULE": "Pengguna"
+        }
+    },
+    "PENGGUNA-GATEWAY": {
+        "TITLE": "Pengguna SMS Gateway",
+        "LIST": "Daftar",
+        "ADD": "Tambah Pengguna",
+        "EDIT": "Ubah Pengguna",
+        "VIEW": "Lihat Pengguna",
+        "SEARCH": "Cari"
+    }
+}

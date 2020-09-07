@@ -1,0 +1,21 @@
+<md-content class="padded-content-page">
+    <h2 translate>BIDANG-USAHA.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.desa.id">
+    <md-input-container md-no-float class="md-block">
+        <label>Kode</label>
+        <input type="text" placeholder="Kode" ng-required="true" ng-model="vm.bidangusaha.kode" ng-disabled="true">
+    </md-input-container>
+    <md-input-container md-no-float class="md-block">
+        <label>Keterangan</label>
+        <input type="text" placeholder="keterangan" ng-required="true" ng-model="vm.bidangusaha.keterangan" ng-disabled="true">
+    </md-input-container>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

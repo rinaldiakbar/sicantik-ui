@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "POSISI": {
+            "POSISI-MODULE": "Pemegang Saham",
+            "POSISI-LIST": "Daftar Pemegang Saham"
+        }
+    },
+    "POSISI": {
+        "TITLE": "Pemegang Saham",
+        "LIST": "Daftar",
+        "ADD": "Tambah Pemegang Saham",
+        "EDIT": "Ubah Pemegang Saham",
+        "VIEW": "Lihat Pemegang Saham",
+        "SEARCH": "Cari"
+    }
+}

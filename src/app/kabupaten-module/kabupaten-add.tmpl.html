@@ -1,0 +1,47 @@
+<md-content class="padded-content-page">
+    <h2 translate>KABUPATEN.ADD</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Kode Kabupaten/Kota </label>
+            <input type="text" name="kode_daerah" placeholder="Kode Kabupaten" ng-required="true" ng-model="vm.kabupaten.kode_daerah" md-maxlength="7">
+            <div ng-messages="mainForm.kode_daerah.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Kabupaten/Kota </label>
+            <input type="text" name="nama_daerah" placeholder="Nama Kabupaten" ng-required="true" ng-model="vm.kabupaten.nama_daerah" md-maxlength="100">
+            <div ng-messages="mainForm.nama_daerah.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Provinsi</label>
+            <md-autocomplete
+                class="margin-bottom-20"
+                ng-disabled="vm.isDisabled"
+                md-no-cache="vm.noCache"
+                md-selected-item="selectedItem"
+                md-search-text="vm.searchText"
+                md-selected-item-change="vm.selectedItemChange(item)"
+                md-items="item in vm.querySearch(vm.searchText)"
+                md-item-text="item.nama_daerah"
+                md-item-value="item.id"
+                md-min-length="0"
+                placeholder="Cari Provinsi">
+                <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.nama_daerah}}</span>
+            </md-autocomplete>
+        </md-input-container>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

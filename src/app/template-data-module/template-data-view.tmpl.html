@@ -1,0 +1,57 @@
+<md-content class="padded-content-page">
+    <h2 translate>TEMPLATE-DATA.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.template_data.id">
+    <md-input-container md-no-float class="md-block">
+        <label>Nama Template Data</label>
+        <input type="text" placeholder="Nama Template Data" ng-required="true" ng-model="vm.template_data.keterangan" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Tipe Keluaran</label>
+        <input type="text" placeholder="Tipe Keluaran" ng-required="true" ng-model="vm.template_data.tipe_keluaran" ng-disabled="true">
+    </md-input-container>
+
+    <md-switch ng-model="vm.template_data.output_as_pdf" aria-label="Output sebagai PDF"
+        ng-if="vm.template_data.tipe_keluaran === vm.DYNAMIC.outputDokumenCetak"
+        ng-disabled="true"
+    >
+        Output sebagai PDF
+    </md-switch>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Template</label>
+        <input type="text" placeholder="Template" ng-required="true" ng-model="vm.template_data.template_dokumen" ng-disabled="true">
+    </md-input-container>
+
+    <!-- BEGIN - Tabs -->
+    <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+        <md-tab label="Kelompok Data">
+            <md-content class="md-padding">
+                <table class="md-table">
+                    <thead>
+                    <th>No</th>
+                    <th>Label</th>
+                    <th>Jenis Sumber</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="(index, kel_data) in vm.template_data.kelompok_data" >
+                        <td>{{index+1}}</td>
+                        <td>{{kel_data.label_kelompok}}</td>
+                        <td>{{kel_data.jenis_sumber}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+    <!-- END - Tabs -->
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

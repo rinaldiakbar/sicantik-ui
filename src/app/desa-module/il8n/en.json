@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "DESA": {
+            "DESA-MODULE": "Menu",
+            "DESA-LIST": "Daftar Desa"
+        }
+    },
+    "DESA": {
+        "TITLE": "Desa",
+        "LIST": "Daftar",
+        "ADD": "Tambah Desa",
+        "EDIT": "Ubah Desa",
+        "VIEW": "Lihat Desa",
+        "SEARCH": "Cari"
+    }
+}

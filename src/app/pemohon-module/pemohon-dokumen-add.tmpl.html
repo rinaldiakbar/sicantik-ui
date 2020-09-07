@@ -1,0 +1,84 @@
+<md-content class="padded-content-page">
+    <h2 translate>DOKUMEN.ADD</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid"
+                       ng-click="vm.createAction()">Simpan
+            </md-button>
+            <md-button class="md-raised" ng-click="vm.backToPemohonView(vm.key_id)">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>No Dokumen</label>
+            <input type="text" name="no_dokumen" placeholder="No Dokumen" ng-required="true"
+                   ng-model="vm.dokumen_pemohon.no_dokumen" md-maxlength="50">
+            <div ng-messages="mainForm.no_dokumen.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Jenis Dokumen</label>
+            <md-autocomplete
+                    class="margin-bottom-20"
+                    ng-disabled="false"
+                    ng-required="true"
+                    md-no-cache="true"
+                    md-selected-item="selectedItemJenisDokumen"
+                    md-search-text="vm.searchTextJenisDokumen"
+                    md-selected-item-change="vm.selectedItemChangeJenisDokumen(item)"
+                    md-items="item in vm.querySearchJenisDokumen(vm.searchTextJenisDokumen)"
+                    md-item-text="item.deskripsi"
+                    md-item-value="item.id"
+                    md-min-length="0"
+                    placeholder="Dokumen Pendukung"
+                    ng-if="!vm.disableChangeJenisDokumen">
+                <span md-highlight-text="vm.searchTextJenisDokumen" md-highlight-flags="^i">{{item.deskripsi}}</span>
+            </md-autocomplete>
+            <input type="text" placeholder="Jenis Dokumen" ng-if="vm.disableChangeJenisDokumen"
+                   ng-required="true" ng-model="vm.dokumen_pemohon.jenis_dokumen_label" ng-disabled="true">
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Awal Berlaku</label>
+            <md-datepicker name="dokumen_awal_berlaku" data-ng-model="vm.dokumen_pemohon.awal_berlaku"
+                        md-placeholder="Awal Berlaku" ng-required="false"></md-datepicker>
+            <div ng-messages="mainForm.dokumen_awal_berlaku.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Akhir Berlaku</label>
+            <md-datepicker name="dokumen_akhir_berlaku" data-ng-model="vm.dokumen_pemohon.akhir_berlaku"
+                        md-placeholder="Akhir Berlaku" ng-required="false"></md-datepicker>
+            <div ng-messages="mainForm.dokumen_akhir_berlaku.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <div layout="row" layout-align="space-around center">
+            <div layout="column" flex="80">
+                <md-input-container md-no-float class="md-block">
+                    <label>File Dokumen (*.jpg, *.png, *.docx, *.pdf)</label>
+                    <input type="text" placeholder="" ng-model="vm.dokumen_pemohon.lokasi_dokumen" ng-readonly="true">
+                </md-input-container>
+            </div>
+            <div layout="column" flex="20">
+                <md-button class="md-primary md-raised md-fab" ngf-select="vm.upload($files)"
+                           ng-disabled="vm.upload_status != 'idle'" ngf-multiple="true" aria-label="upload">
+                    <md-icon md-font-icon
+                             ng-class="{ 'zmdi zmdi-cloud-upload': vm.upload_status == 'idle', 'fa fa-spinner fa-pulse': vm.upload_status == 'uploading', 'zmdi zmdi-check': vm.upload_status == 'complete'}"></md-icon>
+                </md-button>
+            </div>
+        </div>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid"
+                       ng-click="vm.createAction()">Simpan
+            </md-button>
+            <md-button class="md-raised" ng-click="vm.backToPemohonView(vm.key_id)">Batal</md-button>
+        </div>
+    </form>
+</md-content>

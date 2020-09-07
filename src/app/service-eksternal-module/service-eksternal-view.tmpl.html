@@ -1,0 +1,38 @@
+<md-content class="padded-content-page">
+    <h2 translate>SERVICE-EKSTERNAL.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.desa.id">
+
+    <md-input-container md-no-float class="md-block">
+        <label>Nama</label>
+        <input type="text" placeholder="Nama" ng-required="true" ng-model="vm.serviceEksternal.nama" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Deskripsi</label>
+        <input type="text" placeholder="Deskripsi" ng-required="true" ng-model="vm.serviceEksternal.deskripsi" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Base URL</label>
+        <input type="text" placeholder="Base URL" ng-required="true" ng-model="vm.serviceEksternal.base_url" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Tipe Otentikasi</label>
+        <input type="text" placeholder="Tipe Otentikasi" ng-required="true" ng-model="vm.serviceEksternal.tipe_otentikasi" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Username</label>
+        <input type="text" placeholder="Username" ng-required="true" ng-model="vm.serviceEksternal.username" ng-disabled="true">
+    </md-input-container>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

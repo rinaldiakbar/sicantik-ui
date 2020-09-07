@@ -1,0 +1,74 @@
+<md-content class="padded-content-page">
+    <div layout="row" layout-align="center center">
+        <h2 class="md-display-3" translate>PROSESPENGEMBANGAN.TITLE</h2>
+        <md-button class="md-fab md-primary md-fab-top-right" ng-click="vm.showFormAdd()" aria-label="bottom right toast">
+            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+            <md-tooltip>Buat Penanganan Aduan Baru</md-tooltip>
+        </md-button>
+    </div>
+    
+    <div layout="row">
+        <button class="md-icon-button md-button md-cyan-theme md-ink-ripple" ng-hide="vm.prevVal" ng-click="vm.prev()" aria-label="previous">
+            <md-icon md-font-icon="zmdi zmdi-chevron-left" class="ng-scope md-cyan-theme md-font material-icons zmdi zmdi-chevron-left" aria-hidden="true"></md-icon>
+        </button>
+        <button class="md-icon-button md-button md-cyan-theme md-ink-ripple" ng-hide="vm.nextVal" type="button" ng-click="vm.next()" aria-label="previous tweet">
+            <md-icon md-font-icon="zmdi zmdi-chevron-right" class="ng-scope md-cyan-theme md-font material-icons zmdi zmdi-chevron-left" aria-hidden="true"></md-icon>
+        </button>
+        <md-input-container>
+            <input type="text" ng-model="vm.query.filter" placeholder="Cari Data Laporan">
+        </md-input-container>
+        <md-input-container>
+            <md-select ng-model="vm.query.status" placeholder="Status">
+                <md-option value=""></md-option>
+                <md-option value="pengajuan">OPEN</md-option>
+                <md-option value="diskusi_usulan">DISKUSI USULAN</md-option>
+                <md-option value="close">Close</md-option>
+                <md-option value="ditampung">DITAMPUNG</md-option>
+            </md-select>
+        </md-input-container>
+        <flex></flex>
+        <md-input-container>
+            <md-select name="type" ng-model="vm.query.kategori" placeholder="Kategori">
+                <md-option value="" selected></md-option>
+                <md-option value="inovasi">Inovasi</md-option>
+            </md-select>
+        </md-input-container>
+        <button class="md-icon-button md-button md-cyan-theme md-ink-ripple" type="button" ng-click="vm.getData()">
+            <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+        </button>
+    </div>
+    <md-divider></md-divider>
+    <div>
+        <tri-widget flex="100" flex-xs="100" content-layout="column">
+            <md-list>
+                <md-list-item class="md-2-line" ng-repeat="item in vm.data.items" md-progress="vm.deferred">
+                    <img ng-src="assets/images/avatars/avatar-5.png" class="md-avatar"/>
+                    <div flex class="md-list-item-text">
+                        <div layout="row">
+                            <span flex class="md-head text-dark">
+                                {{item.no_tiket}}
+                                <span class="text-gray">({{item.dibuat_oleh}})</span>
+                            </span>
+                        </div>
+                        <div class="widget-content layout-column layout-align-start-stretch flex-order-2" layout="column" layout-align="" ng-class="{'layout-padding': vm.contentPadding}" flex-order="2">
+                            <div linkify="twitter" class="font-weight-300 md-title font-style-italic line-height-big padding-normal ng-scope">
+                                {{item.aduan}}
+                            </div>
+                        </div>
+                    </div>
+                    <span class="md-caption" layout="column">
+                        <span>{{item.tgl_aduan}}</span>
+                        <span ng-if="item.status == 'pengajuan'">PENGAJUAN</span>
+                        <span ng-if="item.status == 'diskusi_usulan'">DISKUSI USULAN</span>
+                        <span ng-if="item.status == 'close'">CLOSE</span>
+                        <span ng-if="item.status == 'ditampung'">DITAMPUNG</span>
+                        <button class="md-icon-button md-button md-cyan-theme md-ink-ripple" type="button" ng-click="vm.showFormEdit(item.id)" aria-label="previous tweet">
+                            <md-icon md-font-icon="zmdi zmdi-comment-text-alt" class="ng-scope md-cyan-theme md-font material-icons zmdi zmdi-comment-text-alt" aria-hidden="true"></md-icon>
+                        </button>
+                    </span>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+        </tri-widget>
+    </div>
+</md-content>

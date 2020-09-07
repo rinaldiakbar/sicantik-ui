@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "PROFILE-GAJI": {
+            "PROFILE-PEGAWAI-MODULE": "Menu",
+            "PROFILE-PEGAWAI-LIST": "Daftar Profile Pegawai"
+        }
+    },
+    "PROFILE-GAJI": {
+        "TITLE": "Profile Pegawai Gaji",
+        "LIST": "Daftar Profile Pegawai Gaji",
+        "ADD": "Tambah Profile Pegawai Gaji",
+        "EDIT": "Ubah Profile Pegawai Gaji",
+        "VIEW": "Lihat Profile Pegawai Gaji",
+        "SEARCH": "Cari"
+    }
+}

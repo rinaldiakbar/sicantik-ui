@@ -1,0 +1,61 @@
+<md-content class="padded-content-page">
+    <h2 translate>PROVINSI.EDIT</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Kode Provinsi</label>
+            <input type="text" name="kode_daerah" placeholder="Kode Daerah" ng-required="true" ng-model="vm.provinsi.kode_daerah" md-maxlength="3">
+            <div ng-messages="mainForm.kode_daerah.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Provinsi</label>
+            <input type="text" name="nama_daerah" placeholder="Nama Daerah" ng-required="true" ng-model="vm.provinsi.nama_daerah" md-maxlength="100">
+            <div ng-messages="mainForm.nama_daerah.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+    </form>
+
+    <div>
+        <md-data-table-toolbar class="md-data-table-toolbar search-bar">
+            <md-icon md-font-icon="zmdi zmdi-search search-icon"></md-icon>
+            <form flex="" name="vm.filter.form">
+                <input type="text" ng-model="vm.query.filter" ng-model-options="vm.filter.options" placeholder="Cari Kabupaten">
+            </form>
+        </md-data-table-toolbar>
+
+        <md-data-table-container>
+            <table md-data-table class="md-primary md-data-table" md-progress="vm.deferred">
+                <thead md-order="vm.query.order" md-trigger="vm.getData">
+                <tr>
+                    <th order-by="no" name="#"></th>
+                    <th name="Kode Kabupaten"></th>
+                    <th name="Nama Kabupaten"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in vm.data.items">
+                    <td>{{item.no}}</td>
+                    <td>{{item.kode_daerah}}</td>
+                    <td>{{item.nama_daerah}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+
+        <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.data.total_items}}" md-trigger="vm.getData"></md-data-table-pagination>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Perbarui</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </div>
+
+</md-content>

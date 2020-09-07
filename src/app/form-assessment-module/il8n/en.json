@@ -1,0 +1,15 @@
+{
+    "MENU": {
+        "FORMASSESSMENT": {
+            "FORMASSESSMENT-MODULE": "Menu",
+            "FORMASSESSMENT-LIST": "Daftar"
+        }
+    },
+    "FORMASSESSMENT": {
+        "TITLE": "Form Survey",
+        "LIST": "Daftar",
+        "ADD": "Tambah",
+        "Edit": "Ubah",
+        "SEARCH": "Cari"
+    }
+}

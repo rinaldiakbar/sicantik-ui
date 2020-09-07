@@ -1,0 +1,32 @@
+<md-content class="padded-content-page">
+    <h2 translate>REST-SERVICE.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Endpoint</label>
+        <md-input-container>
+            <p>{{vm.api_url}}public/[create/update/delete/get/getall]/{{vm.restService.id}}.json</p>
+        </md-input-container>
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Datatabel</label>
+        <input type="text" placeholder="Datatabel" ng-required="true" ng-model="vm.restService.datatabel.nama_datatabel" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container class="md-block">
+        <label>Instansi</label>
+        <input type="text" placeholder="Instansi" ng-required="true" ng-model="vm.restService.instansi.nama" ng-disabled="true">
+    </md-input-container>
+
+    <md-switch ng-model="vm.restService.is_active" ng-disabled="true" aria-label="Aktif">
+        Aktif
+    </md-switch>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

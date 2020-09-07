@@ -1,0 +1,93 @@
+<md-content class="padded-content-page">
+    <h2 translate>SIMULASI-TARIF.TITLE</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button ng-click="vm.hitungSimulasi()">Hitung</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Jenis Izin</label>
+            <md-select ng-required="true" name="jenis_izin" placeholder="Jenis Izin" ng-model="vm.jenis_izin_id" ng-change="vm.getFormSimulasi()">
+                <md-option ng-value="opt.id" ng-repeat="opt in vm.jenisIzinList">{{opt.jenis_izin}}</md-option>
+            </md-select>
+            <div ng-messages="mainForm.jenis_izin.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <table class="md-table">
+            <thead>
+            <th class="text-center">Item SimulasiTarif</th>
+            <th class="text-center">Jumlah</th>
+            <th class="text-center">Subtotal</th>
+            </thead>
+            <tbody>
+            <tr class="item" ng-repeat="(index, itemSimulasiTarif) in vm.tarif_item">
+                <!--Jika tidak ada option, asumsi sebagai input text-->
+                <td ng-if="itemSimulasiTarif.tarif_harga.length == 0">
+                    <md-input-container class="full-width">
+                        <label class="field-title">
+                            {{itemSimulasiTarif.nama_item}} :
+                        </label>
+                        <input name="nama_item_{{index}}" type="number"
+                               ng-model="vm.formData.items[itemSimulasiTarif.kode_item][0]"
+                               ng-change="vm.pilihItem(itemSimulasiTarif.kode_item, vm.formData.items[itemSimulasiTarif.kode_item])">
+                        <div ng-messages="mainForm['nama_item_'+index].$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                </td>
+
+                <!--Jika ada option, buat dropdown-->
+                <td ng-if="itemSimulasiTarif.tarif_harga.length > 0">
+                    <md-input-container class="full-width md-block">
+                        <label class="field-title">
+                            {{itemSimulasiTarif.nama_item}} :
+                        </label>
+                        <select placeholder="pilih {{itemSimulasiTarif.nama_item}}" name="nama_item_{{index}}"
+                                class="md-select-form"
+                                ng-options="optKategori.harga as optKategori.kategori for optKategori in itemSimulasiTarif.tarif_harga"
+                                ng-model="vm.formData.items[itemSimulasiTarif.kode_item][0]"
+                                ng-change="vm.pilihItem(itemSimulasiTarif.kode_item, vm.formData.items[itemSimulasiTarif.kode_item])">
+                            <option>Pilih</option>
+                        </select>
+                        <div ng-messages="mainForm['nama_item_'+index].$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                </td>
+                <td>
+                    <md-input-container class="full-width">
+                        <input name="qty_{{index}}" type="number"
+                               ng-model="vm.formData.items[itemSimulasiTarif.kode_item][1]"
+                               ng-change="vm.pilihItem(itemSimulasiTarif.kode_item, vm.formData.items[itemSimulasiTarif.kode_item])">
+                        <div ng-messages="mainForm['qty_'+index].$error">
+                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                        </div>
+                    </md-input-container>
+                </td>
+                <td>
+                    <md-input-container class="full-width">
+                        <input class="full-width" disabled type="number" placeholder=""
+                               ng-model="vm.formData.items[itemSimulasiTarif.kode_item][2]" value="0">
+                    </md-input-container>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <td colspan="2">Total</td>
+            <td>
+                <md-input-container class="full-width">
+                    <input class="requiredField full-width" disabled type="number" placeholder=""
+                           ng-model="vm.total">
+                </md-input-container>
+            </td>
+            </tfoot>
+        </table>
+
+        <div layout="row" layout-align="end center">
+            <md-button ng-click="vm.hitungSimulasi()">Hitung</md-button>
+        </div>
+    </form>
+</md-content>

@@ -1,0 +1,87 @@
+<md-content class="padded-content-page">
+    <h2 translate>PENGGUNA.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.pengguna.id">
+    <md-input-container md-no-float class="md-block">
+        <label>Nama User</label>
+        <input type="text" placeholder="Nama User" ng-required="true" ng-model="vm.pengguna.username" ng-disabled="true">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <label>Email</label>
+        <input type="text" placeholder="Email" ng-required="true" ng-model="vm.pengguna.email" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container md-no-float class="md-block">
+        <label>Peran</label>
+        <input type="text" placeholder="Peran" ng-required="true" ng-model="vm.pengguna.peran.label_peran" ng-disabled="true">
+    </md-input-container>
+    
+    <md-input-container class="md-block">
+        <label>Nama Pegawai</label>
+        <input type="text" placeholder="Pegawai" ng-required="true" ng-model="vm.pengguna.pegawai.nama" ng-disabled="true">
+    </md-input-container>
+
+    <!-- BEGIN - Tabs -->
+    <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+        <md-tab label="Unit Kerja">
+            <md-content class="md-padding">
+                <table class="md-table">
+                    <thead>
+                        <th class="number-col" style="width:15%">#</th>
+                        <th style="width:85%">Unit Kerja</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(index, unit) in vm.unit">
+                            <td class="number-col">{{index+1}}</td>
+                            <td>{{unit.nama}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-content>
+        </md-tab>
+
+        <md-tab label="Jenis Izin">
+            <md-content class="md-padding">
+                <table class="md-table">
+                    <thead>
+                        <th class="number-col" style="width:15%">#</th>
+                        <th style="width:85%">Jenis Izin</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(index, jenis_izin) in vm.jenis_izin">
+                            <td class="number-col">{{index+1}}</td>
+                            <td>{{jenis_izin.jenis_izin}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-content>
+        </md-tab>
+
+        <md-tab label="Jenis Proses">
+            <md-content class="md-padding">
+                <table class="md-table">
+                    <thead>
+                        <th class="number-col" style="width:15%">#</th>
+                        <th style="width:85%">Jenis Proses</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(index, jenis_proses) in vm.jenis_proses">
+                            <td class="number-col">{{index+1}}</td>
+                            <td>{{jenis_proses.nama_proses}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+    <!-- END - Tabs -->
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

@@ -1,0 +1,36 @@
+<md-content class="padded-content-page">
+    <h2 translate>PERAN.VIEW</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.peran.id">
+    <md-input-container md-no-float class="md-block">
+        <label>Label Peran</label>
+        <input type="text" placeholder="Label Peran" ng-required="true" ng-model="vm.peran.label_peran" ng-disabled="true">
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label>Nama Instansi</label>
+        <input type="text" placeholder="Nama Instansi" ng-required="true" ng-model="vm.peran.instansi.nama" ng-disabled="true">
+    </md-input-container>
+
+    <div>
+        <div class="tree-view" ivh-treeview="vm.treeData" ivh-treeview-expand-to-depth="2">
+            <script type="text/ng-template">
+                <span ivh-treeview-toggle>
+                  <span ivh-treeview-twistie></span>
+                </span>
+                <ascii-box-view></ascii-box-view>
+                <span class="ivh-treeview-node-label" ivh-treeview-toggle>
+                      {{trvw.label(node)}}
+                    </span>
+                <div ivh-treeview-children></div>
+            </script>
+        </div>
+    </div>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

@@ -1,0 +1,68 @@
+<md-content class="padded-content-page">
+    <h2 translate>REPORT-COMPONENT.VIEW</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Jenis Izin</label>
+            <input type="text" name="jenis_izin" placeholder="Nama Jenis Izin" ng-required="true" ng-disabled="true" ng-model="vm.jenis_izin.jenis_izin" md-maxlength="100">
+            <div ng-messages="mainForm.jenis_izin.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+
+            <!-- BEGIN - Loop Jenis Pengajuan -->
+            <md-tab label="{{pengajuan.jenis_pengajuan}}" ng-repeat="(tabIdx, pengajuan) in vm.jenis_izin.jenis_pengajuan">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <md-tabs class="md-primary" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+                            <md-tab label="{{daftarProses.no}}" ng-repeat="(subTabIdx, daftarProses) in pengajuan.alur_prose.daftar_proses">
+                                <md-content class="md-padding">
+                                    <md-list class="no-scroll">
+                                        <h3>Proses-{{daftarProses.no}} : {{daftarProses.nama_proses}}</h3>
+
+                                        <table class="md-table static-table">
+                                            <thead>
+                                            <th style="width:5%" class="number-col">#</th>
+                                            <th style="width:30%">Penandatangan</th>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="(index, detail) in daftarProses.details">
+                                                <td class="number-col">{{index+1}}</td>
+                                                <td>
+                                                    <md-input-container md-no-float class="md-block">
+                                                        <md-select name="proses_pegawai_{{index}}" placeholder="Pilih Pegawai" ng-model="detail.pegawai_id" ng-required="true" ng-disabled="true">
+                                                            <md-option ng-value="opt.id" ng-repeat="opt in vm.pegawaiList">{{opt.nama}} - {{opt.nomor_induk}}</md-option>
+                                                        </md-select>
+                                                        <div ng-messages="mainForm['proses_pegawai_'+index].$error">
+                                                            <div ng-messages-include="app/include/validation-messages.html"></div>
+                                                        </div>
+                                                    </md-input-container>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </md-list>
+                                </md-content>
+                            </md-tab>
+                        </md-tabs>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Loop Jenis Pengajuan -->
+
+        </md-tabs>
+        <!-- END - Tabs -->
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

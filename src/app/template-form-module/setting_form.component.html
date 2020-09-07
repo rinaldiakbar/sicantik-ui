@@ -1,0 +1,55 @@
+<div class="dialog-demo-content" layout="row" layout-wrap layout-margin layout-align="center">
+    <md-button ng-if="forms === null" class="md-primary md-raised" ng-click="addForm()">
+        Buat Form
+    </md-button>
+    <md-button ng-if="forms !== null" class="md-primary md-raised" ng-click="showCanvas($event)">
+        Buat Canvas
+    </md-button>
+    <md-button ng-if="forms !== null" class="md-primary md-raised" ng-click="showTab($event)">
+        Buat Tab
+    </md-button>
+    <md-button ng-if="enableActionButton === true" class="md-primary md-raised" ng-click="showActionButton($event)">
+        Buat Tombol
+    </md-button>
+    <md-button ng-if="enableFilter === true" class="md-primary md-raised" ng-click="showFilterSetting($event)">
+        Buat Filter
+    </md-button>
+</div>
+
+<!-- Action Button Area -->
+<div ng-repeat="(formIndex, form) in forms | filter:{ftype:'action', del:false}">
+    <div ng-include="'app/template-form-module/dCanvas.html'"></div>
+</div>
+
+<!-- Filter Area -->
+<div ng-repeat="(formIndex, form) in forms | filter:{ftype:'filter', del:false}">
+    <div ng-include="'app/template-form-module/dCanvas.html'"></div>
+</div>
+
+<div ng-if="form.ftype!='tab'" ng-repeat="(formIndex, form) in forms | filter:{tabIdx:'0', del:false} | orderBy:'no_urut':false">
+    <div ng-include="'app/template-form-module/dCanvas.html'"></div>
+</div>
+
+<md-card flex="100" class="card-element" ng-repeat="tabDisplay in forms | filter:{ftype:'tab'} | orderBy:'tabIdx':false | orderBy:'no_urut':false">
+    <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always" ng-if="tabDisplay.ftype === 'tab'">
+        <md-tab ng-repeat="(tabIndex, tab) in tabDisplay.ftab | filter:{del:false} | orderBy:'idx':false" label="{{tab.label}}">
+            <md-content>
+                <div layout="row">
+                    <div layout="column" flex="80">
+                    </div>
+                    <div layout="column" flex="20">
+                        <md-button flex class="md-raised md-primary md-default" ng-click="deleteTab($event, tab)">
+                            <md-icon md-font-icon="zmdi zmdi-delete" class="ng-scope ng-isolate-scope md-cyan-theme md-font zmdi material-icons" aria-hidden="true">
+                            </md-icon> Hapus Tab
+                        </md-button>
+                    </div>
+                </div>
+            </md-content>
+            <md-content class="md-padding"
+                ng-repeat="(formIndex, form) in forms | orderBy:'no_urut':false"
+                ng-if="form.ftype!='tab' && form.tabIdx === tab.idx && form.del==false">
+                <div ng-include="'app/template-form-module/dCanvas.html'"></div>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</md-card>

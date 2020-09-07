@@ -1,0 +1,150 @@
+<md-content class="padded-content-page">
+    <h2 translate>INOVASI-ADUAN.VIEW</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+        <div layout="row" flex=100  layout-xs="column" > 
+            <div flex=50>
+                <md-input-container md-no-float class="md-block">
+                    <label>No Tiket</label>
+                    <input type="text" name="no_tiket" placeholder="No Tiket" ng-model="vm.aduan.no_tiket" md-maxlength="255" disabled>
+                </md-input-container> 
+                <md-input-container md-no-float class="md-block">
+                    <label>Status</label>
+                    <input type="text" name="status" ng-model="vm.aduan.status" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tgl Aduan</label>
+                    <input type="text" name="tgl_aduan" placeholder="Tgl Aduan" ng-model="vm.aduan.tgl_aduan" disabled>
+                </md-input-container>
+            </div>
+            <div flex=50>
+                <md-input-container md-no-float class="md-block">
+                    <label>Pengajuan</label>
+                    <input type="text" name="aduan" placeholder="Pengajuan" ng-model="vm.aduan.aduan" md-maxlength="1000" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Kategori</label>
+                    <input type="text" name="kategori" ng-model="vm.aduan.kategori" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Type</label>
+                    <input type="text" name="type" placeholder="Type" ng-model="vm.aduan.type" disabled>
+                </md-input-container>
+            </div>
+        </div>
+
+        <div layout="row" layout-xs="column" >
+            <div flex=50>
+                <tri-widget todo-widget class="dashboard-todo-widget" palette-background="" title="Keterangan" subtitle="" title-position="top" content-layout-align="space-between" content-padding>
+                    <md-list flex class="padding-left-0">
+                        <md-list-item >
+                            <div layout="column" flex="100" ng-repeat="(index, result) in vm.aduan.c_aduan_lampiran">
+                                <md-input-container md-no-float class="md-block">
+                                    <label>Keterangan</label>
+                                    <input type="text" ng-model="result.keterangan" placeholder="Keterangan" md-maxlength="1000" disabled>
+                                </md-input-container>
+                                <md-input-container md-no-float class="md-block">
+                                    <div layout="row" layout-align="space-around center">
+                                        <div layout="column" flex="75">
+                                            <md-input-container md-no-float class="md-block">
+                                                <label>File Dokumen (*.jpg, *.png, *.pdf)</label>
+                                                <input type="text" ng-model="result.file_lampiran" style="color: black" disabled>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout="column" flex="12.5">
+                                            <button class="btn btn-success btn-circle" type="button" ng-if="result.file_lampiran" ng-click="vm.showDokumen(result.file_lampiran)">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div layout="column" flex="12.5">
+                                            <button ng-if="result.file_lampiran" class="btn btn-success btn-circle" type="button" ng-click="vm.downloadFile(result.file_lampiran,'komentar')">
+                                                <i class="fa fa-download"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </tri-widget>
+            </div>
+            <div flex=50 style="padding-left: 5px;">
+                <tri-widget chat-widget flex class="widget-chat" title="Komentar" content-layout="column" content-layout-align="space-between">
+                    <md-divider></md-divider>
+                    <md-list class="padding-top-20 padding-bottom-0" flex>
+                        <md-list-item ng-repeat="chat in ::conversation" class="md-3-line" ng-class="userClass($even)" ng-init="userColor = $even ? 'cyan' : 'light-green'">
+                            <img class="md-avatar" ng-src="{{::chat.image}}" alt="{{::chat.name}}">
+                            <div class="md-list-item-text">
+                                <p palette-background="{{::userColor}}:200" ng-repeat="message in ::chat.messages">
+                                   {{::message}}
+                                </p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+
+                    <div ng-repeat="komentar in vm.aduan.c_aduan_komentar">
+                        <div layout="row" layout-align="space-between center">
+                            <md-input-container flex class="margin-left-20 margin-right-20">
+                                <label><img src="assets/images/avatars/avatar-5.png" alt="girl-avatar" class="make-round" width="20"/>{{komentar.dibuat_oleh}} ({{komentar.tgl_dibuat}})</label>
+                                <input type="text" ng-model="komentar.komentar" ng-disabled="true" flex="90">
+                                <button ng-if="komentar.file_lampiran" class="btn btn-success btn-circle" type="button" ng-click="vm.downloadFile(komentar.file_lampiran,'komentar')">
+                                    <i class="fa fa-download"></i>
+                                </button>
+                                <button ng-if="komentar.file_lampiran" class="btn btn-success btn-circle" type="button" ng-click="vm.showDokumen(komentar.file_lampiran)">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </md-input-container>
+                        </div>
+                    </div>
+
+                    <div layout="row" layout-align="space-between center" ng-if="vm.aduan.status != 'close'">
+                        <md-input-container flex class="margin-left-20 margin-right-20">
+                            <label>Keterangan</label>
+                            <input type="text" ng-model="vm.aduan.new_komentar">
+                            <input type="hidden" ng-model="vm.aduan.file_lampiran">
+                            <div ng-if="vm.aduan.file_lampiran.length > 0" ng-click="vm.downloadFile(vm.aduan.file_url,'')" class="btn-download">{{vm.aduan.file_lampiran}}</div>
+                        </md-input-container>
+                        <md-button class="md-primary md-raised md-fab" 
+                            ngf-select="vm.uploadFile($files, 'komentar')"
+                            ng-disabled="false" 
+                            ngf-multiple="true"
+                            ngf-accept="'image/*'"
+                            ngf-max-size="2MB"
+                            aria-label="upload">
+                            <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.upload_status == 'idle', 'fa fa-spinner fa-pulse': vm.upload_status == 'uploading', 'zmdi zmdi-check': vm.upload_status == 'complete'}"></md-icon>
+                        </md-button>
+                        <md-button class="md-primary md-raised" ng-if="vm.aduan.file_lampiran.length > 0" ng-click="vm.showDokumen(vm.aduan.file_lampiran)">Lihat</md-button>
+                        <md-button class="md-raised" ng-click="vm.saveKomentar(vm.aduan.id)">Kirim</md-button>
+                    </div>
+
+                    <div layout="row" layout-align="space-between center" ng-if="vm.aduan.status == 'close'">
+                        <md-input-container flex class="margin-left-20 margin-right-20">
+                            <label>Keterangan</label>
+                            <input type="text" ng-model="vm.aduan.new_komentar" disabled>
+                            <input type="hidden" ng-model="vm.aduan.file_lampiran">
+                            <div ng-if="vm.aduan.file_lampiran.length > 0" ng-click="vm.downloadFile(vm.aduan.file_url,'')" class="btn-download">{{vm.aduan.file_lampiran}}</div>
+                        </md-input-container>
+                        <md-button class="md-primary md-raised md-fab" 
+                            ngf-select="vm.uploadFile($files, 'komentar')"
+                            ng-disabled="false" 
+                            ngf-multiple="true"
+                            ngf-accept="'image/*'"
+                            ngf-max-size="2MB"
+                            aria-label="upload" disabled>
+                            <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.upload_status == 'idle', 'fa fa-spinner fa-pulse': vm.upload_status == 'uploading', 'zmdi zmdi-check': vm.upload_status == 'complete'}"></md-icon>
+                        </md-button>
+                        <md-button class="md-primary md-raised" ng-if="vm.aduan.file_lampiran.length > 0" ng-click="vm.showDokumen(vm.aduan.file_lampiran)" disabled>Lihat</md-button>
+                        <md-button class="md-raised" ng-click="vm.saveKomentar(vm.aduan.id)" disabled>Kirim</md-button>
+                    </div>
+                </tri-widget>
+            </div>
+        </div>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

@@ -1,0 +1,67 @@
+<md-content class="padded-content-page">
+    <h2>Sign Report</h2>
+
+    <form name="mainForm" novalidate>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Jenis Izin</label>
+            <input type="text" placeholder="Jenis Izin" ng-required="false" ng-model="vm.prosesPermohonan.permohonan_izin.jenis_izin.jenis_izin" ng-disabled="true">
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>No Permohonan</label>
+            <input type="text" placeholder="No Permohonan" ng-required="false" ng-model="vm.prosesPermohonan.permohonan_izin.no_permohonan" ng-disabled="true">
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Instansi</label>
+            <input type="text" placeholder="Instansi" ng-required="false" ng-model="vm.prosesPermohonan.permohonan_izin.instansi.nama" ng-disabled="true">
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Unit</label>
+            <input type="text" placeholder="Unit" ng-required="false" ng-model="vm.prosesPermohonan.permohonan_izin.unit.nama" ng-disabled="true">
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Pemohon</label>
+            <input type="text" placeholder="Pemohon" ng-required="false" ng-model="vm.prosesPermohonan.permohonan_izin.pemohon.nama" ng-disabled="true">
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>File Sertifikat (.ca)</label>
+            <input type="file" id="cert" name="cert" ng-model="vm.form.cert" multiple ng-required="true"/>
+            <div ng-messages="mainForm.cert.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Password</label>
+            <input type="password" id="pass" name="pass" ng-model="vm.form.pass" ng-required="true"/>
+            <div ng-messages="mainForm.pass.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block" ng-if="vm.prosesPermohonan.file_signed_report.length > 0">
+            <label>Report Signed</label>
+            <input type="text" id="file_signed_report" name="file_signed_report" ng-model="vm.prosesPermohonan.file_signed_report" ng-disabled="true"/>
+            <div ng-click="vm.downloadSignedReport(vm.prosesPermohonan.file_signed_report)" class="btn-download">Download</div>
+            <div ng-click="vm.viewFile(vm.prosesPermohonan.file_signed_report)" class="btn-download">View</div>
+        </md-input-container>
+
+        <div layout="row" layout-align="center center">
+            <md-button class="md-primary md-raised" ng-click="vm.signReport()" ng-disabled="mainForm.$invalid">
+                Sign PDF
+            </md-button>
+            <md-button class="md-primary md-raised" ng-click="vm.cancelSign()" ng-if="vm.prosesPermohonan.file_signed_report.length > 0">
+                Cancel Sign
+            </md-button>
+            <md-button class="md-primary" ng-click="vm.saveAndNext()"
+                       ng-disabled="!vm.enableNext">Proses Berikutnya
+            </md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

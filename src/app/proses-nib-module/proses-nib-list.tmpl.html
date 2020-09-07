@@ -1,0 +1,45 @@
+<md-content class="padded-content-page">
+    <div layout="row" layout-align="center center">
+        <h2 class="md-display-3" translate>PROSES-PENGAJUAN.NIB</h2>
+    </div>
+
+    <div>
+        <md-data-table-toolbar class="md-data-table-toolbar">
+            <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+            <form flex="" name="vm.filter.form">
+                <input id="filter-text" type="text" ng-model="vm.query.filter" ng-model-options="vm.filter.options" placeholder="Cari Proses NIB">
+            </form>
+        </md-data-table-toolbar>
+
+        <md-data-table-container>
+            <table md-data-table class="md-primary md-data-table" md-progress="vm.deferred">
+                <thead md-order="vm.query.order" md-trigger="vm.getData">
+                    <tr>
+                        <th order-by="permohonanizin.id" name="#"></th>
+                        <th order-by="permohonanizin.nib_id" name="NIB ID"></th>
+                        <th order-by="permohonanizin.tgl_pengajuan" name="Tgl Pengajuan"></th>
+                        <th order-by="pemohon.nama" name="Pemohon"></th>
+                        <th order-by="perusahaan.nama_perusahaan" name="Perusahaan"></th>
+                        <th name=""></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.data.items">
+                        <td>{{item.no}}</td>
+                        <td>{{item.nib_id}}</td>
+                        <td>{{item.tgl_pengajuan}}</td>
+                        <td>{{item.pemohon.nama}}</td>
+                        <td>{{item.perusahaan.nama_perusahaan}}</td>
+                        <td>
+                            <button class="btn btn-success btn-circle" type="button" ng-click="vm.showFormView(item.nib_id)">
+                                <i class="fa fa-list"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+
+        <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.data.total_items}}" md-trigger="vm.getData"></md-data-table-pagination>
+    </div>
+</md-content>

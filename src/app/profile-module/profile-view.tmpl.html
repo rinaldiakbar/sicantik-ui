@@ -1,0 +1,132 @@
+<md-content class="padded-content-page">
+    <h2 translate>PROFILE-PEGAWAI.VIEW</h2>
+
+    <form>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+        <div layout="row" flex>
+            <div layout="column" flex="20">
+                <div>
+                    <md-input-container md-no-float class="md-block">
+                        <label>{{data.label}}</label>
+                    </md-input-container>
+                    <br>
+                </div>
+                <img src="assets/images/no-image.120x160.png" class="thumb-photo">
+            </div>
+            <div layout="column" flex="80">
+                <md-input-container md-no-float class="md-block">
+                    <label>Nama</label>
+                    <input type="hidden" ng-model="vm.profile.id">
+                    <input type="text" placeholder="Nama Pegawai" ng-required="true" ng-model="vm.profile.nama" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Nomor KTP</label>
+                    <input type="text" placeholder="Nomor KTP" ng-required="false" ng-model="vm.profile.no_idcard" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tempat Lahir</label>
+                    <input type="text" placeholder="Tempat Lahir" ng-required="false" ng-model="vm.profile.tempat_lahir" disabled>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Tanggal Lahir</label>
+                    <md-datepicker ng-model="vm.profile.tanggal_lahir" md-placeholder="Tanggal Lahir" ng-required="true" disabled>
+                    </md-datepicker>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Agama</label>
+                    <md-select placeholder="Agama" ng-model="vm.profile.agama" disabled>
+                        <md-option ng-value="opt.kode" ng-repeat="opt in vm.agamaList">{{opt.label}}</md-option>
+                        <md-option ng-value=""></md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Jenis Kelamin</label>
+                    <md-select placeholder="Jenis Kelamin" ng-model="vm.profile.jenis_kelamin" disabled>
+                        <md-option ng-value="opt.kode" ng-repeat="opt in vm.genderList">{{opt.label}}</md-option>
+                        <md-option ng-value=""></md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Golongan Darah</label>
+                    <md-select placeholder="Golongan Darah" ng-model="vm.profile.golongan_darah" disabled>
+                        <md-option ng-value="opt.kode" ng-repeat="opt in vm.bloodList">{{opt.label}}</md-option>
+                        <md-option ng-value=""></md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </div>       
+        
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+            <!-- BEGIN - Organization -->
+            <md-tab label="Organization">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <md-list-item layout="row" layout-align="space-around center" ng-repeat="(index, pengajuan) in vm.jenis_pengajuan">
+                            <input type="hidden" value="{{atribut.id}}" ng-model="atribut.id">
+                            <md-input-container flex>
+                                <label>Unit</label>
+                                <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabledUnit" md-no-cache="vm.noCacheUnit" md-selected-item="selectedItemUnit" md-search-text="vm.searchTextUnit" md-selected-item-change="vm.selectedItemChangeUnit(item, index)" md-items="item in vm.querySearchUnit(vm.searchTextUnit, vm.atribut.instansi_id)"
+                                                 md-item-text="item.nama" md-item-value="item.id" md-min-length="0" placeholder="Cari Unit">
+                                    <span md-highlight-text="vm.searchTextUnit" md-highlight-flags="^i">{{item.nama}}</span>
+                                </md-autocomplete>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Jabatan</label>
+                                <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabledJabatan" md-no-cache="vm.noCacheJabatan" md-selected-item="selectedItemJabatan"
+                                                 md-search-text="vm.searchTextJabatan" md-selected-item-change="vm.selectedItemChangeJabatan(item, index)" md-items="item in vm.querySearchJabatan(vm.searchTextJabatan)"
+                                                 md-item-text="item.jabatan" md-item-value="item.id" md-min-length="0" placeholder="Cari Jabatan">
+                                    <span md-highlight-text="vm.searchTextJabatan" md-highlight-flags="^i">{{item.jabatan}}</span>
+                                </md-autocomplete>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Posisi</label>
+                                <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabledJabatan" md-no-cache="vm.noCacheJabatan" md-selected-item="selectedItemJabatan"
+                                                 md-search-text="vm.searchTextJabatan" md-selected-item-change="vm.selectedItemChangeJabatan(item, index)" md-items="item in vm.querySearchJabatan(vm.searchTextJabatan)"
+                                                 md-item-text="item.jabatan" md-item-value="item.id" md-min-length="0" placeholder="Cari Jabatan">
+                                    <span md-highlight-text="vm.searchTextJabatan" md-highlight-flags="^i">{{item.jabatan}}</span>
+                                </md-autocomplete>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <md-datepicker ng-model="atribut.tgl_mulai" name="atribut_tgl_mulai_{{index}}"
+                                   md-placeholder="Mulai Berlaku" ng-required="true">
+                                </md-datepicker>
+                            </md-input-container>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Organization -->
+
+            <!-- BEGIN - Personnel -->
+            <md-tab label="Personnel">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <md-list-item layout="row" layout-align="space-around center" ng-repeat="(index, terkait) in vm.unit_terkait">
+                            <input type="hidden" value="{{terkait.id}}" ng-model="terkait.id">
+                            <md-input-container flex>
+                                <md-autocomplete ng-disabled="false" md-no-cache="true" md-search-text="vm.searchTextUnitTerkait[index]" md-selected-item-change="vm.selectedItemChangeUnitTerkait(item, index)" md-items="item in vm.querySearchUnitTerkait(vm.searchTextUnitTerkait[index])"
+                                    md-item-text="item.nama" md-item-value="item.id" md-min-length="0" placeholder="Unit">
+                                    <span md-highlight-text="terkait.unit.nama" md-highlight-flags="^i">{{item.nama}}</span>
+                                </md-autocomplete>
+                            </md-input-container>
+                            <md-input-container>
+                                <button class="btn btn-success btn-circle" type="button" ng-click="vm.removeUnitTerkait(index)">
+                                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                </button>
+                            </md-input-container>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Personnel -->
+        </md-tabs>
+        <!-- END - Tabs -->
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

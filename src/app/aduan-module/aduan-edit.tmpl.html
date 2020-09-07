@@ -1,0 +1,145 @@
+<md-content class="padded-content-page">
+    <h2 translate>ADUAN.EDIT</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Simpan</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+        <div  layout="row" layout-xs="column" >
+            <div layout-align="space-around center" layout-margin>
+                <md-card flex="100" class="card-element">
+                    <md-card-content>
+                        <div flex=100  layout="column">                        
+                            <md-input-container md-no-float class="md-block">
+                                <label>No Tiket</label>
+                                <input type="text" name="no_tiket" placeholder="No Tiket" ng-model="vm.aduan.no_tiket" md-maxlength="15" disabled>
+                            </md-input-container>
+                            <div layout="row" layout-xs="column">
+                                <md-input-container md-no-float class="md-block">
+                                    <label>Status</label>
+                                    <input type="text" name="status" placeholder="Status" ng-model="vm.aduan.status" disabled>
+                                </md-input-container>
+                                <md-input-container md-no-float class="md-block">
+                                    <label>Tgl Aduan</label>
+                                    <md-datepicker ng-model="vm.aduan.tgl_aduan" name="tgl_aduan"
+                                        md-placeholder="Tanggal Aduan" disabled>
+                                    </md-datepicker>
+                                </md-input-container>
+                                <md-input-container md-no-float class="md-block">
+                                    <label>Tipe Aduan</label>
+                                        <input type="text" name="tipe" placeholder="Tipe" ng-model="vm.aduan.type" disabled>
+                                </md-input-container>
+                            </div>
+                            <md-input-container md-no-float class="md-block">
+                                <label>Kategori</label>
+                                <md-autocomplete
+                                    ng-disabled="vm.isDisabled"
+                                    md-input-name="kategori"
+                                    md-no-cache="vm.noCache"
+                                    md-selected-item="selectedItem"
+                                    md-search-text="vm.searchText"
+                                    md-selected-item-change="vm.selectedItemChange(item)"
+                                    md-items="item in vm.querySearch(vm.searchText)"
+                                    md-item-text="item.path" md-item-value="item.path" md-min-length="0">
+                                    <span md-highlight-text="vm.searchText" md-highlight-flags="^i">
+                                        {{item.path}}</span>
+                                </md-autocomplete>
+                            </md-input-container>
+                            <md-input-container md-no-float class="md-block">
+                                <label>Kendala Teknis</label>
+                                <textarea rows="10" ng-model="vm.aduan.aduan" style="overflow:auto;resize: none;max-height: 145px !important;height: 145px !important;"></textarea>
+                                <div ng-messages="mainForm.aduan.$error">
+                                <div ng-messages-include="app/include/validation-messages.html"></div>
+                                </div>
+                            </md-input-container>
+                            <tri-widget todo-widget class="dashboard-todo-widget" palette-background="triCyan:600" title="" subtitle="Lampiran Kronologi Kendala Teknis" title-position="top" content-layout-align="space-between" content-padding>
+                                <md-list flex class="padding-left-0">
+                                    <md-list-item>
+                                        <div layout="column" flex="100">
+                                            <md-input-container md-no-float class="md-block">
+                                                <label>Keterangan</label>
+                                                <input type="text" ng-model="vm.aduan.c_aduan_lampiran[0].keterangan" placeholder="Keterangan" md-maxlength="1000">
+                                            </md-input-container>
+                                            
+                                            <div layout="row" layout-align="space-around center">
+                                                <div layout="column" flex="75">
+                                                    <md-input-container md-no-float class="md-block">
+                                                        <label>File Dokumen (*.jpg, *.png, *.pdf)</label>
+                                                        <input type="text" ng-model="vm.aduan.c_aduan_lampiran[0].file_lampiran" ng-readonly="true" style="color: black">
+                                                        <div ng-if="vm.data.file_url_lampiran.length > 0" ng-click="vm.downloadFile(vm.data.file_url_lampiran,'')" class="btn-download">{{vm.aduan.c_aduan_lampiran[0].file_lampiran}}</div>
+                                                    </md-input-container>
+                                                </div>
+                                                <div layout="column" flex="12.5">
+                                                    <button class="btn btn-success btn-circle" type="button" ng-if="vm.aduan.c_aduan_lampiran[0].file_lampiran" ng-click="vm.showDokumen(vm.aduan.c_aduan_lampiran[0].file_lampiran)">
+                                                        <i class="fa fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                <div layout="column" flex="12.5">
+                                                    <md-button class="md-primary md-raised md-fab" 
+                                                        ngf-select="vm.uploadFile($files, 'lampiran')" 
+                                                        ng-disabled="false"
+                                                        ngf-multiple="true"
+                                                        ngf-accept="'image/*'"
+                                                        ngf-max-size="2MB"
+                                                        aria-label="upload">
+                                                    <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.upload_status == 'idle', 'fa fa-spinner fa-pulse': vm.upload_status == 'uploading', 'zmdi zmdi-check': vm.upload_status == 'complete'}"></md-icon>
+                                                    </md-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </md-list-item>
+                                </md-list>
+                            </tri-widget>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div flex=40 layout="column" layout-align="space-around center" layout-margin style="height: 400px;">
+                <tri-widget chat-widget flex class="widget-chat" title="Komentar" content-layout="column" content-layout-align="space-between">
+                    <md-content style="height: 200px;">
+                        <md-list flex>
+                            <md-list-item class="md-3-line" ng-repeat="komentar in vm.aduan.c_aduan_komentar"" ng-click="null">
+                                <img ng-src="assets/images/avatars/avatar-5.png" class="md-avatar" alt="{{item.who}}" />
+                                <div class="md-list-item-text" layout="column">
+                                    <h3>{{komentar.dibuat_oleh}}</h3>
+                                    <p>{{komentar.tgl_dibuat}}</p>
+                                    <p style="word-wrap: break-word;">{{komentar.komentar}}</p>
+                                </div>
+                                <button ng-if="komentar.file_lampiran" class="btn btn-success btn-circle" type="button" ng-click="vm.downloadFile(komentar.file_lampiran,'komentar')">
+                                    <i class="fa fa-download"></i>
+                                </button>
+                                <button ng-if="komentar.file_lampiran" class="btn btn-success btn-circle" type="button" ng-click="vm.showDokumen(komentar.file_lampiran)">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </md-list-item>
+                        </md-list> 
+                    </md-content>   
+                    <div layout="row" layout-align="space-between center">
+                        <md-input-container flex class="margin-left-20 margin-right-20">
+                            <label>Komentar</label>
+                            <input type="text" ng-model="vm.data.new_komentar">
+                            <input type="hidden" ng-model="vm.data.file_lampiran_komentar">
+                            <div ng-if="vm.data.file_lampiran_komentar.length > 0" ng-click="vm.downloadFile(vm.data.file_url_lampiran_komentar,'')" class="btn-download">{{vm.data.file_lampiran_komentar}}</div>
+                        </md-input-container>
+                        <md-button class="md-primary md-raised md-fab" 
+                                ngf-select="vm.uploadFile($files, 'komentar')" 
+                                ng-disabled="false" 
+                                ngf-multiple="true"
+                                ngf-accept="'image/*'"
+                                ngf-max-size="2MB"
+                                aria-label="upload">
+                                <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.upload_status2 == 'idle', 'fa fa-spinner fa-pulse': vm.upload_status2 == 'uploading', 'zmdi zmdi-check': vm.upload_status2 == 'complete'}"></md-icon>
+                        </md-button>
+                        <md-button class="md-primary md-raised" ng-if="vm.aduan.file_lampiran_komentar.length > 0" ng-click="vm.showDokumen(vm.aduan.file_lampiran_komentar)">Lihat</md-button>
+                        <md-button class="md-raised" ng-click="vm.saveKomentar(vm.aduan.id)">Kirim</md-button>
+                    </div>
+                </tri-widget>
+            </div>
+        </div>
+        <div layout="row" layout-align="end center" style="padding-top: 10px;">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.updateAction()">Simpan</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

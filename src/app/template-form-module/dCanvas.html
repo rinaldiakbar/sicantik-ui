@@ -1,0 +1,292 @@
+<md-card flex="100" class="card-element">
+    <md-card-content>
+        <div class="content-padded">
+
+            <h3 ng-if="form.ftype !== 'action' && form.ftype !== 'filter'" md-truncate>{{form.fName}}</h3>
+            <h3 ng-if="form.ftype === 'action'" md-truncate>Action</h3>
+            <h3 ng-if="form.ftype === 'filter'" md-truncate>Filter</h3>
+
+            <div layout="row" flex="100">
+                <!-- Form new-->
+                <div ng-if="form.ftype === 'form'" class="full-width">
+
+                    <!-- If form has photo element -->
+                    <div ng-repeat="(fieldIndex, field) in form.fields" ng-if="form.has_photo" layout="row">
+
+                        <div layout="column" class="padding-10" flex="30">
+                            <div ng-repeat="(dataIndex, data) in field.field | filter:{type:'photo', del:false} | orderBy:'no_urut':false" layout="row">
+                                <div ng-include="'app/template-form-module/element.html'" layout="column" flex="100"></div>
+                                <div layout="column">
+                                    <md-menu>
+                                        <md-button class="md-icon-button" aria-label="open menu" ng-click="$mdOpenMenu()">
+                                            <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                                        </md-button>
+                                        <md-menu-content width="4">
+                                            <md-menu-item>
+                                                <md-button ng-click="showElement($event, form, 'edit', data)">
+                                                    <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                                    Edit
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-divider></md-menu-divider>
+                                            <md-menu-item>
+                                                <md-button ng-click="delElm(data)">
+                                                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                                                    Hapus
+                                                </md-button>
+                                            </md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div layout="column" flex="70" ng-if="!form.has_splitted_section">
+                            <span ng-include="'app/template-form-module/section.html'" ng-init="sectionPosition = 'center'"></span>
+                        </div>
+
+                        <div layout="column" flex="35" ng-if="form.has_splitted_section">
+                            <span ng-include="'app/template-form-module/section.html'" ng-init="sectionPosition = 'left'"></span>
+                        </div>
+
+                        <div layout="column" flex="35" ng-if="form.has_splitted_section">
+                            <span ng-include="'app/template-form-module/section.html'" ng-init="sectionPosition = 'right'"></span>
+                        </div>
+
+                    </div>
+                    <!-- .If form has photo element -->
+
+                    <!-- If form does not have photo element -->
+                    <div ng-repeat="(fieldIndex, field) in form.fields" ng-if="!form.has_photo" layout="row">
+                        <div layout="column" flex="100" ng-if="!form.has_splitted_section">
+                            <span ng-include="'app/template-form-module/section.html'" ng-init="sectionPosition = 'center'"></span>
+                        </div>
+
+                        <div layout="column" flex="50" ng-if="form.has_splitted_section">
+                            <span ng-include="'app/template-form-module/section.html'" ng-init="sectionPosition = 'left'"></span>
+                        </div>
+
+                        <div layout="column" flex="50" ng-if="form.has_splitted_section">
+                            <span ng-include="'app/template-form-module/section.html'" ng-init="sectionPosition = 'right'"></span>
+                        </div>
+                    </div>
+                    <!-- .If form does not have photo element -->
+
+                </div>
+                <!-- .Form -->
+
+                <!-- Tabel new-->
+                <div ng-if="form.ftype === 'tabel' || form.ftype === 'tabel-grid' || form.ftype === 'tabel-statik'" 
+                    class="table-body-form">
+                    {{form.type}}</br>
+
+                    <!-- Action buttons inside canvas -->
+                    <div class="flex-100">
+                        <div layout="row" ng-repeat="(fieldIndex, field) in form.fields | filter:{del:false}">
+                            <div ng-repeat="(dataIndex, data) in field.field | filter:{type:'button-action', del:false} | orderBy:'no_urut':false" layout="column" flex>
+                                <div class="layout-margin layout-xs-column layout-row full-width" layout-margin="" layout-xs="column" layout="row">
+                                    <div layout="column" layout-align="center" flex="80" ng-include="'app/template-form-module/element.html'"></div>
+                                    <div layout="column" flex>
+                                        <md-menu>
+                                            <md-button class="md-icon-button" aria-label="open menu" ng-click="$mdOpenMenu()">
+                                                <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                                            </md-button>
+                                            <md-menu-content width="4">
+                                                <md-menu-item>
+                                                    <md-button ng-click="showActionButton($event, 'edit', data)">
+                                                        <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                                        Edit
+                                                    </md-button>
+                                                </md-menu-item>
+                                                <md-menu-divider></md-menu-divider>
+                                                <md-menu-item>
+                                                    <md-button ng-click="delElm(data)">
+                                                        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                                                        Hapus
+                                                    </md-button>
+                                                </md-menu-item>
+                                            </md-menu-content>
+                                        </md-menu>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .Action buttons inside canvas -->
+
+                    <table class="template-table-form">
+                        <tr class="table-head" ng-repeat="field in form.fields | filter:{del:false}">
+                            <th ng-repeat="header in field.field | filter:{type:'!button-action', del:false} | orderBy:'no_urut':false">{{header.label}}</th>
+                        </tr>
+
+                        <tr ng-repeat="(fieldIndex, field) in form.fields | filter:{del:false}">
+                            <td ng-repeat="(dataIndex, data) in field.field | filter:{type:'!button-action', del:false} | orderBy:'no_urut':false">
+
+                                <div class="layout-margin layout-xs-column layout-row full-height" layout-xs="column" layout="row">
+                                    <div layout="column" flex="80" ng-include="'app/template-form-module/element.html'"
+                                         layout-align="top" class="center"></div>
+                                    <div layout="column" flex="20" layout-align="top" class="center">
+                                        <md-menu>
+                                            <md-button class="md-icon-button" aria-label="open menu" layout-align="top" ng-click="$mdOpenMenu()">
+                                                <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                                            </md-button>
+                                            <md-menu-content width="4">
+                                                <md-menu-item>
+                                                    <md-button ng-click="showElement($event, form, 'edit', data)">
+                                                        <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                                        Edit
+                                                    </md-button>
+                                                </md-menu-item>
+                                                <md-menu-item ng-if="data.type=='select'">
+                                                    <md-button ng-click="showOption($event,data)">
+                                                        <md-icon md-font-icon="zmdi zmdi-format-list-bulleted"></md-icon>
+                                                        List
+                                                    </md-button>
+                                                </md-menu-item>
+                                                <md-menu-item ng-if="data.type == 'autocomplete' || data.type == 'select-ws'">
+                                                    <md-button ng-click="showSource($event,data)">
+                                                        <md-icon md-font-icon="zmdi zmdi-storage"></md-icon>
+                                                        Sumber
+                                                    </md-button>
+                                                </md-menu-item>
+                                                <md-menu-item ng-if="data.type=='numbering'">
+                                                    <md-button ng-click="showNumbering($event,data)">
+                                                        <md-icon md-font-icon="zmdi zmdi-n-1-square"></md-icon>
+                                                        Format Nomor
+                                                    </md-button>
+                                                </md-menu-item>
+                                                <md-menu-item ng-if="data.type=='button-set'">
+                                                    <md-button ng-click="showButton($event, data, 'tabel')">
+                                                        <md-icon md-font-icon="zmdi zmdi-n-1-square"></md-icon>
+                                                        Pengaturan
+                                                    </md-button>
+                                                </md-menu-item>
+
+                                                <md-menu-divider></md-menu-divider>
+                                                <md-menu-item>
+                                                    <md-button ng-click="delElm(data)">
+                                                        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                                                        Hapus
+                                                    </md-button>
+                                                </md-menu-item>
+                                            </md-menu-content>
+                                        </md-menu>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- .Tabel -->
+
+                <!-- Action Buttons new-->
+                <div ng-if="form.ftype == 'action'" class="flex-100">
+                    <div layout="row" ng-repeat="(fieldIndex, field) in form.fields | filter:{del:false}">
+                        <div ng-repeat="(dataIndex, data) in field.field | filter:{type:'button-action', del:false} | orderBy:'no_urut':false" layout="column" flex>
+                            <div class="layout-margin layout-xs-column layout-row full-width" layout-margin="" layout-xs="column" layout="row">
+                                <div layout="column" layout-align="center" flex="80" ng-include="'app/template-form-module/element.html'"></div>
+                                <div layout="column" flex>
+                                    <md-menu>
+                                        <md-button class="md-icon-button" aria-label="open menu" ng-click="$mdOpenMenu()">
+                                            <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                                        </md-button>
+                                        <md-menu-content width="4">
+                                            <md-menu-item>
+                                                <md-button ng-click="showActionButton($event, 'edit', data)">
+                                                    <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                                    Edit
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-divider></md-menu-divider>
+                                            <md-menu-item>
+                                                <md-button ng-click="delElm(data)">
+                                                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                                                    Hapus
+                                                </md-button>
+                                            </md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- .Action Buttons -->
+
+                <!-- Filters -->
+                <div ng-if="form.ftype == 'filter'">
+                    <table>
+                        <tr ng-repeat="(fieldIndex, field) in form.fields | filter:{del:false}">
+                            <td ng-repeat="(dataIndex, data) in field.field | filter:{del:false} | orderBy:'no_urut':false">
+                                <div class="layout-margin layout-xs-column layout-row" layout-margin="" layout-xs="column" layout="row">
+
+                                    <div layout="column" flex="90" ng-include="'app/template-form-module/element.html'"></div>
+                                    <div layout="column" flex>
+                                        <md-menu>
+                                            <md-button class="md-icon-button" aria-label="open menu" ng-click="$mdOpenMenu()">
+                                                <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                                            </md-button>
+                                            <md-menu-content width="4">
+
+                                                <md-menu-item>
+                                                    <md-button ng-click="delElm(data)">
+                                                        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                                                        Hapus
+                                                    </md-button>
+                                                </md-menu-item>
+                                            </md-menu-content>
+                                        </md-menu>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- .Filters -->
+
+            </div>
+
+        </div>
+
+        <md-divider ng-if="form.ftype !== 'action' && form.ftype !=='filter'"></md-divider>
+
+        <div class="button-toolbar" layout="row" layout-align="start center" layout-xs="column">
+            <!-- Button Show Initial Web Service Format -->
+            <md-button flex ng-if="form.ftype !== 'action' && form.ftype !== 'filter'" class="md-raised md-primary md-default" ng-click="showElement($event,form)">
+                <md-icon md-font-icon="zmdi zmdi-plus" class="ng-scope ng-isolate-scope md-cyan-theme md-font zmdi zmdi-pin-help material-icons"
+                    aria-hidden="true"></md-icon> Buat Element
+            </md-button>
+
+            <md-button flex class="md-raised md-primary md-default" ng-click="configureCanvasActionButton($event, form)"
+                ng-if="form.ftype === 'tabel-statik'">
+                <md-icon md-font-icon="zmdi zmdi-plus" class="ng-scope ng-isolate-scope md-cyan-theme md-font zmdi material-icons" aria-hidden="true">
+                </md-icon> Buat Tombol
+            </md-button>
+
+            <!-- Button Edit Canvas -->
+            <md-button flex ng-if="form.ftype !== 'action' && form.ftype !== 'filter'" class="md-raised md-primary md-default" ng-click="editCanvas($event, form)">
+                <md-icon md-font-icon="zmdi zmdi-edit" class="ng-scope ng-isolate-scope md-cyan-theme md-font zmdi zmdi-edit material-icons"
+                    aria-hidden="true"></md-icon> Edit Canvas
+            </md-button>
+
+            <!-- Button Edit Filter Canvas -->
+            <md-button flex ng-if="form.ftype === 'filter'" class="md-raised md-primary md-default" ng-click="editFilterCanvas($event, form)">
+                <md-icon md-font-icon="zmdi zmdi-edit" class="ng-scope ng-isolate-scope md-cyan-theme md-font zmdi zmdi-edit material-icons"
+                    aria-hidden="true"></md-icon> Edit Filter Canvas
+            </md-button>
+
+            <!-- Button Remove Canvas -->
+            <md-button flex ng-if="form.ftype !== 'action'" class="md-raised md-primary md-default" ng-click="deleteCanvas($event, formIndex, form)">
+                <md-icon md-font-icon="zmdi zmdi-delete" class="ng-scope ng-isolate-scope md-cyan-theme md-font zmdi material-icons" aria-hidden="true">
+                </md-icon> Hapus Canvas
+            </md-button>
+
+            <!-- Button Show Initial Web Service Format -->
+            <md-button flex ng-if="form.ftype !== 'action' && form.ftype !== 'filter'" class="md-raised md-primary md-default" ng-click="showInitialCanvasFormat($event, form)">
+                <md-icon md-font-icon="zmdi zmdi-pin-help" class="ng-scope ng-isolate-scope md-cyan-theme md-font zmdi zmdi-pin-help material-icons"
+                    aria-hidden="true">
+                </md-icon> Info Web Service
+            </md-button>
+        </div>
+    </md-card-content>
+</md-card>

@@ -1,0 +1,30 @@
+<md-content class="padded-content-page">
+    <h2 translate>PROVINSI.ADD</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Kode Provinsi</label>
+            <input name="kode_daerah" type="text" placeholder="Kode Provinsi" ng-required="true" ng-model="vm.provinsi.kode_daerah" md-maxlength="3">
+            <div ng-messages="mainForm.kode_daerah.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Provinsi</label>
+            <input type="text" name="nama_daerah" placeholder="Nama Provinsi" ng-required="true" ng-model="vm.provinsi.nama_daerah" md-maxlength="100">
+            <div ng-messages="mainForm.nama_daerah.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

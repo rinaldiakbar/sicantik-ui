@@ -1,0 +1,16 @@
+{
+    "MENU": {
+        "BIDANG-USAHA": {
+            "BIDANG-USAHA-MODULE": "Menu",
+            "BIDANG-USAHA-LIST": "Daftar Bidang Usaha"
+        }
+    },
+    "BIDANG-USAHA": {
+        "TITLE": "Bidang Usaha",
+        "LIST": "Daftar",
+        "ADD": "Tambah Bidang Usaha",
+        "EDIT": "Ubah Bidang Usaha",
+        "VIEW": "Lihat Bidang Usaha",
+        "SEARCH": "Cari"
+    }
+}

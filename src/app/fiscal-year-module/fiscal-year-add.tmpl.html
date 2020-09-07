@@ -1,0 +1,103 @@
+<md-content class="padded-content-page">
+    <h2 translate>FISCAL.ADD</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+        <div layout="row" flex>
+            <div layout="column" flex="40">
+                <md-input-container md-no-float class="md-block">
+                    <label>Periode Awal</label>
+                    <md-datepicker ng-model="vm.fiscal.periode_mulai" name="periode_mulai" ng-required="true">
+                    </md-datepicker>
+                    <div ng-messages="mainForm.periode_mulai.$error">
+                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                    </div>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Periode Akhir</label>
+                    <md-datepicker ng-model="vm.fiscal.periode_akhr" name="periode_akhr">
+                    </md-datepicker>
+                    <div ng-messages="mainForm.periode_akhr.$error">
+                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="column" flex="60">
+                <md-input-container md-no-float class="md-block">
+                    <md-autocomplete class="margin-bottom-20" ng-disabled="vm.isDisabledPerusahaan" md-no-cache="vm.noCachePerusahaan" md-selected-item="selectedItemPerusahaan" md-search-text="vm.searchTextPerusahaan" md-selected-item-change="vm.selectedItemChangePerusahaan(item)" md-items="item in vm.querySearchPerusahaan(vm.searchTextPerusahaan)"
+                    md-item-text="item.nama" md-item-value="item.id" md-min-length="0" placeholder="Cari Perusahaan">
+                        <span md-highlight-text="vm.searchTextPerusahaan" md-highlight-flags="^i">{{item.nama}}</span>
+                    </md-autocomplete>
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>Year</label>
+                    <input type="number" name="c_year" ng-required="true" ng-model="vm.fiscal.c_year">
+                    <div ng-messages="mainForm.c_year.$error">
+                        <div ng-messages-include="app/include/validation-messages.html"></div>
+                    </div>
+                </md-input-container>
+            </div>
+        </div>       
+        
+        <!-- BEGIN - Tabs -->
+        <md-tabs class="md-primary" md-selected="selectedTabIndex" md-dynamic-height md-border-bottom md-stretch-tabs="always">
+            <!-- BEGIN - Ledger -->
+            <md-tab label="Ledger">
+                <md-content class="md-padding">
+                    <md-list class="no-scroll">
+                        <table class="md-table">
+                            <thead>
+                                <th width="5%" class="number-col">#</th>
+                                <th width="25%">Currency</th>
+                                <th width="20%">Item</th>
+                                <th width="25%">Nilai</th>
+                                <th width="10%" class="action-col">Aksi</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(index, data) in vm.fiscal.c_ledger">
+                                    <td class="number-col">{{ index+1 }}</td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" name="currency" ng-model="data.currency" md-maxlength="20">
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="text" name="item" ng-required="true" ng-model="data.item" md-maxlength="75">
+                                        </md-input-container>
+                                    </td>
+                                    <td>
+                                        <md-input-container md-no-float class="md-block">
+                                            <input type="number" name="nilai" ng-model="data.nilai">
+                                        </md-input-container>
+                                    </td>
+                                    <td class="action-col">
+                                        <button class="btn btn-success btn-circle" type="button" ng-click="vm.removeLedger(index)">
+                                            <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-button class="md-raised md-accent md-hue-1 full-button" ng-click="vm.addNewLedger()" aria-label="raised button">
+                                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
+            <!-- END - Ledger -->
+        </md-tabs>
+        <!-- END - Tabs -->
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

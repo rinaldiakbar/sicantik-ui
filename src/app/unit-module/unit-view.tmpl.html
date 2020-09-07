@@ -1,0 +1,28 @@
+<md-content class="padded-content-page">
+    <h2>Lihat Unit</h2>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+
+    <input type="hidden" ng-model="vm.unit.id">
+    <md-input-container md-no-float class="md-block">
+        <label>Nama</label>
+        <input type="text" placeholder="Nama" ng-required="true" ng-model="vm.unit.nama" ng-disabled="true">
+    </md-input-container>
+    <md-input-container md-no-float class="md-block">
+        <label>Tipe</label>
+        <input type="text" placeholder="Tipe" ng-required="true" ng-model="vm.unit.label_tipe" ng-disabled="true">
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label>Kode Daerah</label>
+        <input type="text" placeholder="-" ng-required="true" ng-model="vm.unit.kode_daerah" ng-disabled="true">
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label>Parent</label>
+        <input type="text" placeholder="-" ng-required="true" ng-model="vm.unit.parent_unit.nama" ng-disabled="true">
+    </md-input-container>
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+    </div>
+</md-content>

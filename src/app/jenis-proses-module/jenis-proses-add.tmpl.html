@@ -1,0 +1,50 @@
+<md-content class="padded-content-page">
+    <h2>Tambah Jenis Proses</h2>
+
+    <form name="mainForm" novalidate>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Kode</label>
+            <input type="text" name="kode" placeholder="Kode" ng-required="true" ng-model="vm.jenis_proses.kode" md-maxlength="5">
+            <div ng-messages="mainForm.kode.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Nama Proses</label>
+            <input type="text" name="nama_proses" placeholder="Nama Proses" ng-required="true" ng-model="vm.jenis_proses.nama_proses" md-maxlength="100">
+            <div ng-messages="mainForm.nama_proses.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Tautan</label>
+            <md-select name="tautan" placeholder="Tautan" ng-model="vm.jenis_proses.tautan" ng-required="true">
+                <md-option ng-value="opt.kode" ng-repeat="opt in vm.tautanList">{{opt.label}}</md-option>
+            </md-select>
+            <div ng-messages="mainForm.tautan.$error">
+                <div ng-messages-include="app/include/validation-messages.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Kode OSS</label>
+            <input type="text" name="kode_oss" placeholder="Kode Oss" ng-required="false" ng-model="vm.jenis_proses.kode_oss" md-maxlength="100">
+        </md-input-container>
+
+        <md-switch ng-model="vm.jenis_proses.is_drop" aria-label="Is Default DROP">
+            Is Default DROP
+        </md-switch>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-primary md-raised" ng-disabled="mainForm.$invalid" ng-click="vm.createAction()">Buat</md-button>
+            <md-button class="md-raised" ng-click="vm.cancelAction()">Batal</md-button>
+        </div>
+    </form>
+</md-content>

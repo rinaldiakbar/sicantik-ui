@@ -1,0 +1,33 @@
+<md-dialog aria-label="form" ng-cloak>
+    <form ng-repeat="form in forms" name="mainForm" novalidate>
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 class="canvas-title">{{form.fName}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content class="padded-content-page">
+            <div ng-if="form.ftype=='form'"></br>
+                <div ng-repeat="field in form.fields">
+                    <div ng-repeat="(dataKey, data) in field.field">
+                        <span ng-include="'app/template-form-module/element.html'"></span></div>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()">
+                Batal
+            </md-button>
+            <md-button ng-click="answer(forms)" ng-disabled="mainForm.$invalid && validateForm">
+                Simpan
+            </md-button>
+        </md-dialog-actions>
+
+    </form>
+</md-dialog>

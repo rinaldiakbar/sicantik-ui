@@ -216,6 +216,14 @@
     </text-angular>
 </md-input-container>
 
+<!-- Input EDITOR -->
+<md-input-container ng-if="data.type === 'editor'" flex class="md-block">
+    <label>{{data.label}}</label>
+    <text-angular name="{{data.id}}" data-ng-model="data.data" ng-required="data.required && validateForm"
+                  ta-toolbar="[['bold','italics','underline','strikeThrough','ul','ol','redo','undo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent'],['html','insertImage','insertLink','insertVideo','wordcount','charcount']]">
+    </text-angular>
+</md-input-container>
+
 <!-- QR Code -->
 <div ng-if="data.type === 'qrcode'" layout-align="space-around center">
     <div>

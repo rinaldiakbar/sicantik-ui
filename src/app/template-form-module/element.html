@@ -216,7 +216,7 @@
 <md-input-container ng-if="data.type === 'textarea'" flex class="md-block">
     <label>{{data.label}}</label>
     <text-angular name="{{data.id}}" data-ng-model="data.data" ng-required="data.required && validateForm" 
-        ta-target-toolbars="editor-toolbar">
+        ta-toolbar="[['undo','redo'],['bold','italics','underline'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],['ul','ol']]">
     </text-angular>
 </md-input-container>
 

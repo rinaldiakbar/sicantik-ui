@@ -640,6 +640,10 @@ function elmDialog($scope, $mdDialog, $log, AppFactory, TemplateFormFactory, dat
                             name: 'Textarea'
                         },
 						{
+                            id: 'editor',
+                            name: 'Editor'
+                        },
+						{
                             id: 'qrcode',
                             name: 'QR Code'
                         }

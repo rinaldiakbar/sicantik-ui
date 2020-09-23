@@ -1,0 +1,13 @@
+node_modules
+npm-debug.log
+dist
+.tmp
+.sass-cache
+bower_components
+.idea
+.vscode
+src/app/config.app.js
+config.app.json
+src/.DS_Store
+src/app/.DS_Store
+.DS_Store
